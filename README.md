@@ -1,2 +1,2 @@
-# ColabFoocus
-buat nyimpan data cgoogle colab
+# ColabFooocus
+buat nyimpan data google colab
