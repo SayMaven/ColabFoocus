@@ -41,7 +41,7 @@ Pilih varian notebook sesuai kebutuhan penyimpanan Anda:
 
 ## 🌐 Katalog Web Interaktif & Trigger Words (Civitai Hub)
 
-Jelajahi dan cari seluruh **620+ model** dengan antarmuka web modern, lengkap dengan thumbnail preview, filter arsitektur, parameter generasi contoh, tombol salin trigger words 1-klik, dan tautan resmi ke Civitai:
+Jelajahi dan cari seluruh **600+ model (607 model aktif)** dengan antarmuka web modern, lengkap dengan thumbnail preview, filter arsitektur, parameter generasi contoh, tombol salin trigger words 1-klik, dan tautan resmi ke Civitai:
 
 - 🚀 **[Buka Web Hub Interaktif (GitHub Pages)](https://saymaven.github.io/ColabFoocus/)** *(Atau buka langsung file [`catalog/index.html`](catalog/index.html) di browser secara offline)*
 - 📚 **[Buka Dokumentasi Markdown (MODELS_CATALOG.md)](MODELS_CATALOG.md)**
@@ -55,13 +55,14 @@ Jelajahi dan cari seluruh **620+ model** dengan antarmuka web modern, lengkap de
 ColabFoocus/
 ├── Foocus SayMaven.ipynb                    # Notebook utama (penyimpanan lokal /content/)
 ├── Foocus SayMaven Google Drive Mount.ipynb # Notebook utama (penyimpanan Google Drive)
+├── add_model.py                             # Tool CLI otomatis penambah model Civitai & sinkronisasi ganda
 ├── Dataset_Maker.ipynb                      # Tool pembuat dataset
 ├── Lora_Trainer_XL.ipynb                    # Tool pelatihan LoRA SDXL
 ├── catalog/                                 # Web Hub Interaktif (Bisa dibuka offline / GitHub Pages)
 │   ├── index.html                           # Tampilan Web App pencarian & preview model
 │   ├── style.css                            # Desain glassmorphism dark aesthetic
 │   ├── app.js                               # Logika search, filter, modal, copy triggers
-│   └── data.js                              # Database offline 620 model
+│   └── data.js                              # Database offline 600+ model
 ├── index.html                               # Redirect otomatis ke catalog/
 ├── models_database.json                     # Database master metadata Civitai (JSON)
 ├── MODELS_CATALOG.md                        # Dokumentasi tabel lengkap format Markdown
@@ -82,6 +83,31 @@ ColabFoocus/
 4. Pilih dan jalankan sel model Checkpoint, VAE, dan LoRA yang diinginkan.
 5. Jalankan sel **Runner** (Gradio atau Tunnel) pada port `7866`.
 6. Buka URL tunnel (Cloudflare, Ngrok, atau Gradio Live Link) untuk mulai menghasilkan gambar.
+
+---
+
+## ⚡ Menambahkan Model Baru Secara Otomatis (`add_model.py`)
+
+Ingin menambahkan LoRA atau Checkpoint baru dari Civitai tanpa harus mengetik manual atau khawatir merusak sinkronisasi notebook? Gunakan script CLI [`add_model.py`](add_model.py):
+
+```bash
+# Tambahkan model via URL Civitai
+python add_model.py https://civitai.com/models/827184/wai-illustrious-sdxl
+
+# Atau cukup dengan Model ID Civitai
+python add_model.py 827184
+
+# Atau jalankan tanpa argumen untuk mode interaktif penuh
+python add_model.py
+```
+
+### Keunggulan `add_model.py`:
+- 🤖 **Auto Fetch Metadata Civitai**: Otomatis menarik judul asli, pembuat, model base, varian rilis, trigger words, dan preview image via Civitai API.
+- 🎯 **Pilihan Versi Interaktif**: Jika model memiliki banyak varian/rilis versi (seperti WAI Illustrious dengan 17 versi), Anda dapat memilih versi yang diinginkan.
+- 🏷️ **Kustomisasi Nama File Bersih**: Tentukan nama file yang rapi (ekstensi `.safetensors` dan suffix `_ANIMA` ditangani otomatis).
+- 🔍 **Pencarian Sel Tanpa Hafal Nomor**: Cukup ketik kata kunci seperti `bangdream`, `poses`, `blue archive`, `style`, dsb.
+- ➕ **Dukungan Seri Baru Otomatis**: Jika seri anime belum ada di notebook, pilih opsi `new` dan script akan otomatis membuat sel baru pada posisi alfabetis (A–Z) yang tepat.
+- 🔄 **Sinkronisasi 1-to-1 Penuh**: Otomatis memperbarui kedua notebook (`Foocus SayMaven.ipynb` & Google Drive), mengurutkan baris secara alfabetis (A–Z), serta menyinkronkan `models_database.json`, `MODELS_CATALOG.md`, dan Web Hub `catalog/data.js` secara simultan.
 
 ---
 

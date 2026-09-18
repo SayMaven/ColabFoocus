@@ -103,3 +103,35 @@ Sebelum menyimpan atau menjalankan notebook, selalu pastikan:
 6. **Sinkronisasi Katalog Model & Hub**:
    - Repositori ini memiliki master database `models_database.json`, dokumentasi Markdown `MODELS_CATALOG.md`, serta Web Hub Interaktif `catalog/`.
    - Pastikan database dan katalog selalu diperbarui ketika ada model baru yang ditambahkan ke notebook.
+
+---
+
+## 7. Tool Otomatis Penambahan Model (`add_model.py`)
+
+Untuk menghindari kesalahan manual dan menjaga konsistensi repositori, telah disediakan script CLI otomatis [`add_model.py`](file:///f:/CODE/Repo/ColabFoocus/add_model.py). Tool ini mengotomatiskan seluruh alur kerja penambahan model baru dari Civitai:
+
+### Fitur Utama `add_model.py`:
+1. **Otomatis Fetch Civitai API**: Mengambil judul asli, creator, base model, varian versi, file download URL, trigger words, dan preview image secara otomatis.
+2. **Dukungan Multi-Versi Interaktif**: Jika suatu model memiliki banyak varian/versi rilis di Civitai (misal: model dengan puluhan versi), script menampilkan daftar versi lengkap dengan nomor versi, nama versi, dan base model, lalu meminta pengguna memilih versi yang diinginkan.
+3. **Kustomisasi Nama File**: Pengguna dapat menentukan nama file `.safetensors` yang rapi dan bersih. Script otomatis menambahkan ekstensi `.safetensors` jika terlewat, membersihkan karakter ilegal, serta otomatis mendeteksi dan menyarankan suffix `_ANIMA` jika model berbasis ANIMA.
+4. **Pemilihan Sel / Kategori Ramah Pengguna**:
+   - Pengguna **tidak perlu menghafal nomor sel notebook**.
+   - Cukup ketik kata kunci (misal: `bangdream`, `poses`, `blue archive`, `yuru yuri`, `style`, dsb.) untuk mencari kategori yang cocok.
+   - Ketik `list` untuk melihat seluruh kategori sel yang tersedia.
+   - Ketik `new` untuk membuat sel seri anime baru secara otomatis.
+5. **Pembuatan Sel Seri Baru Otomatis**: Jika seri anime belum ada di notebook, script akan meminta nama seri, lalu menyisipkan sel baru pada kedua notebook secara simultan di posisi urutan alfabetis (A–Z) yang tepat di antara seri standalone lainnya.
+6. **Sinkronisasi Ganda 1-to-1 Terjamin**: Perintah unduhan ditulis langsung ke kedua notebook (`Foocus SayMaven.ipynb` dengan `/content/Fooocus/` dan `Foocus SayMaven Google Drive Mount.ipynb` dengan `/content/drive/MyDrive/Fooocus/`).
+7. **Pengurutan Alfabetis Otomatis**: Baris unduhan di dalam sel tujuan langsung diurutkan kembali secara alfabetis (A–Z) bersama komentar tautan URL Civitai-nya.
+8. **Sinkronisasi Katalog Otomatis**: Master database `models_database.json`, katalog web `catalog/data.js`, dan dokumentasi `MODELS_CATALOG.md` langsung diperbarui secara instan dalam sekali jalan.
+
+### Cara Penggunaan:
+```bash
+# Menambahkan model dengan memasukkan URL Civitai
+python add_model.py https://civitai.com/models/827184/wai-illustrious-sdxl
+
+# Atau hanya dengan Model ID
+python add_model.py 827184
+
+# Atau jalankan secara interaktif tanpa argumen (akan diminta URL/ID)
+python add_model.py
+```

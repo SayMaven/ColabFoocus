@@ -51,4 +51,12 @@ Ketika mengedit, memodifikasi, menganalisa, atau memperbarui notebook di reposit
   - `catalog/` (`index.html`, `style.css`, `app.js`, `data.js`): Web Hub Interaktif yang dapat dibuka secara offline atau via GitHub Pages.
 - Setiap kali ada penambahan, penghapusan, atau perubahan model pada kedua notebook utama, database dan katalog harus selalu diperbarui agar tetap sinkron.
 
+## 9. Tool Otomatis Penambah Model (`add_model.py`)
+- Repositori ini dilengkapi script CLI otomatis `add_model.py` untuk menambahkan model baru dari Civitai secara terintegrasi:
+  - Otomatis mengekstrak metadata, varian versi, trigger words, dan preview image via Civitai API.
+  - Menulis perintah download ke kedua notebook (`Foocus SayMaven.ipynb` & Drive notebook) sekaligus.
+  - Otomatis mengurutkan baris secara alfabetis (A–Z).
+  - Otomatis memperbarui `models_database.json`, `MODELS_CATALOG.md`, dan `catalog/data.js`.
+  - Mampu membuat sel seri baru secara otomatis di posisi urutan alfabetis yang tepat jika seri anime belum memiliki sel tersendiri.
+
 Panduan lengkap dan detail dapat dilihat di [NOTEBOOK_GUIDELINES.md](file:///f:/CODE/Repo/ColabFoocus/NOTEBOOK_GUIDELINES.md).
