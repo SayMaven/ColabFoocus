@@ -28,7 +28,7 @@ Ketika mengedit, memodifikasi, menganalisa, atau memperbarui notebook di reposit
 - [Cell 73–76]: Series ANIMA mandiri
 - [Cell 77–102]: Series Standalone SDXL (Alfabetis A–Z)
 - [Cell 103–104]: Random Characters (ANIMA lalu SDXL)
-- [Cell 105–112]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE, FAVORITE)
+- [Cell 105–111]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE)
 
 ## 5. Konfigurasi Civitai Token Global
 - Token Civitai dikonfigurasi terpusat pada **Cell 2** via `~/.wgetrc` dan `~/.aria2/aria2.conf` menggunakan header `Authorization: Bearer $CIVITAI_TOKEN`.

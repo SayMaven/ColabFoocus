@@ -59,7 +59,7 @@ Seluruh notebook harus selalu mengikuti urutan kelompok berikut:
 [Cell 73 – 76] : Series ANIMA Mandiri (Roshidere, Kamiina Botan, Adachi to Shimamura, Chou Kaguya Hime)
 [Cell 77 – 102]: Series Standalone SDXL (Diurutkan alfabetis A–Z berdasarkan nama series)
 [Cell 103 – 104]: Random Characters (Random Character ANIMA lalu SDXL)
-[Cell 105 – 112]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE, FAVORITE)
+[Cell 105 – 111]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE)
 ```
 
 ### Detail Kluster Penting:
