@@ -39,6 +39,16 @@ Pilih varian notebook sesuai kebutuhan penyimpanan Anda:
 
 ---
 
+## 🌐 Katalog Web Interaktif & Trigger Words (Civitai Hub)
+
+Jelajahi dan cari seluruh **620+ model** dengan antarmuka web modern, lengkap dengan thumbnail preview, filter arsitektur, parameter generasi contoh, tombol salin trigger words 1-klik, dan tautan resmi ke Civitai:
+
+- 🚀 **[Buka Web Hub Interaktif (GitHub Pages)](https://saymaven.github.io/ColabFoocus/)** *(Atau buka langsung file [`catalog/index.html`](catalog/index.html) di browser secara offline)*
+- 📚 **[Buka Dokumentasi Markdown (MODELS_CATALOG.md)](MODELS_CATALOG.md)**
+- 🗄️ **[Download Database Raw (models_database.json)](models_database.json)**
+
+---
+
 ## 📁 Struktur Direktori Repositori
 
 ```plaintext
@@ -47,6 +57,14 @@ ColabFoocus/
 ├── Foocus SayMaven Google Drive Mount.ipynb # Notebook utama (penyimpanan Google Drive)
 ├── Dataset_Maker.ipynb                      # Tool pembuat dataset
 ├── Lora_Trainer_XL.ipynb                    # Tool pelatihan LoRA SDXL
+├── catalog/                                 # Web Hub Interaktif (Bisa dibuka offline / GitHub Pages)
+│   ├── index.html                           # Tampilan Web App pencarian & preview model
+│   ├── style.css                            # Desain glassmorphism dark aesthetic
+│   ├── app.js                               # Logika search, filter, modal, copy triggers
+│   └── data.js                              # Database offline 620 model
+├── index.html                               # Redirect otomatis ke catalog/
+├── models_database.json                     # Database master metadata Civitai (JSON)
+├── MODELS_CATALOG.md                        # Dokumentasi tabel lengkap format Markdown
 ├── NOTEBOOK_GUIDELINES.md                   # Pedoman lengkap struktur dan aturan pemeliharaan
 ├── GEMINI.md                                # Aturan otomatis workspace Antigravity/AI Agent
 ├── README.md                                # Dokumentasi utama repositori
