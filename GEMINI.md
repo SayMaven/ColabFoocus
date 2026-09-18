@@ -37,10 +37,18 @@ Ketika mengedit, memodifikasi, menganalisa, atau memperbarui notebook di reposit
 ## 6. Pengurutan Baris di Dalam Sel
 - Baris perintah unduhan (`!test -f ... || wget/aria2c ...`) di dalam setiap sel **wajib diurutkan secara alfabetis (A–Z)** berdasarkan nama file target (`.safetensors` atau `.pt`).
 - Komentar header (`# ...`) tetap berada di baris pertama.
+- Setiap baris unduhan model disertai komentar tautan web resmi Civitai (`# https://civitai.com/models/<model_id>`) tepat satu baris di atasnya.
 
 ## 7. Validasi Ketat
 - Jalur pada `!test -f "<path>"` harus **sama persis karakter demi karakter** dengan output `wget -O "<path>"` atau `aria2c -o "<fname>"`.
 - Hindari karakter non-ASCII (seperti `ƒ` hook) atau tanda seru `!` dalam nama file.
 - Pastikan tidak ada link atau Civitai Model ID yang terduplikasi ke karakter berbeda.
+
+## 8. Sistem Katalog Model & Hub
+- Repositori ini memiliki sistem katalog metadata untuk seluruh model:
+  - `models_database.json`: Database master JSON yang memuat seluruh metadata (nama file, judul asli Civitai, tautan web Civitai, trigger words, base model, dan preview image).
+  - `MODELS_CATALOG.md`: Dokumentasi Markdown lengkap yang dikelompokkan sesuai kluster sel notebook.
+  - `catalog/` (`index.html`, `style.css`, `app.js`, `data.js`): Web Hub Interaktif yang dapat dibuka secara offline atau via GitHub Pages.
+- Setiap kali ada penambahan, penghapusan, atau perubahan model pada kedua notebook utama, database dan katalog harus selalu diperbarui agar tetap sinkron.
 
 Panduan lengkap dan detail dapat dilihat di [NOTEBOOK_GUIDELINES.md](file:///f:/CODE/Repo/ColabFoocus/NOTEBOOK_GUIDELINES.md).

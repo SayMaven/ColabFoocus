@@ -77,6 +77,7 @@ Seluruh notebook harus selalu mengikuti urutan kelompok berikut:
 
 ## 5. Aturan Pengurutan Baris di Dalam Sel (In-Cell Line Sorting)
 - **Baris 1**: Komentar header sel (`# ...`) selalu dipertahankan di posisi paling atas.
+- **Tautan Sumber Web Civitai**: Setiap baris unduhan model disertai komentar URL resmi (`# https://civitai.com/models/<model_id>`) tepat satu baris di atasnya.
 - **Baris Unduhan**: Seluruh baris perintah download (`!test -f ... || wget/aria2c ...`) diurutkan secara **alfabetis (A–Z)** berdasarkan nama file target (`.safetensors` atau `.pt`).
 
 ---
@@ -99,3 +100,6 @@ Sebelum menyimpan atau menjalankan notebook, selalu pastikan:
 5. **Autentikasi Civitai Global**:
    - Token Civitai dikonfigurasi terpusat pada **Cell 2** via `~/.wgetrc` dan `~/.aria2/aria2.conf` (`Authorization: Bearer $CIVITAI_TOKEN`).
    - Jangan menambahkan parameter `&token=...` pada link unduhan individual agar URL tetap bersih, rapi, dan mudah dipelihara.
+6. **Sinkronisasi Katalog Model & Hub**:
+   - Repositori ini memiliki master database `models_database.json`, dokumentasi Markdown `MODELS_CATALOG.md`, serta Web Hub Interaktif `catalog/`.
+   - Pastikan database dan katalog selalu diperbarui ketika ada model baru yang ditambahkan ke notebook.
