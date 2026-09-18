@@ -46,20 +46,20 @@ Terdapat dua arsitektur base model yang digunakan:
 Seluruh notebook harus selalu mengikuti urutan kelompok berikut:
 
 ```
-[Cell 0 – 19]  : Setup, Environment, Tunnels, Git Clone, Launchers (JANGAN DIUBAH)
-[Cell 20]      : Checkpoint ANIMA
-[Cell 21 – 29] : Checkpoint SDXL
-[Cell 30 – 31] : VAE SDXL & Upscale SDXL
-[Cell 32 – 33] : Color Settings SDXL & Embeddings SDXL
-[Cell 34 – 48] : Kluster BanG Dream! (15 Sel Berdekatan: ANIMA & SDXL)
-[Cell 49 – 51] : Kluster Music / Band Anime (GBC, Bocchi, K-ON)
-[Cell 52 – 57] : Kluster HoYoverse (Sel Terpisah: HSR ANIMA & SDXL, ZZZ ANIMA & SDXL, Genshin, HI3)
-[Cell 58 – 59] : Kluster The Idolm@ster (Gakuen Idolmaster & U149)
-[Cell 60 – 71] : Series Berpasangan ANIMA & SDXL (Project Sekai, Watanare, Wataten, GnP, Takopi, Hoshizora)
-[Cell 72 – 75] : Series ANIMA Mandiri (Roshidere, Kamiina Botan, Adachi to Shimamura, Chou Kaguya Hime)
-[Cell 76 – 101]: Series Standalone SDXL (Diurutkan alfabetis A–Z berdasarkan nama series)
-[Cell 102 – 103]: Random Characters (Random Character ANIMA lalu SDXL)
-[Cell 104 – 111]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE, FAVORITE)
+[Cell 0 – 20]  : Setup, Civitai Token Global, Environment, Tunnels, Git Clone, Launchers (JANGAN DIUBAH)
+[Cell 21]      : Checkpoint ANIMA
+[Cell 22 – 30] : Checkpoint SDXL
+[Cell 31 – 32] : VAE SDXL & Upscale SDXL
+[Cell 33 – 34] : Color Settings SDXL & Embeddings SDXL
+[Cell 35 – 49] : Kluster BanG Dream! (15 Sel Berdekatan: ANIMA & SDXL)
+[Cell 50 – 52] : Kluster Music / Band Anime (GBC, Bocchi, K-ON)
+[Cell 53 – 58] : Kluster HoYoverse (Sel Terpisah: HSR ANIMA & SDXL, ZZZ ANIMA & SDXL, Genshin, HI3)
+[Cell 59 – 60] : Kluster The Idolm@ster (Gakuen Idolmaster & U149)
+[Cell 61 – 72] : Series Berpasangan ANIMA & SDXL (Project Sekai, Watanare, Wataten, GnP, Takopi, Hoshizora)
+[Cell 73 – 76] : Series ANIMA Mandiri (Roshidere, Kamiina Botan, Adachi to Shimamura, Chou Kaguya Hime)
+[Cell 77 – 102]: Series Standalone SDXL (Diurutkan alfabetis A–Z berdasarkan nama series)
+[Cell 103 – 104]: Random Characters (Random Character ANIMA lalu SDXL)
+[Cell 105 – 112]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE, FAVORITE)
 ```
 
 ### Detail Kluster Penting:
@@ -96,3 +96,6 @@ Sebelum menyimpan atau menjalankan notebook, selalu pastikan:
    - Hindari tanda seru `!` dalam nama file (gunakan `WeCanDoIt` bukan `WeCanDoIt!`) untuk mencegah error history expansion pada bash.
 4. **Keamanan Kredensial**:
    - Gunakan placeholder `NGROK_TOKEN = "INPUT_NGROK_TOKEN"`. Jangan menaruh token pribadi secara terbuka di repositori publik.
+5. **Autentikasi Civitai Global**:
+   - Token Civitai dikonfigurasi terpusat pada **Cell 2** via `~/.wgetrc` dan `~/.aria2/aria2.conf` (`Authorization: Bearer $CIVITAI_TOKEN`).
+   - Jangan menambahkan parameter `&token=...` pada link unduhan individual agar URL tetap bersih, rapi, dan mudah dipelihara.

@@ -15,26 +15,30 @@ Ketika mengedit, memodifikasi, menganalisa, atau memperbarui notebook di reposit
 - Model **SDXL**: Semua model non-ANIMA adalah SDXL dan komentar header **wajib** diakhiri dengan `SDXL` (contoh: `# Blue Archive SDXL`, `# Roselia SDXL`, `# Honkai Star Rail SDXL`, `# Poses SDXL`).
 
 ## 4. Urutan Sel (Cell Ordering)
-- [Cell 0–19]: Setup environment, git clone, mount, tunnels, dan runner gradio/tunnels (tidak boleh diubah).
-- [Cell 20]: `# Checkpoint ANIMA`
-- [Cell 21–29]: `# Checkpoint SDXL`
-- [Cell 30–31]: `# VAE SDXL` & `# Upscale SDXL`
-- [Cell 32–33]: `# Color Settings SDXL` & `# Embeddings SDXL`
-- [Cell 34–48]: Kluster BanG Dream! (15 sel berdekatan)
-- [Cell 49–51]: Kluster Music / Band Anime (GBC, Bocchi, K-ON)
-- [Cell 52–57]: Kluster HoYoverse (Selalu 4 sel terpisah: HSR ANIMA & SDXL, ZZZ ANIMA & SDXL, Genshin, HI3)
-- [Cell 58–59]: Kluster The Idolm@ster (Gakuen Idolmaster & U149)
-- [Cell 60–71]: Series berpasangan ANIMA & SDXL (Project Sekai, Watanare, Wataten, GnP, Takopi, Hoshizora)
-- [Cell 72–75]: Series ANIMA mandiri
-- [Cell 76–101]: Series Standalone SDXL (Alfabetis A–Z)
-- [Cell 102–103]: Random Characters (ANIMA lalu SDXL)
-- [Cell 104–111]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE, FAVORITE)
+- [Cell 0–20]: Setup environment, Civitai token global, git clone, mount, tunnels, dan runner gradio/tunnels (tidak boleh diubah).
+- [Cell 21]: `# Checkpoint ANIMA`
+- [Cell 22–30]: `# Checkpoint SDXL`
+- [Cell 31–32]: `# VAE SDXL` & `# Upscale SDXL`
+- [Cell 33–34]: `# Color Settings SDXL` & `# Embeddings SDXL`
+- [Cell 35–49]: Kluster BanG Dream! (15 sel berdekatan)
+- [Cell 50–52]: Kluster Music / Band Anime (GBC, Bocchi, K-ON)
+- [Cell 53–58]: Kluster HoYoverse (Selalu 4 sel terpisah: HSR ANIMA & SDXL, ZZZ ANIMA & SDXL, Genshin, HI3)
+- [Cell 59–60]: Kluster The Idolm@ster (Gakuen Idolmaster & U149)
+- [Cell 61–72]: Series berpasangan ANIMA & SDXL (Project Sekai, Watanare, Wataten, GnP, Takopi, Hoshizora)
+- [Cell 73–76]: Series ANIMA mandiri
+- [Cell 77–102]: Series Standalone SDXL (Alfabetis A–Z)
+- [Cell 103–104]: Random Characters (ANIMA lalu SDXL)
+- [Cell 105–112]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE, FAVORITE)
 
-## 5. Pengurutan Baris di Dalam Sel
+## 5. Konfigurasi Civitai Token Global
+- Token Civitai dikonfigurasi terpusat pada **Cell 2** via `~/.wgetrc` dan `~/.aria2/aria2.conf` menggunakan header `Authorization: Bearer $CIVITAI_TOKEN`.
+- Seluruh URL download model individual **TIDAK PERLU** ditambahkan parameter query `&token=...`.
+
+## 6. Pengurutan Baris di Dalam Sel
 - Baris perintah unduhan (`!test -f ... || wget/aria2c ...`) di dalam setiap sel **wajib diurutkan secara alfabetis (A–Z)** berdasarkan nama file target (`.safetensors` atau `.pt`).
 - Komentar header (`# ...`) tetap berada di baris pertama.
 
-## 6. Validasi Ketat
+## 7. Validasi Ketat
 - Jalur pada `!test -f "<path>"` harus **sama persis karakter demi karakter** dengan output `wget -O "<path>"` atau `aria2c -o "<fname>"`.
 - Hindari karakter non-ASCII (seperti `ƒ` hook) atau tanda seru `!` dalam nama file.
 - Pastikan tidak ada link atau Civitai Model ID yang terduplikasi ke karakter berbeda.
