@@ -39,7 +39,7 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 - [Raise a Suilen SDXL](#raise-a-suilen-sdxl) *(5 model)*
 - [MyGO!!!! SDXL](#mygo-sdxl) *(5 model)*
 - [Ave Mujica SDXL](#ave-mujica-sdxl) *(8 model)*
-- [Soutsa Model SDXL](#soutsa-model-sdxl) *(10 model)*
+- [Soutsa Model SDXL](#soutsa-model-sdxl) *(7 model)*
 - [GBC SDXL](#gbc-sdxl) *(7 model)*
 - [Bocchi the Rock SDXL](#bocchi-the-rock-sdxl) *(4 model)*
 - [K-ON SDXL](#k-on-sdxl) *(6 model)*
@@ -72,7 +72,7 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 - [Blue Archive SDXL](#blue-archive-sdxl) *(5 model)*
 - [Citrus SDXL](#citrus-sdxl) *(2 model)*
 - [Date A Live SDXL](#date-a-live-sdxl) *(20 model)*
-- [Fate/Kalleid Liner Prisma Illya SDXL](#fatekalleid-liner-prisma-illya-sdxl) *(7 model)*
+- [Fate/Kalleid Liner Prisma Illya SDXL](#fatekalleid-liner-prisma-illya-sdxl) *(6 model)*
 - [Gamers SDXL](#gamers-sdxl) *(4 model)*
 - [HELLO WORLD SDXL](#hello-world-sdxl) *(1 model)*
 - [Hinako Note SDXL](#hinako-note-sdxl) *(2 model)*
@@ -92,7 +92,7 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 - [Wonder Egg Priority SDXL](#wonder-egg-priority-sdxl) *(2 model)*
 - [WUWA SDXL](#wuwa-sdxl) *(6 model)*
 - [Yagate kimi ni naru SDXL](#yagate-kimi-ni-naru-sdxl) *(1 model)*
-- [Yuru Yuri SDXL](#yuru-yuri-sdxl) *(9 model)*
+- [Yuru Yuri SDXL](#yuru-yuri-sdxl) *(12 model)*
 - [Random Character ANIMA](#random-character-anima) *(3 model)*
 - [Random Character SDXL](#random-character-sdxl) *(15 model)*
 - [Tool SDXL](#tool-sdxl) *(8 model)*
@@ -100,7 +100,7 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 - [Clothing SDXL](#clothing-sdxl) *(13 model)*
 - [Concept SDXL](#concept-sdxl) *(74 model)*
 - [Background SDXL](#background-sdxl) *(12 model)*
-- [Style SDXL](#style-sdxl) *(40 model)*
+- [Style SDXL](#style-sdxl) *(41 model)*
 - [STYLE SDXL](#style-sdxl) *(11 model)*
 
 ---
@@ -405,9 +405,6 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 | `HanazonoTaeSoutsa.safetensors` | [Tae Hanazono - Bang Dream!](https://civitai.com/models/1771700) | `SDXL` | `htae`<br>`brown hair, very long hair, single sidelock, hair between eyes, hair behind ear, green eyes, official style, anime screenshot,`<br>`hanasakigawa school uniform, white sailor collar, serafuku, brown shirt, red ribbon, neck ribbon, brown skirt, kneehighs, dark blue socks, loafers,` |
 | `MaruyamaAyaSoutsa.safetensors` | [Maruyama Aya - Bang Dream](https://civitai.com/models/1612283) | `SDXL` | `4ya`<br>`maruyama aya`<br>`pink hair`<br>`pink eyes` |
 | `MatsubaraKanonSoutsa.safetensors` | [Matsubara Kanon - Bang Dream - IL](https://civitai.com/models/1637282) | `SDXL` | `k4non`<br>`light blue hair, purple eyes, long hair, one side up, hair ribbon, green hair ribbon,` |
-| `MisakiTakasakiSoutsa.safetensors` | [Misaki Takasaki - Oomuro-ke ( Yuru Yuri )](https://civitai.com/models/1684008) | `SDXL` | `Tmisaki`<br>`blonde hair,  long hair, twintails, red eyes`<br>`white shirt, neck ribbon, red ribbon, suspender skirt, red skirt, white kneehighs,  red uwabaki, ` |
-| `OomuroHanakoSoutsa.safetensors` | [Hanako Oomuro - Oomuro-ke ( Yuru Yuri )](https://civitai.com/models/1681803) | `SDXL` | `Ohanako`<br>`very long hair, brown hair, brown eyes,`<br>`school uniform, short sleeves, suspender skirt, red skirt, neck ribbon, red ribbon, white kneehighs, loafers, `<br>`green pinafore dress, white shirt, long sleeves, white kneehighs, ` |
-| `OomuroNadeshikoSoutsa.safetensors` | [Nadeshiko Oomuro - Oomuro-ke ( Yuru Yuri )](https://civitai.com/models/1685593) | `SDXL` | `Onadeshiko`<br>`short hair, blonde hair, brown eyes, small breasts, `<br>`school uniform, blue sweater, collared shirt, white shirt, dark blue necktie,  pleated skirt, dark blue skirt,  white kneehighs, loafers, ` |
 | `TakamatsuTomoriSoutsa.safetensors` | [Takamatsu Tomori - BanG Dream! MyGO!!!!](https://civitai.com/models/1725355) | `SDXL` | `Tomor1`<br>`short hair, purple hair, single sidelock, hair behind ear, pink eyes,`<br>`haneoka school uniform, green necktie, diagonal-striped necktie, collared shirt, white shirt, grey jacket, plaid skirt, pleated skirt, green skirt, dark green socks, kneehighs, green uwabaki,` |
 | `ToyamaKasumiSoutsa.safetensors` | [Toyama Kasumi - BanG Dream!](https://civitai.com/models/1777131) | `SDXL` | `Tkasumi`<br>`medium hair, brown hair, double bun, hair bun, hair ears, sidelocks, star hair ornament, star \(symbol\), purple eyes, anime screenshot,`<br>`hanasakigawa school uniform, white sailor collar, serafuku, brown shirt, red ribbon, neck ribbon, brown skirt, kneehighs, dark blue socks, loafers,` |
 | `UshigomeRimiSoutsa.safetensors` | [Ushigome Rimi - BanG Dream!](https://civitai.com/models/1784745) | `SDXL` | `r1m1`<br>`short hair,dark blue hair, hair flaps, blunt bangs, red eyes,`<br>`hanasakigawa school uniform, white sailor collar, serafuku, brown shirt, red ribbon, neck ribbon, brown skirt, kneehighs, dark blue socks, loafers,` |
@@ -830,7 +827,6 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 | `ChloeVonEinzbern_XViviochanX.safetensors` | [Chloe von Einzbern (Fate/kaleid liner Prisma Illya)](https://civitai.com/models/1868616) | `SDXL` | `Chloe von Einzbern (Fate/kaleid liner Prisma Illya), long hair, hair between eyes, yellow eyes, pink hair, dark skin, dark-skinned female, hair ornament, half updo, breasts, small breasts, thighs`<br>`Chloe von Einzbern (Fate/kaleid liner Prisma Illya), long hair, hair between eyes, yellow eyes, pink hair, dark skin, dark-skinned female, hair ornament, half updo, stomach tattoo, breasts, small breasts, thighs`<br>`Chloe von Einzbern (Fate/kaleid liner Prisma Illya), long hair, single hair bun, topknot, hair between eyes, yellow eyes, pink hair, dark skin, dark-skinned female, hair ornament, half updo, breasts, small breasts, thighs`<br>`Chloe von Einzbern (Fate/kaleid liner Prisma Illya), long hair, braid, hair between eyes, yellow eyes, pink hair, dark skin, dark-skinned female, hair ornament, stomach tattoo, breasts, small breasts, thighs`<br>`Chloe von Einzbern (Fate/kaleid liner Prisma Illya), long hair, side ponytail, hair between eyes, yellow eyes, pink hair, dark skin, dark-skinned female, hair ornament, breasts, small breasts, thighs`<br>`Chloe von Einzbern (Fate/kaleid liner Prisma Illya), long hair, ponytail, hair between eyes, yellow eyes, pink hair, dark skin, dark-skinned female, hair ornament, stomach tattoo, breasts, small breasts, thighs`<br>*+18 trigger lainnya...* |
 | `IllyasvielVonEinzbern_C2P.safetensors` | [Illyasviel Von Einzbern | Fate/Kalleid Liner Prisma Illya (3 outfits) [COMMISION]](https://civitai.com/models/1707826) | `SDXL` | `Illya` |
 | `IllyasvielVonEinzbern_h_madoka.safetensors` | [[Illustrious] Illyasviel von Einzbern イリヤスフィール・フォン・アインツベルン / Fate/kaleid liner Prisma☆Illya](https://civitai.com/models/941181) | `SDXL` | `aaillya, long hair, blonde hair, two side up, hair ornament, red eyes, bare shoulders, magical girl, cape, orange ascot, pink shirt, sleeveless, detached sleeves, white gloves, white skirt, pink thighhighs`<br>`aaillya, long hair, blonde hair, beret, white headwear, red eyes, school uniform, collarbone, neck ribbon, white shirt, puffy short sleeves, pleated skirt, black skirt`<br>`aaillya, long hair, blonde hair, mask on head, skull mask, hood up, torn scarf, black scarf, red eyes, bare shoulders, short jumpsuit, sleeveless, arm wrap, asymmetrical legwear, single thighhigh, black thighhighs`<br>`aaillya, long hair, blonde hair, ponytail, hair bow, red eyes, detached collar, bare shoulders, strapless, pink dress, armor, detached sleeves, gauntlets`<br>`aaillya, long hair, blonde hair, animal ears, hair ribbon, red ribbon, jingle bell, red eyes, cat tail, fur trim, bare shoulders, black leotard, center opening, elbow gloves, black gloves, animal hands, black thighhighs` |
-| `MeMaXLFlatAnimeStyleV3C.safetensors` | [MeMaXL Flat Anime Style - Noob/Illustrious/Pony/XL](https://civitai.com/models/269772) | `SDXL` | *Tidak ada trigger khusus* |
 | `MiyuEdelfelt_C2P.safetensors` | [Miyu Edelfelt | Fate/Kalleid Liner Prisma Illya (6 outfits) [COMMISION]](https://civitai.com/models/1759947) | `SDXL` | `Miyu` |
 | `PrismaIllyaStyle.safetensors` | [Prisma Illya Style (Fate/Kaleid liner Prisma) [Illustrious & Pony & SD1.5]](https://civitai.com/models/248048) | `SDXL` | `2girls,   illyasviel von einzbern, red eyes, white hair, long hair, red eyes, chloe von einzbern, yellow eyes, pink hair, long hair, one side up, dark skin,`<br>`illyasviel von einzbern, red eyes, white hair, long hair, red eyes,`<br>`chloe von einzbern, yellow eyes, pink hair, long hair, one side up, dark skin,`<br>`miyu edelfelt, brown eyes, black hair, hair ornament,` |
 
@@ -1037,6 +1033,9 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 | `FurutaniHimawari.safetensors` | [Furutani Himawari | Yuru Yuri!](https://civitai.com/models/60753) | `SDXL` | `furutani himawari, brown eyes, blue hair, hairband, low twin braids`<br>`, nanamori school uniform` |
 | `IkedaChitose.safetensors` | [池田千岁-摇曳百合（Ikeda Chitose-Yuru Yuri）](https://civitai.com/models/1157133) | `SDXL` | `Ikeda Chitose`<br>`grey hair,short hair,messy hair,hair between eyes,parted bangs,blue eyes,glasses`<br>`collarbone,nanamori school uniform,black sailor collar,sailor dress,layered sleeves,short over long sleeves,red long sleeves,small breasts,black socks,uwabaki` |
 | `MatsumotoRise.safetensors` | [松本理世-摇曳百合（Matsumoto Rise-Yuru Yuri）](https://civitai.com/models/1157161) | `SDXL` | `Matsumoto Rise`<br>`long hair,black hair,hime cut,sidelocks,blunt bangs,red eyes`<br>`collarbone,nanamori school uniform,black sailor collar,sailor dress,layered sleeves,short over long sleeves,red long sleeves,armband,small breasts,black socks,uwabaki` |
+| `MisakiTakasakiSoutsa.safetensors` | [Misaki Takasaki - Oomuro-ke ( Yuru Yuri )](https://civitai.com/models/1684008) | `SDXL` | `Tmisaki`<br>`blonde hair,  long hair, twintails, red eyes`<br>`white shirt, neck ribbon, red ribbon, suspender skirt, red skirt, white kneehighs,  red uwabaki, ` |
+| `OomuroHanakoSoutsa.safetensors` | [Hanako Oomuro - Oomuro-ke ( Yuru Yuri )](https://civitai.com/models/1681803) | `SDXL` | `Ohanako`<br>`very long hair, brown hair, brown eyes,`<br>`school uniform, short sleeves, suspender skirt, red skirt, neck ribbon, red ribbon, white kneehighs, loafers, `<br>`green pinafore dress, white shirt, long sleeves, white kneehighs, ` |
+| `OomuroNadeshikoSoutsa.safetensors` | [Nadeshiko Oomuro - Oomuro-ke ( Yuru Yuri )](https://civitai.com/models/1685593) | `SDXL` | `Onadeshiko`<br>`short hair, blonde hair, brown eyes, small breasts, `<br>`school uniform, blue sweater, collared shirt, white shirt, dark blue necktie,  pleated skirt, dark blue skirt,  white kneehighs, loafers, ` |
 | `OomuroSakurako.safetensors` | [[IL v0.1] Sakurako Oomuro - Yuru Yuri | 大室櫻子 ゆるゆり (~3 costumes) [Port Request]](https://civitai.com/models/1149769) | `SDXL` | `oosaku, light brown hair, medium hair, brown eyes, hairclip, fang, nanamori school uniform, serafuku, sailor collar, white shirt, layered sleeves, short over long sleeves, red dress, pleated dress, thighs, white socks, shoes,`<br>`oosaku, light brown hair, medium hair, brown eyes, hairclip, fang, pink tank top, star print, sleeveless, white skirt, frilled skirt, black leggings,`<br>`oosaku, light brown hair, medium hair, brown eyes, hairclip, fang, gym uniform, gym shirt, name tag, bike shorts, sneakers,`<br>`oosaku, light brown hair, medium hair, brown eyes, hairclip, fang, animal costume, white pajamas,`<br>`anime screencap,` |
 | `SugiuraAyano.safetensors` | [杉浦绫乃-摇曳百合（Sugiura Ayano-Yuru Yuri）](https://civitai.com/models/1157069) | `SDXL` | `Sugiura Ayano`<br>`ahoge,long hair,ponytail,hair intakes,sidelocks,hair between eyes,bangs,brown eyes`<br>`collarbone,nanamori school uniform,black sailor collar,sailor dress,layered sleeves,short over long sleeves,red long sleeves,small breasts,black socks,loafers` |
 | `ToshinoKyouko.safetensors` | [岁纳京子-摇曳百合（Toshino Kyouko-Yuru Yuri）](https://civitai.com/models/1157216) | `SDXL` | `Toshino Kyouko`<br>`long hair,blonde hair,hair bow,red bow,sidelocks,hair between eyes,bangs,v-shaped eyebrows,blue eyes`<br>`collarbone,nanamori school uniform,black sailor collar,sailor dress,layered sleeves,short over long sleeves,red long sleeves,small breasts,black socks,loafers` |
@@ -1315,6 +1314,7 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 | `KuraChi151Styles.safetensors` | [[Artist Style] KuraChi151 | くらっち](https://civitai.com/models/1559040) | `SDXL` | `kuchi` |
 | `LineArtStyles.safetensors` | [Lineart style illustriousXL](https://civitai.com/models/1090623) | `SDXL` | `lineart, monochrome, greyscale` |
 | `LycorisRecoilStyles.safetensors` | [莉可丽丝 [动漫画风]（Lycoris Recoil [Anime style]）](https://civitai.com/models/1339579) | `SDXL` | `Lycoris Recoil style` |
+| `MeMaXLFlatAnimeStyleV3C.safetensors` | [MeMaXL Flat Anime Style - Noob/Illustrious/Pony/XL](https://civitai.com/models/269772) | `SDXL` | *Tidak ada trigger khusus* |
 | `NukitashiStyles.safetensors` | [《Nukitashi 》STYLE](https://civitai.com/models/1789782) | `SDXL` | `Nukitashi STYLE` |
 | `OdayakaStyles.safetensors` | [Odayaka artist style](https://civitai.com/models/1481390) | `SDXL` | `odayaka-ill` |
 | `OpenVlStyles.safetensors` | [artist:openvl](https://civitai.com/models/1657386) | `SDXL` | `artist:openvl` |

@@ -45,26 +45,30 @@
   // Generate Cluster Buttons
   const popularClusters = [
     { label: 'Semua Seri', id: 'all' },
-    { label: '🎸 BanG Dream!', match: 'bangdream' },
-    { label: '🌌 HoYoverse', match: 'honkai|zenless|genshin' },
-    { label: '💙 Blue Archive', match: 'blue archive' },
-    { label: '🎵 Music Anime', match: 'gbc|bocchi|k-on' },
-    { label: '🎤 Project Sekai', match: 'project sekai' },
-    { label: '⭐ Idolm@ster', match: 'idolm@ster|idolmaster' },
-    { label: '🌸 Yuri / Romcom', match: 'watanare|wataten|roshidere|citrus|yagate' },
-    { label: '🛠️ Tool & Poses', match: 'tool|poses|concept|clothing' },
-    { label: '🎨 Art Styles', match: 'style|favorite' },
-    { label: '🎲 Random Chara', match: 'random character' }
+    { label: '🎨 Art Styles', id: 'style' },
+    { label: '💡 Concept', id: 'concept' },
+    { label: '💃 Poses', id: 'poses' },
+    { label: '👗 Clothing', id: 'clothing' },
+    { label: '🌄 Background', id: 'background' },
+    { label: '🛠️ Tools', id: 'tool' },
+    { label: '🎸 BanG Dream!', id: 'bangdream' },
+    { label: '🌌 HoYoverse', id: 'hoyoverse' },
+    { label: '💙 Blue Archive', id: 'bluearchive' },
+    { label: '🎵 Music Anime', id: 'musicanime' },
+    { label: '🎤 Project Sekai', id: 'projectsekai' },
+    { label: '⭐ Idolm@ster', id: 'idolmaster' },
+    { label: '🌸 Yuri / Romcom', id: 'yuri' },
+    { label: '🎲 Random Chara', id: 'random' }
   ];
 
   function renderClusterFilters() {
     clusterScroll.innerHTML = '';
     popularClusters.forEach(item => {
       const btn = document.createElement('button');
-      btn.className = `pill-btn ${state.cluster === (item.match || item.id) ? 'active' : ''}`;
+      btn.className = `pill-btn ${state.cluster === item.id ? 'active' : ''}`;
       btn.textContent = item.label;
       btn.addEventListener('click', () => {
-        state.cluster = item.match || item.id;
+        state.cluster = item.id;
         state.page = 1;
         document.querySelectorAll('#clusterScroll .pill-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -87,11 +91,41 @@
 
       // Cluster filter
       if (state.cluster !== 'all') {
-        const regex = new RegExp(state.cluster, 'i');
-        const inHeader = regex.test(m.header || '');
-        const inCat = regex.test(m.cat || '');
-        const inName = regex.test(m.filename || '');
-        if (!inHeader && !inCat && !inName) return false;
+        const cId = state.cluster;
+        const cat = (m.cat || '').toLowerCase();
+        const header = (m.header || '').toLowerCase();
+        const cell = m.cell;
+
+        if (cId === 'style') {
+          if (cat !== 'style' && !header.includes('style')) return false;
+        } else if (cId === 'concept') {
+          if (cat !== 'concept' && !header.includes('concept')) return false;
+        } else if (cId === 'poses') {
+          if (cat !== 'poses' && !header.includes('poses')) return false;
+        } else if (cId === 'clothing') {
+          if (cat !== 'clothing' && !header.includes('clothing')) return false;
+        } else if (cId === 'background') {
+          if (cat !== 'background' && !header.includes('background')) return false;
+        } else if (cId === 'tool') {
+          if (cat !== 'tool' && !header.includes('tool')) return false;
+        } else if (cId === 'bangdream') {
+          if (cell < 35 || cell > 49) return false;
+        } else if (cId === 'hoyoverse') {
+          if (cell < 53 || cell > 58) return false;
+        } else if (cId === 'bluearchive') {
+          if (cell !== 79 && !cat.includes('blue archive') && !header.includes('blue archive')) return false;
+        } else if (cId === 'musicanime') {
+          if (cell < 50 || cell > 52) return false;
+        } else if (cId === 'projectsekai') {
+          if (cell < 61 || cell > 62) return false;
+        } else if (cId === 'idolmaster') {
+          if (cell < 59 || cell > 60) return false;
+        } else if (cId === 'yuri') {
+          const yuriCells = [63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 80, 93, 101, 102];
+          if (!yuriCells.includes(cell)) return false;
+        } else if (cId === 'random') {
+          if (cell < 103 || cell > 104) return false;
+        }
       }
 
       // Search query
