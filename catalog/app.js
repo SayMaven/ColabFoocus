@@ -165,14 +165,19 @@
       ? m.tw.slice(0, 3).map(t => `<span class="trigger-chip" title="${escapeHtml(t)}">${escapeHtml(t)}</span>`).join('')
       : `<span class="no-trigger">Tidak ada trigger khusus</span>`;
 
-    const imgTag = m.img
-      ? `<img class="card-img" src="${m.img}" alt="${escapeHtml(m.filename)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'><span>🖼️ Preview N/A</span></div>'">`
-      : `<div class="card-img-placeholder"><span>🖼️ Preview N/A</span></div>`;
+    let mediaTag = `<div class="card-img-placeholder"><span>🖼️ Preview N/A</span></div>`;
+    if (m.img) {
+      if (m.img.endsWith('.mp4')) {
+        mediaTag = `<video class="card-img" src="${m.img}" autoplay loop muted playsinline preload="metadata"></video>`;
+      } else {
+        mediaTag = `<img class="card-img" src="${m.img}" alt="${escapeHtml(m.filename)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'><span>🖼️ Preview N/A</span></div>'">`;
+      }
+    }
 
     return `
       <div class="model-card" data-id="${m.id}">
         <div class="card-img-wrap">
-          ${imgTag}
+          ${mediaTag}
           <div class="card-badges">
             <span class="badge ${archBadgeClass}">${m.arch}</span>
             <span class="badge badge-type">${m.type}</span>
@@ -256,13 +261,17 @@
     document.getElementById('modalCell').textContent = `Cell ${m.cell}`;
     document.getElementById('modalTarget').textContent = m.target;
 
-    // Image
-    const modalImg = document.getElementById('modalImage');
+    // Image / Video Media
+    const modalMediaWrap = document.querySelector('.modal-img-wrap');
     if (m.img) {
-      modalImg.src = m.img;
-      modalImg.style.display = 'block';
+      modalMediaWrap.style.display = 'block';
+      if (m.img.endsWith('.mp4')) {
+        modalMediaWrap.innerHTML = `<video id="modalImage" class="modal-img" src="${m.img}" autoplay loop muted playsinline controls></video>`;
+      } else {
+        modalMediaWrap.innerHTML = `<img id="modalImage" class="modal-img" src="${m.img}" alt="Preview">`;
+      }
     } else {
-      modalImg.style.display = 'none';
+      modalMediaWrap.style.display = 'none';
     }
 
     // Triggers
