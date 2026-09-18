@@ -689,16 +689,17 @@ body {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  max-width: 900px;
+  max-width: 920px;
   width: 100%;
-  max-height: 90vh;
+  max-height: 88vh;
   overflow-y: auto;
+  overflow-x: hidden;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
   position: relative;
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 360px 1fr;
   gap: 24px;
-  padding: 28px;
+  padding: 24px;
   transform: scale(0.95);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -732,6 +733,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  position: sticky;
+  top: 0;
+  align-self: start;
 }
 
 .modal-img-wrap {
@@ -739,13 +743,18 @@ body {
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border-subtle);
-  background: #000;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
 }
 .modal-img {
   width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
   display: block;
-  object-fit: cover;
-  max-height: 480px;
 }
 
 .modal-info {
@@ -756,10 +765,11 @@ body {
 
 .modal-title-wrap h2 {
   font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.25;
   margin-bottom: 6px;
+  word-break: break-word;
 }
 
 .modal-meta-chips {
@@ -795,30 +805,116 @@ body {
   background: rgba(0, 0, 0, 0.3);
   padding: 8px 12px;
   border-radius: 6px;
-  overflow-x: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   white-space: pre-wrap;
-  word-break: break-all;
+  word-break: break-word;
+  max-height: 110px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+.meta-code::-webkit-scrollbar {
+  width: 4px;
+}
+.meta-code::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Scrollable Triggers Container in Modal */
+.modal-triggers-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.4) rgba(0, 0, 0, 0.2);
+}
+.modal-triggers-container::-webkit-scrollbar {
+  width: 5px;
+}
+.modal-triggers-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.modal-triggers-container::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.4);
+  border-radius: 4px;
+}
+.modal-triggers-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.7);
+}
+
+.modal-trigger-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.modal-trigger-item:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
+  transform: translateX(2px);
+}
+.modal-trigger-text {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  color: #ddd6fe;
+  word-break: break-word;
+  line-height: 1.4;
+  flex: 1;
+}
+.modal-trigger-copy-hint {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-purple);
+  white-space: nowrap;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+.modal-trigger-item:hover .modal-trigger-copy-hint {
+  opacity: 1;
+  color: #c4b5fd;
 }
 
 .param-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  font-size: 0.82rem;
 }
 .param-item {
   display: flex;
-  justify-content: space-between;
-  padding: 4px 0;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
 }
 .param-label {
+  font-size: 0.68rem;
   color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 .param-val {
   font-family: var(--font-code);
+  font-size: 0.82rem;
   color: #fff;
   font-weight: 600;
+  word-break: break-word;
+  line-height: 1.3;
 }
 
 /* ══════════════════════════════════════════════════════════════════

@@ -1,6 +1,6 @@
 # 📚 Katalog Model, Trigger Words & Sumber Asli Civitai
 
-Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di notebook [Foocus SayMaven](Foocus%20SayMaven.ipynb), lengkap dengan nama file kustom, judul asli dari kreator di Civitai, tautan web resmi, arsitektur, dan trigger words untuk prompt.
+Dokumen ini memuat seluruh daftar model (**606 model**) yang tersedia di notebook [Foocus SayMaven](Foocus%20SayMaven.ipynb), lengkap dengan nama file kustom, judul asli dari kreator di Civitai, tautan web resmi, arsitektur, dan trigger words untuk prompt.
 
 > 💡 **Tips Penggunaan**:
 > - **Nama File**: Cari nama ini di menu dropdown *Model* atau *LoRA* pada antarmuka Fooocus.
@@ -36,7 +36,7 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 - [Bocchi the Rock SDXL (#bocchi-the-rock-sdxl)](#bocchi-the-rock-sdxl) *(4 model)*
 - [K-ON SDXL (#k-on-sdxl)](#k-on-sdxl) *(6 model)*
 - [Honkai Star Rail ANIMA (#honkai-star-rail-anima)](#honkai-star-rail-anima) *(4 model)*
-- [Honkai Star Rail SDXL (#honkai-star-rail-sdxl)](#honkai-star-rail-sdxl) *(25 model)*
+- [Honkai Star Rail SDXL (#honkai-star-rail-sdxl)](#honkai-star-rail-sdxl) *(24 model)*
 - [Zenless Zone Zero ANIMA (#zenless-zone-zero-anima)](#zenless-zone-zero-anima) *(1 model)*
 - [Zenless Zone Zero SDXL (#zenless-zone-zero-sdxl)](#zenless-zone-zero-sdxl) *(4 model)*
 - [Genshin SDXL (#genshin-sdxl)](#genshin-sdxl) *(1 model)*
@@ -87,12 +87,12 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 - [Yuru Yuri SDXL (#yuru-yuri-sdxl)](#yuru-yuri-sdxl) *(9 model)*
 - [Random Character ANIMA (#random-character-anima)](#random-character-anima) *(3 model)*
 - [Random Character SDXL (#random-character-sdxl)](#random-character-sdxl) *(15 model)*
-- [Tool SDXL (#tool-sdxl)](#tool-sdxl) *(12 model)*
-- [Poses SDXL (#poses-sdxl)](#poses-sdxl) *(84 model)*
-- [Clothing SDXL (#clothing-sdxl)](#clothing-sdxl) *(12 model)*
-- [Concept SDXL (#concept-sdxl)](#concept-sdxl) *(68 model)*
-- [Background SDXL (#background-sdxl)](#background-sdxl) *(10 model)*
-- [Style SDXL (#style-sdxl)](#style-sdxl) *(39 model)*
+- [Tool SDXL (#tool-sdxl)](#tool-sdxl) *(11 model)*
+- [Poses SDXL (#poses-sdxl)](#poses-sdxl) *(82 model)*
+- [Clothing SDXL (#clothing-sdxl)](#clothing-sdxl) *(11 model)*
+- [Concept SDXL (#concept-sdxl)](#concept-sdxl) *(65 model)*
+- [Background SDXL (#background-sdxl)](#background-sdxl) *(9 model)*
+- [Style SDXL (#style-sdxl)](#style-sdxl) *(34 model)*
 - [STYLE SDXL (#style-sdxl)](#style-sdxl) *(11 model)*
 - [FAVORITE Classical Artstyle SDXL (#favorite-classical-artstyle-sdxl)](#favorite-classical-artstyle-sdxl) *(1 model)*
 
@@ -372,7 +372,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | `Qinque.safetensors` | [Qingque - Honkai Star Rail - Illustrious](https://civitai.com/models/1470121) | **SDXL** | `qing-que, 1girl, grey hair, green eyes, low twintails, medium hair, hair ornament, hairclip,`<br>`qing-que, qing-suit, 1girl, grey hair, green eyes, low twintails, medium hair, hair ornament, hairclip, solo, black and green dress, turtleneck, detached sleeves, white skirt, sleeves bow, socks, shoes` |
 | `Robin.safetensors` | [Robin 知更鸟 (IL,Pony,XL,1.5)](https://civitai.com/models/477055) | **SDXL** | `robin \(honkai: star rail\)`<br>`sleeveless dress, halo, white gloves, earrings, detached sleeves, detached collar, head wings, blue pumps` |
 | `RuanMei.safetensors` | [Ruan Mei - Honkai Star Rail - Illustrious](https://civitai.com/models/1438905) | **SDXL** | `ruan-mei, 1girl, long hair, aqua eyes, black hair, hair bun, hair flower, hair ornament, pink tint in eyes`<br>`ruan-mei, 1girl, long hair, aqua eyes, black hair, hair bun, hair flower, pink tint in eyes, left thigh strap, flower, jewelry, bare shoulders, bracelet, green gloves, covered navel, black corset, elbow gloves, pearl necklace, shoulder cutout, white capelet, detached collar, strapless dress, pelvic curtain, china dress`<br>`ruan-mei, 1girl, long hair, aqua eyes, black hair, hair bun, hair flower, pink tint in eyes, glasses, black glasses, office suit, black suit jacket, jacket, white shirt, collared shirt, black skirt, pencil skirt` |
-| `ShushangHSR.safetensors` | [ShushangHSR](https://civitai.com/models/1871697) | **SDXL** | *Tidak ada trigger khusus* |
 | `SilverWolf.safetensors` | [Silver Wolf - Honkai Star Rail - Illustrious](https://civitai.com/models/1460272) | **SDXL** | `si-wolf, 1girl, silver hair, silver eyes, eyewear on head, blue and black hair ribbon, drill ponytail, earing`<br>`si-wolf, s-suit, 1girl, silver hair, silver eyes, eyewear on head, blue and black hair ribbon, drill ponytail, earing, solo, jacket, choker, jacket fur trim, cropped jacket, crop top, black shorts, fingerless gloves, thigh strap, single fishnet sock, band-aid,  fold-over boots` |
 | `Sparkle.safetensors` | [Sparkle - Honkai Star Rail - Illustrious](https://civitai.com/models/1463936) | **SDXL** | `ha-nabi, s-suit, 1girl, magenta eyes, sparkling eyes, cherry blossom iris, black hair, twintails, red mole under eyes, fox mask, mask on head, red hair ribbons, black choker, neck bell, red kimono, off shoulder kimono, obi, sash, black single glove, detached sleeves, thigh strap, halterneck, cherry blossom tattoo, sandals, cross-laced sandals, sleeves train`<br>`ha-nabi, 1girl, magenta eyes, sparkling eyes, cherry blossom iris, black hair, twintails, red mole under eyes, fox mask, mask on head, red hair ribbons` |
 | `Stelle.safetensors` | [Stelle (Trailblazer) - Honkai Star Rail - Illustrious](https://civitai.com/models/1623491) | **SDXL** | `ste-hs, 1girl, yellow eyes, grey hair, long hair`<br>`ste-hs, def, 1girl, yellow eyes, grey hair, long hair, gloves, black coat, sleeves rolled up, open clothes, white sweater, off shoulder sweater, black skirt, yellow trim, thigh strap, boots, black gloves, ribbon` |
@@ -871,7 +870,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | `BangDreamStyles_KINGDONG.safetensors` | [BanG Dream! 迷途之子 [动漫画风]（BanG Dream! It's MyGO [Anime style]）](https://civitai.com/models/1278946) | **SDXL** | `Bang Dream! It's Mygo anime style-Remake` |
 | `BangDreamStyles_RIKUMIYASHIRO.safetensors` | [BanG Dream! \| Bandori \| バンドリ Illustration Style](https://civitai.com/models/1667570) | **SDXL** | `bandori_5starscard` |
 | `DetailedEyesV3.safetensors` | [DetailedEyes_XL](https://civitai.com/models/120723) | **SDXL** | *Tidak ada trigger khusus* |
-| `DramaticLightingSliderStyles.safetensors` | [DramaticLightingSliderStyles](https://civitai.com/models/1268294) | **SDXL** | *Tidak ada trigger khusus* |
 | `DynamicPosesSlider.safetensors` | [Dynamic Poses slider PONYXL](https://civitai.com/models/438059) | **SDXL** | `dynamic pose, foreshortening, extreme perspective` |
 | `GakumasIdolMasterStyles.safetensors` | [[Anima V1.0 / WAI] Gakuen Idolmaster Game Style / Gakumas (学マス)  Game Style](https://civitai.com/models/1858848) | **SDXL** | `gakumas, 3d`<br>`shaded face, sweat, messy hair`<br>`hanami saki, hanami ume, shinosawa hiro, hataya misuzu, arimura mao, fujita kotone, juo sena, himesaki rinami, katsuragi lilja, shiun sumika, kuramoto china, tsukimura temari,` |
 | `GenesisStyles.safetensors` | [GENESIS](https://civitai.com/models/846953) | **SDXL** | *Tidak ada trigger khusus* |
@@ -886,7 +884,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | `BandagedArm.safetensors` | [[Illust&XL] arm sling / bandaged arm / 骨折 / ギプス / 包帯](https://civitai.com/models/586588) | **SDXL** | `arm sling` |
 | `BandagedLeg.safetensors` | [leg cast / bandaged leg / 骨折 / ギプス / 包帯](https://civitai.com/models/1646725) | **SDXL** | `leg cast` |
 | `BattoujutsuStance.safetensors` | [Battoujutsu Stance (抜刀術) - Poses](https://civitai.com/models/1168316) | **SDXL** | `<lora:battoujutsu-stance-ponyxl-lora-nochekaiser:1>, battoujutsu stance, looking at viewer, holding, weapon, sword, holding weapon, holding sword, standing, katana, sheath, sheathed, fighting stance, ready to draw` |
-| `BetterYuriKiss.safetensors` | [BetterYuriKiss](https://civitai.com/models/1188399) | **SDXL** | *Tidak ada trigger khusus* |
 | `Biting_KissingStomach.safetensors` | [Biting/Kissing stomach (Yuri) -SDXL](https://civitai.com/models/1803782) | **SDXL** | `stomach biting` |
 | `BreakDance.safetensors` | [breakdance / breaking / ブレイクダンス / ブレイキン](https://civitai.com/models/851015) | **SDXL** | `breakdance` |
 | `BunnyRabbitPiece.safetensors` | [[Illust&XL] bunny rabbit piece / うさちゃんピース / うさピース](https://civitai.com/models/394500) | **SDXL** | `usa piece,double v` |
@@ -951,7 +948,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | `SmallBreastsClevageHandjob_Naizuri.safetensors` | [POV/Side 小胸専用 胸の谷間ハンドジョブ / POV/Side Small breasts clevage handjob / naizuri](https://civitai.com/models/1491446) | **SDXL** | `nzcenter`<br>`small breast`<br>`nude`<br>`nipples`<br>*(+5 trigger lainnya)* |
 | `SmellingPanties.safetensors` | [smelling panties / クンカクンカ / パンツ嗅ぎ](https://civitai.com/models/1049240) | **SDXL** | `kunka` |
 | `Soba_ShrimpTempura.safetensors` | [soba / shrimp tempura / 年越しそば / 天ぷらそば / 大晦日 / 蕎麦](https://civitai.com/models/1068321) | **SDXL** | `soba` |
-| `SpittingDomination.safetensors` | [SpittingDomination](https://civitai.com/models/1969737) | **SDXL** | *Tidak ada trigger khusus* |
 | `SpringRider.safetensors` | [[Illust&XL&Pony] spring rider / ロッキング遊具 / スプリング遊具](https://civitai.com/models/329581) | **SDXL** | `spring rider` |
 | `StompingandSex.safetensors` | [Stomping and Sex](https://civitai.com/models/1661478) | **SDXL** | `stomp01, stomping, head, stomped by hand, sex, doggystyle`<br>`by foot` |
 | `SwordGuardStancePoses.safetensors` | [Sword Guard Stance - Poses](https://civitai.com/models/1187524) | **SDXL** | `<lora:sword-guard-stance-illustriousxl-lora-nochekaiser:1>, sword guard stance, sword, weapon, solo, katana, holding, holding weapon, holding sword, looking at viewer, cowboy shot,` |
@@ -976,7 +972,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | `HospitalGown.safetensors` | [Hospital Gown - Clothing](https://civitai.com/models/1596589) | **SDXL** | `<lora:hospital-gown-illustriousxl-lora-nochekaiser:1>, hospital gown, intravenous drip, iv stand, bandages,` |
 | `IdolOutfit.safetensors` | [Idol Outfit](https://civitai.com/models/1102771) | **SDXL** | `japanese-idol-outfit` |
 | `KindergartenClothing.safetensors` | [Kindergarten Uniform - Clothing](https://civitai.com/models/1651266) | **SDXL** | `<lora:garten-uniform-illustriousxl-lora-nochekaiser:1>, garten uniform, tulip hat, yellow hat, randoseru, backpack, red bag, blue shirt, name tag, skirt, pleated skirt,` |
-| `MicroBikini.safetensors` | [MicroBikini](https://civitai.com/models/1687553) | **SDXL** | *Tidak ada trigger khusus* |
 | `NurseryTeacherApron.safetensors` | [Nursery Teacher Apron](https://civitai.com/models/1275100) | **SDXL** | `nursery-teacher-apron` |
 | `PlayboyBunnySuit.safetensors` | [Playboy Bunny Suit](https://civitai.com/models/253223) | **SDXL** | `pantyhose, bowtie, playboy_bunny, rabbit_ears, detached_collar, highleg_leotard, wrist_cuffs, playboy bunny, rabbit ears` |
 | `RuffleBikini.safetensors` | [【COSTUME】Ruffle Bikini (Illustrious)](https://civitai.com/models/1450883) | **SDXL** | `ruffle bikini, (color) bikini` |
@@ -990,13 +985,11 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 |---|---|:---:|---|
 | `AestheticQualityModifiers-BestQuality.safetensors` | [Aesthetic Quality Modifiers - Best Quality](https://civitai.com/models/977115) | **SDXL** | `masterpiece, best quality, very aesthetic, absurdres` |
 | `AestheticQualityModifiers-Masterpiece.safetensors` | [Aesthetic Quality Modifiers - Masterpiece](https://civitai.com/models/929497) | **SDXL** | `masterpiece, very aesthetic, absurdres` |
-| `AfterFellatiowithMizumizuniStyle.safetensors` | [AfterFellatiowithMizumizuniStyle](https://civitai.com/models/1765969) | **SDXL** | *Tidak ada trigger khusus* |
 | `AnalRose.safetensors` | [アナルローズ/anal rose(pony)](https://civitai.com/models/476502) | **SDXL** | `spread anus`<br>`anal prolapse` |
 | `AnimeFeet.safetensors` | [Anime Feet - Detailed Soles](https://civitai.com/models/773126) | **SDXL** | `feet`<br>`soles`<br>`detailed feet`<br>`detailed soles` |
 | `AssAgainstGlass.safetensors` | [Ass Against Glass - Concept](https://civitai.com/models/1777002) | **SDXL** | `<lora:ass-against-glass-illustriousxl-lora-nochekaiser:1>, ass against glass, against glass, solo, looking at viewer, blush, smile, closed mouth, standing, nipples, ass, thighs, cowboy shot, completely nude, pussy, indoors, looking back, from behind, wet, anus, back, thigh gap, from below, hand on own chest, steam, breast press, water drop, cleft of venus, tiles, tile wall, showering, ceiling, shower head, shower (place),` |
 | `BackLighting.safetensors` | [Vixon's Illustrious Styles - Back Lighting](https://civitai.com/models/1026983) | **SDXL** | `backlit, backlighting,`<br>`sunset` |
 | `BedInvitation.safetensors` | [Bed Invitation - Concept](https://civitai.com/models/1572034) | **SDXL** | `<lora:bed-invitation-illustriousxl-lora-nochekaiser:1>, bed invitation, on bed, on side, pillow, under covers, lingerie, panties, navel, torogao, blush, parted lips hand up, looking at viewer,` |
-| `BetterDetailedPussyandAnus.safetensors` | [BetterDetailedPussyandAnus](https://civitai.com/models/1785482) | **SDXL** | *Tidak ada trigger khusus* |
 | `BreastDrop.safetensors` | [Breast Drop - Concept](https://civitai.com/models/1324556) | **SDXL** | `<lora:breast-drop-illustriousxl-lora-nochekaiser:1>, breast drop, bra, underboob, bra lift, lifting own clothes, bed room, navel, nipples, smug,, cowboy shot, looking at viewer, dutch angle` |
 | `CheekonGlass.safetensors` | [Cheek on Glass - Concept](https://civitai.com/models/1266532) | **SDXL** | `<lora:cheek-on-glass-illustriousxl-lora-nochekaiser:1>, cheek on glass, against glass, glass, completely nude, nipples, navel, hetero, one eye closed, tongue, open mouth, looking back, sex, tongue out, bent over, sex from behind, doggystyle, standing sex, mixed bathing, wet, water, motion, motion lines, motion blur, bathroom, tiles, tile wall,` |
 | `ClothesPull.safetensors` | [脱ぎかけ/clothes pull(ill,pony)](https://civitai.com/models/596740) | **SDXL** | `clothes pull` |
@@ -1047,7 +1040,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | `ReverseNursingHandjob.safetensors` | [Reverse Nursing Handjob - Concept](https://civitai.com/models/1266705) | **SDXL** | `<lora:reverse-nursing-handjob-illustriousxl-lora-nochekaiser:1>, reverse nursing handjob, nipples, hetero, nude, lying, penis, tongue, tongue out, pov, licking, handjob, nipple tweak, licking nipple, completely nude, bed room,` |
 | `SmellingMasturbationLyCoris.safetensors` | [smelling masturbation](https://civitai.com/models/782699) | **SDXL** | `smelling masturbation, female masturbation, smelling clothes,` |
 | `SmokingLyCoris.safetensors` | [喫煙/smoking](https://civitai.com/models/852273) | **SDXL** | `smoking, cigarette`<br>`holding` |
-| `StarryHair.safetensors` | [StarryHair](https://civitai.com/models/1455059) | **SDXL** | *Tidak ada trigger khusus* |
 | `StraddlingPaizuri.safetensors` | [Straddling Paizuri - Concept](https://civitai.com/models/1350711) | **SDXL** | `<lora:straddling-paizuri-illustriousxl-lora-nochekaiser:1>, straddling paizuri, paizuri, boy on top, penis, breasts squeezed together, pov, cum, cum on face, ejaculation, facial, nipples, nude, open mouth, one eye closed, bed, bed room, on back, on bed, blush,` |
 | `SuspendedCongressBolero537.safetensors` | [駅弁/suspended congress](https://civitai.com/models/708540) | **SDXL** | `ekiben, suspended congress, 1boy, sex` |
 | `SuspendedCongressNochekaiser881.safetensors` | [Suspended Congress - Concept](https://civitai.com/models/1358265) | **SDXL** | `<lora:suspended-congress-v2-illustriousxl-lora-nochekaiser:1>, suspended congress, blush, 1boy, standing, nipples, closed eyes, ass, hetero, heart, sweat, completely nude, penis, sex, cum, from side, vaginal, hug, kiss, breast press, standing sex, arms around neck` |
@@ -1062,7 +1054,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
 | `Backstage.safetensors` | [Backstage](https://civitai.com/models/1317518) | **SDXL** | `b4ckst4g3`<br>`backstage, curtains, scaffolding, indoors, ,crowd behind curtains, glowsticks, , instruments, microphone stand` |
-| `CloudCollection.safetensors` | [CloudCollection](https://civitai.com/models/1502308) | **SDXL** | *Tidak ada trigger khusus* |
 | `SaltFlatsMirror.safetensors` | [Salt Flats Mirror - Illustrious](https://civitai.com/models/628917) | **SDXL** | `s4ltflats`<br>`Reflection, outdoors, day, scenery, blue sky, water, cloudy sky, horizon` |
 | `SchoolPoolV2.safetensors` | [School Pool V2 (学校のプール)](https://civitai.com/models/1604582) | **SDXL** | `school pool` |
 | `SchoolRooftop.safetensors` | [School Rooftop (学校の屋上) ｜IL・SDXL](https://civitai.com/models/1361758) | **SDXL** | `school rooftop`<br>`white concrete floor, blue sky, white railing` |
@@ -1082,8 +1073,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | `ArimonStyles.safetensors` | [Arimon Style](https://civitai.com/models/822349) | **SDXL** | `arimon` |
 | `BrightShiiroStyles.safetensors` | [Bright \| Shiiro's Styles](https://civitai.com/models/1389337) | **SDXL** | `Bright_illu,sparkle,too many light particles` |
 | `BubukkaStyles.safetensors` | [Bubukka (ぶぶっか) - Artist Style // Illustrious](https://civitai.com/models/1810892) | **SDXL** | `Bubukstyle`<br>`thin lineart, flat cel shading, minimal shadows, pastel palette, low contrast lighting, minimal highlights` |
-| `CunnyStyleV7.safetensors` | [CunnyStyleV7](https://civitai.com/models/1920055) | **SDXL** | *Tidak ada trigger khusus* |
-| `CustomUdonStyles.safetensors` | [CustomUdonStyles](https://civitai.com/models/1727866) | **SDXL** | *Tidak ada trigger khusus* |
 | `DateALiveAnimeStyles.safetensors` | [约会大作战 第四 & 第五季 [动漫画风]（Date A Live Iv & V [Anime style]）](https://civitai.com/models/1255017) | **SDXL** | `Date A Live Iv & V anime style` |
 | `DateALiveTsunakoNovelStyles.safetensors` | [Tsunako-画师风格（Tsunako-Artist style）](https://civitai.com/models/1218608) | **SDXL** | `Tsunako style` |
 | `EdanomaMeuShiiroStyles.safetensors` | [Edanoma Meu \| Shiiro's Styles](https://civitai.com/models/1336154) | **SDXL** | `edanoma_meu_illu` |
@@ -1098,8 +1087,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | `KuraChi151Styles.safetensors` | [[Artist Style] KuraChi151 \| くらっち](https://civitai.com/models/1559040) | **SDXL** | `kuchi` |
 | `LineArtStyles.safetensors` | [Lineart style illustriousXL](https://civitai.com/models/1090623) | **SDXL** | `lineart, monochrome, greyscale` |
 | `LycorisRecoilStyles.safetensors` | [莉可丽丝 [动漫画风]（Lycoris Recoil [Anime style]）](https://civitai.com/models/1339579) | **SDXL** | `Lycoris Recoil style` |
-| `MangamasterStyles.safetensors` | [MangamasterStyles](https://civitai.com/models/1168742) | **SDXL** | *Tidak ada trigger khusus* |
-| `MizumizuniStyles.safetensors` | [MizumizuniStyles](https://civitai.com/models/960410) | **SDXL** | *Tidak ada trigger khusus* |
 | `NukitashiStyles.safetensors` | [《Nukitashi 》STYLE](https://civitai.com/models/1789782) | **SDXL** | `Nukitashi STYLE` |
 | `OdayakaStyles.safetensors` | [Odayaka artist style](https://civitai.com/models/1481390) | **SDXL** | `odayaka-ill` |
 | `OpenVlStyles.safetensors` | [artist:openvl](https://civitai.com/models/1657386) | **SDXL** | `artist:openvl` |
@@ -1113,7 +1100,6 @@ Dokumen ini memuat seluruh daftar model (**620 model**) yang tersedia di noteboo
 | `TokidokiBosottoRussiagoDeDereruTonariNoAlyasanStyles.safetensors` | [不时轻声地以俄语遮羞的邻座艾莉同学 [动漫画风]（Tokidoki Bosotto Russia go De Dereru Tonari No Alya san [Anime style]）](https://civitai.com/models/1302238) | **SDXL** | `Tokidoki Bosotto Russia-go De Dereru Tonari No Alya-san anime style` |
 | `Himouto!Umaru-chanStyles.safetensors` | [干物妹小埋 [动漫画风]（Himouto! Umaru-chan [Anime style]）](https://civitai.com/models/1251507) | **SDXL** | `Himouto! Umaru-chan anime style` |
 | `USNRStyles.safetensors` | [薄塗り / USNR STYLE](https://civitai.com/models/176554) | **SDXL** | `usnr` |
-| `VicinekoStyles.safetensors` | [VicinekoStyles](https://civitai.com/models/1731487) | **SDXL** | *Tidak ada trigger khusus* |
 | `ZenlessZoneZeroShiiroStyles.safetensors` | [Zenless Zone Zero \| Shiiro's Styles](https://civitai.com/models/1397679) | **SDXL** | `3d` |
 
 ## STYLE SDXL

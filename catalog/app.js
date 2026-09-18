@@ -276,15 +276,24 @@
 
     // Triggers
     const triggersWrap = document.getElementById('modalTriggers');
+    const triggersTitle = document.getElementById('modalTriggersTitle');
+    const triggersCount = m.tw ? m.tw.length : 0;
+    if (triggersTitle) {
+      triggersTitle.textContent = `Trigger Words (${triggersCount})`;
+    }
+
     if (m.tw && m.tw.length > 0) {
+      triggersWrap.className = 'modal-triggers-container';
       triggersWrap.innerHTML = m.tw.map(t => `
-        <div class="trigger-chip" style="padding: 6px 10px; font-size: 0.85rem; cursor: pointer;" title="Klik untuk salin">
-          ${escapeHtml(t)}
+        <div class="modal-trigger-item" title="Klik untuk salin trigger ini">
+          <span class="modal-trigger-text">${escapeHtml(t)}</span>
+          <span class="modal-trigger-copy-hint">📋 Salin</span>
         </div>
       `).join('');
+
       // Click chip to copy
-      triggersWrap.querySelectorAll('.trigger-chip').forEach((chip, idx) => {
-        chip.addEventListener('click', () => {
+      triggersWrap.querySelectorAll('.modal-trigger-item').forEach((item, idx) => {
+        item.addEventListener('click', () => {
           navigator.clipboard.writeText(m.tw[idx]).then(() => {
             showToast(`Disalin: <code>${escapeHtml(m.tw[idx])}</code>`);
           });
@@ -297,6 +306,7 @@
         });
       };
     } else {
+      triggersWrap.className = '';
       triggersWrap.innerHTML = '<span class="no-trigger" style="font-size: 0.9rem;">Tidak ada trigger words khusus.</span>';
       document.getElementById('modalCopyAllTriggers').style.display = 'none';
     }
