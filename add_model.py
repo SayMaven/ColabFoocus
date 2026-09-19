@@ -20,6 +20,14 @@ import urllib.request
 import urllib.parse
 from datetime import datetime
 
+# Pastikan output terminal mendukung UTF-8 (mencegah error emoji di Windows)
+if sys.stdout.encoding and sys.stdout.encoding.lower() != 'utf-8':
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except AttributeError:
+        pass
+
 # Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 NB_LOCAL = os.path.join(BASE_DIR, "Foocus SayMaven.ipynb")
@@ -73,13 +81,16 @@ def sanitize_filename(name):
     return s
 
 def select_version_interactive(versions, preselected_version_id=None):
-    if preselected_version_id:
-        for v in versions:
-            if str(v.get('id')) == str(preselected_version_id):
-                return v
-
     if len(versions) == 1:
         return versions[0]
+
+    # Temukan index versi default jika URL memuat ?modelVersionId=...
+    default_idx = 0
+    if preselected_version_id:
+        for idx, v in enumerate(versions):
+            if str(v.get('id')) == str(preselected_version_id):
+                default_idx = idx
+                break
 
     print(f"\n📦 Model ini memiliki {len(versions)} varian versi:")
     for idx, v in enumerate(versions):
@@ -88,17 +99,23 @@ def select_version_interactive(versions, preselected_version_id=None):
         v_date = (v.get('createdAt') or '')[:10]
         files = [f.get('name') for f in v.get('files', []) if f.get('name', '').endswith(('.safetensors', '.pt'))]
         f_info = f"({files[0]})" if files else ""
-        print(f"  [{idx+1:2d}] {v_name:<18} | Base: {v_base:<12} | Tgl: {v_date} {f_info}")
+        from_link = " ⭐ (Dari Link URL)" if idx == default_idx and preselected_version_id else ""
+        print(f"  [{idx+1:2d}] {v_name:<22} | Base: {v_base:<14} | Tgl: {v_date} {f_info}{from_link}")
+
+    default_num = default_idx + 1
+    default_name = versions[default_idx].get('name', '')
+    prompt_text = f"\nPilih varian versi [1-{len(versions)}, default {default_num} ({default_name})]: "
 
     while True:
-        choice = input(f"\nPilih varian versi [1-{len(versions)}, default 1]: ").strip()
+        choice = input(prompt_text).strip()
         if not choice:
-            return versions[0]
+            return versions[default_idx]
         if choice.isdigit():
             c_idx = int(choice) - 1
             if 0 <= c_idx < len(versions):
                 return versions[c_idx]
         print("Pilihan tidak valid, coba lagi.")
+
 
 def get_target_dir(model_type, cell_idx):
     # Determine destination folder
@@ -255,52 +272,107 @@ def add_model_to_notebooks(target_cell_idx, civitai_url, local_dl_line, drive_dl
         with open(nb_path, "w", encoding="utf-8") as f:
             json.dump(nb, f, indent=1, ensure_ascii=False)
 
-def insert_new_series_cell(series_name, arch):
-    """Membuat dan menyisipkan sel seri baru secara alfabetis (A-Z) pada kedua notebook."""
-    series_clean = series_name.strip()
-    if arch == "ANIMA":
-        new_header = f"# {series_clean} ANIMA" if "ANIMA" not in series_clean else f"# {series_clean}"
-    else:
-        new_header = f"# {series_clean} SDXL" if not series_clean.endswith("SDXL") else f"# {series_clean}"
+def clean_category_name(raw_name):
+    """Membersihkan simbol '#' dan suffix ANIMA/SDXL dari input pengguna."""
+    s = re.sub(r'^[#\s]+', '', raw_name).strip()
+    s = re.sub(r'\s*(ANIMA|SDXL)$', '', s, flags=re.IGNORECASE).strip()
+    return s
+
+def build_cell_header(raw_name, arch):
+    """Menghasilkan header sel resmi yang rapi tanpa duplikasi (misal: '# Concept ANIMA')."""
+    clean = clean_category_name(raw_name)
+    return f"# {clean} {arch}"
+
+def insert_new_cell(raw_name, arch):
+    """
+    Membuat dan menyisipkan sel baru pada kedua notebook secara simultan di posisi yang tepat:
+    1. Pasangan arsitektur: jika sel kategori yang sama pada arsitektur lawan ada (misal: Concept SDXL saat membuat Concept ANIMA):
+       - ANIMA ditempatkan tepat SEBELUM SDXL.
+       - SDXL ditempatkan tepat SETELAH ANIMA.
+    2. Utilitas umum: jika kategori adalah utilitas (Tool, Poses, Clothing, Concept, Background, Style):
+       - Ditempatkan di area General Utilities.
+    3. Seri anime:
+       - ANIMA mandiri: Ditempatkan alfabetis di rentang Seri ANIMA mandiri.
+       - SDXL mandiri: Ditempatkan alfabetis di rentang Seri SDXL mandiri.
+    """
+    clean = clean_category_name(raw_name)
+    new_header = build_cell_header(clean, arch)
+    opposite_arch = "SDXL" if arch == "ANIMA" else "ANIMA"
+    opposite_header = build_cell_header(clean, opposite_arch)
 
     with open(NB_LOCAL, "r", encoding="utf-8") as f:
         nb_local = json.load(f)
     with open(NB_DRIVE, "r", encoding="utf-8") as f:
         nb_drive = json.load(f)
 
-    # Tentukan batas rentang seri standalone
-    if arch == "ANIMA":
-        start_search = 73
-        end_search = 77
-    else:
-        start_search = 77
-        end_search = 103
-
     insert_idx = None
-    for i in range(start_search, len(nb_local['cells'])):
-        src = nb_local['cells'][i].get('source', [])
-        if not src:
-            continue
-        h = src[0].strip()
-        if arch == "SDXL" and i >= 103:
-            insert_idx = i
-            break
-        if arch == "ANIMA" and i >= 77:
-            insert_idx = i
+
+    # 1. Cek pasangan arsitektur yang sudah ada
+    for i, c in enumerate(nb_local['cells']):
+        src = c.get('source', [])
+        if src and src[0].strip() == opposite_header:
+            if arch == "ANIMA":
+                insert_idx = i
+            else:
+                insert_idx = i + 1
             break
 
-        existing_name = h.replace('#', '').replace('ANIMA', '').replace('SDXL', '').strip()
-        if series_clean.lower() < existing_name.lower():
-            insert_idx = i
-            break
+    # 2. Cek apakah utilitas umum
+    utility_keywords = ['tool', 'poses', 'pose', 'clothing', 'concept', 'background', 'style']
+    if insert_idx is None and any(u in clean.lower() for u in utility_keywords):
+        for i, c in enumerate(nb_local['cells']):
+            src = c.get('source', [])
+            if src:
+                h_text = src[0].strip().lower()
+                if any(u in h_text for u in utility_keywords):
+                    insert_idx = i
+                    break
+        if insert_idx is None:
+            insert_idx = len(nb_local['cells'])
 
+    # 3. Jika seri baru, cari posisi alfabetis di kluster yang tepat
     if insert_idx is None:
-        insert_idx = end_search
+        if arch == "ANIMA":
+            start_search = 74
+            end_search = 80
+            for i, c in enumerate(nb_local['cells']):
+                src = c.get('source', [])
+                if src:
+                    if "# Hoshizora no Memoria SDXL" in src[0]:
+                        start_search = i + 1
+                    if "# Akebi-chan" in src[0]:
+                        end_search = i
+                        break
+        else:
+            start_search = 80
+            end_search = 106
+            for i, c in enumerate(nb_local['cells']):
+                src = c.get('source', [])
+                if src:
+                    if "# Akebi-chan" in src[0]:
+                        start_search = i
+                    if "# Random Character" in src[0]:
+                        end_search = i
+                        break
 
-    # Buat cell baru di kedua notebook
+
+        for i in range(start_search, end_search):
+            src = nb_local['cells'][i].get('source', [])
+            if not src:
+                continue
+            h = src[0].strip()
+            existing_clean = clean_category_name(h)
+            if clean.lower() < existing_clean.lower():
+                insert_idx = i
+                break
+
+        if insert_idx is None:
+            insert_idx = end_search
+
+    # Buat sel baru di kedua notebook
     new_cell_local = {"cell_type": "code", "execution_count": None, "metadata": {}, "outputs": [], "source": [f"{new_header}\n"]}
     new_cell_drive = {"cell_type": "code", "execution_count": None, "metadata": {}, "outputs": [], "source": [f"{new_header}\n"]}
-    
+
     nb_local['cells'].insert(insert_idx, new_cell_local)
     nb_drive['cells'].insert(insert_idx, new_cell_drive)
 
@@ -318,42 +390,30 @@ def insert_new_series_cell(series_name, arch):
     with open(DB_FILE, "w", encoding="utf-8") as f:
         json.dump(db, f, indent=2, ensure_ascii=False)
 
-    print(f"\n✨ Berhasil menyisipkan sel baru '{new_header}' di posisi urutan alfabetis Cell {insert_idx}!")
+    print(f"\n✨ Berhasil menyisipkan sel baru '{new_header}' di posisi yang tepat (Cell {insert_idx})!")
     return insert_idx, new_header
 
-def main():
-    if len(sys.argv) > 1 and sys.argv[1] in ["-h", "--help"]:
-        print("Penggunaan:")
-        print("  python add_model.py                     -> Mode interaktif (dipandu langkah demi langkah)")
-        print("  python add_model.py <civitai_url>       -> Langsung proses link Civitai yang diberikan")
-        print("\nContoh:")
-        print("  python add_model.py https://civitai.com/models/827184")
-        print("  python add_model.py https://civitai.com/models/827184?modelVersionId=2883731")
-        return
 
+def process_single_model(url_input):
+    url_input = url_input.strip()
+    if not url_input:
+        return False
+
+    model_id, version_id = parse_civitai_url(url_input)
+    if not model_id and not version_id:
+        print("❌ Gagal mengekstrak ID model dari URL tersebut. Pastikan format URL Civitai valid.")
+        return False
+
+    # Selalu muat ulang database dan notebook agar sinkron dengan iterasi sebelumnya
     with open(NB_LOCAL, "r", encoding="utf-8") as f:
         nb = json.load(f)
     with open(DB_FILE, "r", encoding="utf-8") as f:
         db = json.load(f)
 
-    # 1. Input Civitai URL
-    if len(sys.argv) > 1 and not sys.argv[1].startswith("-"):
-        url_input = sys.argv[1]
-    else:
-        url_input = input("\n🔗 Masukkan URL Civitai (contoh: https://civitai.com/models/827184): ").strip()
-    
-    if not url_input:
-        print("URL tidak boleh kosong. Dibatalkan.")
-        return
-
-    model_id, version_id = parse_civitai_url(url_input)
-    if not model_id and not version_id:
-        print("Gagal mengekstrak ID model dari URL tersebut.")
-        return
-
     print("\n⏳ Mengambil metadata dari Civitai API...")
     model_data = None
     version_data = None
+
 
     if version_id and not model_id:
         v_url = f"https://civitai.com/api/v1/model-versions/{version_id}"
@@ -371,6 +431,16 @@ def main():
     # 2. Select version
     selected_version = select_version_interactive(versions, version_id)
     v_id = selected_version['id']
+
+    # Ambil detail lengkap versi dari endpoint model-versions untuk mendapatkan metadata generasi (CFG, Steps, Sampler, Prompt)
+    try:
+        v_url = f"https://civitai.com/api/v1/model-versions/{v_id}"
+        full_version = fetch_json(v_url)
+        if full_version:
+            selected_version = full_version
+    except Exception as e:
+        pass
+
     v_name = selected_version.get('name', '')
     base_model = selected_version.get('baseModel', 'Unknown')
     download_url = selected_version.get('downloadUrl', '')
@@ -416,7 +486,7 @@ def main():
         override = input("Ingin tetap memperbarui data model ini? (y/n): ").strip().lower()
         if override != 'y':
             print("Dibatalkan.")
-            return
+            return False
 
     # 4. Target Cell Selection
     print("\n📁 Pilih Kategori Sel Tujuan:")
@@ -458,6 +528,9 @@ def main():
         if any(w in kw_search for w in words):
             rec_cells.append((idx, h))
 
+    # Prioritaskan sel yang arsitekturnya sama dengan model
+    rec_cells.sort(key=lambda c: (0 if arch in c[1] else 1))
+
     # Remove duplicates preserving order
     seen_cells = set()
     unique_rec = []
@@ -471,10 +544,11 @@ def main():
     if unique_rec:
         print("⭐ Kategori yang paling cocok:")
         for i, (idx, h) in enumerate(unique_rec[:5], 1):
-            print(f"   [{i}] {h.replace('#', '').strip()}")
+            arch_tag = f" ({arch} Cocok)" if arch in h else ""
+            print(f"   [{i}] {h.replace('#', '').strip()}{arch_tag}")
 
     while True:
-        prompt_msg = f"\nPilih nomor rekomendasi [1-{len(unique_rec[:5])}] atau ketik nama anime/kategori: " if unique_rec else "\nKetik nama anime atau kategori (contoh: 'yuru', 'concept', 'poses', 'style'): "
+        prompt_msg = f"\nPilih nomor rekomendasi [1-{len(unique_rec[:5])}] atau ketik nama anime/kategori: " if unique_rec else "\nKetik nama anime atau kategori (contoh: 'concept', 'poses', 'style', 'blue archive'): "
         cat_input = input(prompt_msg).strip()
         
         if not cat_input and unique_rec:
@@ -499,38 +573,96 @@ def main():
         if cat_input.lower() in ["list", "help", "?"]:
             print("\n📋 Daftar Kategori Tersedia:")
             for idx, h in cells_list:
-                print(f"   - {h.replace('#', '').strip()}")
+                print(f"   [{idx:3d}] {h.replace('#', '').strip()}")
             continue
             
         if cat_input.lower() in ["new", "buat", "+"]:
-            new_series = input("\nMasukkan Nama Seri / Anime baru (contoh: Sousou no Frieren): ").strip()
-            if new_series:
-                target_cell_idx, selected_cell_header = insert_new_series_cell(new_series, arch)
+            new_cat = input("\nMasukkan Nama Kategori / Seri baru (contoh: Sousou no Frieren atau Concept): ").strip()
+            if new_cat:
+                target_cell_idx, selected_cell_header = insert_new_cell(new_cat, arch)
                 break
             continue
 
-        # Search by keyword
-        matches = [c for c in cells_list if cat_input.lower() in c[1].lower()]
-        if len(matches) == 1:
-            target_cell_idx, selected_cell_header = matches[0]
+        # Parse user query and determine architecture
+        user_clean = clean_category_name(cat_input)
+        if "anima" in cat_input.lower():
+            target_arch = "ANIMA"
+        elif "sdxl" in cat_input.lower():
+            target_arch = "SDXL"
+        else:
+            target_arch = arch
+
+        intended_header = build_cell_header(user_clean, target_arch)
+
+        # 1. Exact match with intended header
+        exact_match = [c for c in cells_list if c[1].strip().lower() == intended_header.lower()]
+        if exact_match:
+            target_cell_idx, selected_cell_header = exact_match[0]
             print(f"✅ Terpilih otomatis: {selected_cell_header.replace('#', '').strip()}")
             break
-        elif len(matches) > 1:
-            print(f"Ditemukan {len(matches)} kategori yang cocok:")
-            for i, (idx, h) in enumerate(matches[:8], 1):
-                print(f"   [{i}] {h.replace('#', '').strip()}")
-            sub_choice = input(f"Pilih nomor [1-{min(8, len(matches))}]: ").strip()
-            if sub_choice.isdigit():
-                s_num = int(sub_choice)
-                if 1 <= s_num <= len(matches[:8]):
-                    target_cell_idx, selected_cell_header = matches[s_num - 1]
-                    print(f"✅ Terpilih: {selected_cell_header.replace('#', '').strip()}")
+
+        # 2. Check if the same category name exists under the OPPOSITE architecture
+        opposite_arch = "SDXL" if target_arch == "ANIMA" else "ANIMA"
+        opposite_header = build_cell_header(user_clean, opposite_arch)
+        opp_match = [c for c in cells_list if c[1].strip().lower() == opposite_header.lower()]
+        if opp_match:
+            print(f"\n⚠️ Ditemukan sel '{opp_match[0][1].replace('#', '').strip()}', namun model ini berarsitektur {target_arch}.")
+            print(f"   [1] Buat sel baru '{intended_header}' secara otomatis (Disarankan)")
+            print(f"   [2] Tetap masukkan ke '{opp_match[0][1].replace('#', '').strip()}'")
+            sub_c = input("Pilih [1/2, default 1]: ").strip()
+            if sub_c == "2":
+                target_cell_idx, selected_cell_header = opp_match[0]
+                print(f"✅ Terpilih: {selected_cell_header.replace('#', '').strip()}")
+                break
+            else:
+                target_cell_idx, selected_cell_header = insert_new_cell(user_clean, target_arch)
+                break
+
+        # 3. Partial keyword matching
+        kw_matches = [c for c in cells_list if user_clean.lower() in clean_category_name(c[1]).lower()]
+        if kw_matches:
+            # Sort matches so that cells with target_arch come FIRST
+            kw_matches.sort(key=lambda x: (0 if target_arch in x[1] else 1, x[0]))
+
+            if len(kw_matches) == 1:
+                matched_cell = kw_matches[0]
+                matched_header = matched_cell[1].replace('#', '').strip()
+                if target_arch in matched_cell[1]:
+                    target_cell_idx, selected_cell_header = matched_cell
+                    print(f"✅ Terpilih otomatis: {selected_cell_header.replace('#', '').strip()}")
                     break
+                else:
+                    print(f"\n⚠️ Ditemukan kategori mirip: '{matched_header}', namun arsitekturnya berbeda dengan model ({target_arch}).")
+                    print(f"   [1] Buat sel baru '{intended_header}' secara otomatis (Disarankan)")
+                    print(f"   [2] Tetap masukkan ke '{matched_header}'")
+                    sub_c = input("Pilih [1/2, default 1]: ").strip()
+                    if sub_c == "2":
+                        target_cell_idx, selected_cell_header = matched_cell
+                        print(f"✅ Terpilih: {selected_cell_header.replace('#', '').strip()}")
+                        break
+                    else:
+                        target_cell_idx, selected_cell_header = insert_new_cell(user_clean, target_arch)
+                        break
+            else:
+                print(f"\nDitemukan {len(kw_matches)} kategori yang cocok:")
+                for i, (idx, h) in enumerate(kw_matches[:8], 1):
+                    arch_tag = f" ({target_arch} Cocok)" if target_arch in h else ""
+                    print(f"   [{i}] {h.replace('#', '').strip()}{arch_tag}")
+                sub_choice = input(f"Pilih nomor [1-{min(8, len(kw_matches))}], atau ketik 'new' untuk buat baru: ").strip()
+                if sub_choice.lower() in ["new", "buat"]:
+                    target_cell_idx, selected_cell_header = insert_new_cell(user_clean, target_arch)
+                    break
+                if sub_choice.isdigit():
+                    s_num = int(sub_choice)
+                    if 1 <= s_num <= len(kw_matches[:8]):
+                        target_cell_idx, selected_cell_header = kw_matches[s_num - 1]
+                        print(f"✅ Terpilih: {selected_cell_header.replace('#', '').strip()}")
+                        break
         else:
             print(f"❌ Kategori '{cat_input}' belum ada di notebook.")
-            make_new = input(f"Ingin membuat sel seri baru '# {cat_input} {arch}' secara otomatis? (y/n): ").strip().lower()
+            make_new = input(f"Ingin membuat sel baru '{intended_header}' secara otomatis? (y/n): ").strip().lower()
             if make_new == 'y':
-                target_cell_idx, selected_cell_header = insert_new_series_cell(cat_input, arch)
+                target_cell_idx, selected_cell_header = insert_new_cell(user_clean, target_arch)
                 break
 
     # 5. Build Download Commands
@@ -551,9 +683,14 @@ def main():
     sample_steps = None
 
     if selected_version.get('images'):
-        img0 = selected_version['images'][0]
-        preview_img = img0.get('url', '')
-        meta = img0.get('meta') or {}
+        images = selected_version['images']
+        # Prioritaskan gambar statis yang memiliki metadata generasi (meta)
+        imgs_with_meta = [img for img in images if img.get('meta') and not img.get('url', '').endswith(('.mp4', '.webm'))]
+        static_imgs = [img for img in images if img.get('type') == 'image' and not img.get('url', '').endswith(('.mp4', '.webm'))]
+
+        chosen_img = imgs_with_meta[0] if imgs_with_meta else (static_imgs[0] if static_imgs else images[0])
+        preview_img = chosen_img.get('url', '')
+        meta = chosen_img.get('meta') or {}
         sample_prompt = meta.get('prompt', '')
         sample_neg = meta.get('negativePrompt', '')
         sample_sampler = meta.get('sampler', '')
@@ -611,6 +748,49 @@ def main():
     print(f"   🌐 catalog/data.js & MODELS_CATALOG.md")
     print(f"   🔢 Total Model di Repositori: {len(db)} model")
     print("=" * 65)
+    return True
+
+
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] in ["-h", "--help"]:
+        print("Penggunaan:")
+        print("  python add_model.py                     -> Mode interaktif (looping menambah banyak model)")
+        print("  python add_model.py <civitai_url>       -> Proses link Civitai pertama, lalu lanjut looping")
+        print("\nContoh:")
+        print("  python add_model.py https://civitai.com/models/827184")
+        return
+
+    initial_url = sys.argv[1] if (len(sys.argv) > 1 and not sys.argv[1].startswith("-")) else None
+    first_run = True
+
+    while True:
+        try:
+            if first_run and initial_url:
+                url_input = initial_url
+                initial_url = None
+                first_run = False
+            else:
+                prompt_text = "\n🔗 Masukkan URL Civitai (atau tekan Enter / ketik 'q' untuk selesai): "
+                url_input = input(prompt_text).strip()
+
+            # Keluar jika kosong atau ketik q/exit
+            if not url_input or url_input.lower() in ["q", "quit", "exit", "selesai", "stop"]:
+                print("\n✨ Selesai. Seluruh perubahan model telah tersimpan dan disinkronkan. Sampai jumpa!\n")
+                break
+
+            process_single_model(url_input)
+            first_run = False
+
+        except KeyboardInterrupt:
+            print("\n\n👋 Selesai. Program dihentikan oleh pengguna.\n")
+            break
+        except Exception as e:
+            print(f"\n❌ Terjadi kesalahan saat memproses: {e}")
+            retry = input("Ingin mencoba memasukkan URL lain? (y/n): ").strip().lower()
+            if retry != 'y':
+                break
+
 
 if __name__ == "__main__":
     main()
+

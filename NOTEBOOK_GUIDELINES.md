@@ -55,11 +55,11 @@ Seluruh notebook harus selalu mengikuti urutan kelompok berikut:
 [Cell 50 – 52] : Kluster Music / Band Anime (GBC, Bocchi, K-ON)
 [Cell 53 – 58] : Kluster HoYoverse (Sel Terpisah: HSR ANIMA & SDXL, ZZZ ANIMA & SDXL, Genshin, HI3)
 [Cell 59 – 60] : Kluster The Idolm@ster (Gakuen Idolmaster & U149)
-[Cell 61 – 72] : Series Berpasangan ANIMA & SDXL (Project Sekai, Watanare, Wataten, GnP, Takopi, Hoshizora)
-[Cell 73 – 76] : Series ANIMA Mandiri (Roshidere, Kamiina Botan, Adachi to Shimamura, Chou Kaguya Hime)
-[Cell 77 – 102]: Series Standalone SDXL (Diurutkan alfabetis A–Z berdasarkan nama series)
-[Cell 103 – 104]: Random Characters (Random Character ANIMA lalu SDXL)
-[Cell 105 – 111]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE)
+[Cell 61 – 73] : Series Berpasangan ANIMA & SDXL (Project Sekai, Watanare, Wataten, GnP, Takopi, Hoshizora)
+[Cell 74 – 78] : Series ANIMA Mandiri (Amagi Brilliant Park, Roshidere, Kamiina Botan, Adachi to Shimamura, Chou Kaguya Hime)
+[Cell 79 – 104]: Series Standalone SDXL (Diurutkan alfabetis A–Z berdasarkan nama series)
+[Cell 105 – 106]: Random Characters (Random Character ANIMA lalu SDXL)
+[Cell 107 – 114]: General Utilities (Tool, Poses, Clothing, Concept ANIMA & SDXL, Background, Style, STYLE)
 ```
 
 ### Detail Kluster Penting:

@@ -24,11 +24,11 @@ Ketika mengedit, memodifikasi, menganalisa, atau memperbarui notebook di reposit
 - [Cell 50–52]: Kluster Music / Band Anime (GBC, Bocchi, K-ON)
 - [Cell 53–58]: Kluster HoYoverse (Selalu 4 sel terpisah: HSR ANIMA & SDXL, ZZZ ANIMA & SDXL, Genshin, HI3)
 - [Cell 59–60]: Kluster The Idolm@ster (Gakuen Idolmaster & U149)
-- [Cell 61–72]: Series berpasangan ANIMA & SDXL (Project Sekai, Watanare, Wataten, GnP, Takopi, Hoshizora)
-- [Cell 73–76]: Series ANIMA mandiri
-- [Cell 77–102]: Series Standalone SDXL (Alfabetis A–Z)
-- [Cell 103–104]: Random Characters (ANIMA lalu SDXL)
-- [Cell 105–111]: General Utilities (Tool, Poses, Clothing, Concept, Background, Style, STYLE)
+- [Cell 61–73]: Series berpasangan ANIMA & SDXL (Project Sekai, Watanare, Wataten, GnP, Takopi, Hoshizora)
+- [Cell 74–78]: Series ANIMA mandiri (Amagi Brilliant Park, Roshidere, Kamiina Botan, Adachi to Shimamura, Chou Kaguya Hime)
+- [Cell 79–104]: Series Standalone SDXL (Alfabetis A–Z)
+- [Cell 105–106]: Random Characters (ANIMA lalu SDXL)
+- [Cell 107–114]: General Utilities (Tool, Poses, Clothing, Concept ANIMA & SDXL, Background, Style, STYLE)
 
 ## 5. Konfigurasi Civitai Token Global
 - Token Civitai dikonfigurasi terpusat pada **Cell 2** via `~/.wgetrc` dan `~/.aria2/aria2.conf` menggunakan header `Authorization: Bearer $CIVITAI_TOKEN`.

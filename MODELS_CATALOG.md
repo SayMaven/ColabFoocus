@@ -1,6 +1,6 @@
 # 📚 Katalog Model, Trigger Words & Sumber Asli Civitai
 
-Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di notebook [Foocus SayMaven](Foocus%20SayMaven.ipynb), lengkap dengan nama file kustom, judul asli dari kreator di Civitai, tautan web resmi, arsitektur, dan trigger words untuk prompt.
+Dokumen ini memuat seluruh daftar model (**617 model**) yang tersedia di notebook [Foocus SayMaven](Foocus%20SayMaven.ipynb), lengkap dengan nama file kustom, judul asli dari kreator di Civitai, tautan web resmi, arsitektur, dan trigger words untuk prompt.
 
 > 💡 **Tips Penggunaan**:
 > - **Nama File**: Cari nama ini di menu dropdown *Model* atau *LoRA* pada antarmuka Fooocus.
@@ -48,6 +48,7 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 - [Zenless Zone Zero ANIMA](#zenless-zone-zero-anima) *(1 model)*
 - [Zenless Zone Zero SDXL](#zenless-zone-zero-sdxl) *(4 model)*
 - [Genshin SDXL](#genshin-sdxl) *(1 model)*
+- [Genshin ANIMA](#genshin-anima) *(1 model)*
 - [Honkai Impact 3rd SDXL](#honkai-impact-3rd-sdxl) *(4 model)*
 - [Gakuen Idolmaster SDXL](#gakuen-idolmaster-sdxl) *(16 model)*
 - [THE iDOLM@STER Cinderella Girls: U149 SDXL](#the-idolmster-cinderella-girls-u149-sdxl) *(13 model)*
@@ -62,8 +63,9 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 - [Takopi no Genzai ANIMA](#takopi-no-genzai-anima) *(2 model)*
 - [Takopi no Genzai SDXL](#takopi-no-genzai-sdxl) *(2 model)*
 - [Hoshizora no Memoria ANIMA](#hoshizora-no-memoria-anima) *(1 model)*
-- [Hoshizora no Memoria SDXL](#hoshizora-no-memoria-sdxl) *(7 model)*
 - [Roshidere ANIMA](#roshidere-anima) *(2 model)*
+- [Hoshizora no Memoria SDXL](#hoshizora-no-memoria-sdxl) *(7 model)*
+- [Amagi Brilliant Park ANIMA](#amagi-brilliant-park-anima) *(7 model)*
 - [Kamiina Botan Fully Blossom ANIMA](#kamiina-botan-fully-blossom-anima) *(6 model)*
 - [Adachi to Shimamura ANIMA](#adachi-to-shimamura-anima) *(1 model)*
 - [Chou Kaguya Hime ANIMA](#chou-kaguya-hime-anima) *(2 model)*
@@ -98,6 +100,7 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 - [Tool SDXL](#tool-sdxl) *(8 model)*
 - [Poses SDXL](#poses-sdxl) *(66 model)*
 - [Clothing SDXL](#clothing-sdxl) *(13 model)*
+- [Concept ANIMA](#concept-anima) *(2 model)*
 - [Concept SDXL](#concept-sdxl) *(74 model)*
 - [Background SDXL](#background-sdxl) *(12 model)*
 - [Style SDXL](#style-sdxl) *(41 model)*
@@ -519,6 +522,14 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 
 ---
 
+## Genshin ANIMA
+
+| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
+|---|---|:---:|---|
+| `VentiAnimaV1_ANIMA.safetensors` | [Venti | Genshin Impact](https://civitai.com/models/968887) | `ANIMA` | `venti \(genshin impact\)`<br>`venti \(archon\) \(genshin impact\)` |
+
+---
+
 ## Honkai Impact 3rd SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
@@ -701,6 +712,15 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 
 ---
 
+## Roshidere ANIMA
+
+| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
+|---|---|:---:|---|
+| `AlisaMikhailovnaKujou_ANIMA.safetensors` | [Alisa Mikhailovna Kujou (Ayra-san) | Alya Sometimes Hides Her Feelings in Russian | 時々ボソッとロシア語でデレる隣のアーリャさん](https://civitai.com/models/2706792) | `ANIMA` | `alisa mikhailovna kujou` |
+| `MariaMikhailovnaKujou_ANIMA.safetensors` | [Maria Mikhailovna Kujou (Masha) | Alya Sometimes Hides Her Feelings in Russian | 時々ボソッとロシア語でデレる隣のアーリャさん](https://civitai.com/models/2803601) | `ANIMA` | `maria mikhailovna kujou` |
+
+---
+
 ## Hoshizora no Memoria SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
@@ -715,12 +735,17 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 
 ---
 
-## Roshidere ANIMA
+## Amagi Brilliant Park ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
-| `AlisaMikhailovnaKujou_ANIMA.safetensors` | [Alisa Mikhailovna Kujou (Ayra-san) | Alya Sometimes Hides Her Feelings in Russian | 時々ボソッとロシア語でデレる隣のアーリャさん](https://civitai.com/models/2706792) | `ANIMA` | `alisa mikhailovna kujou` |
-| `MariaMikhailovnaKujou_ANIMA.safetensors` | [Maria Mikhailovna Kujou (Masha) | Alya Sometimes Hides Her Feelings in Russian | 時々ボソッとロシア語でデレる隣のアーリャさん](https://civitai.com/models/2803601) | `ANIMA` | `maria mikhailovna kujou` |
+| `AdachiEiko_ANIMA.safetensors` | [Adachi Eiko 安達映子  Amagi Brilliant Park 甘城ブリリアントパーク](https://civitai.com/models/2842129) | `ANIMA` | `adachi eiko, Brown eyes, black hair, bangs, huge breasts, Long hair, pink hairband, white open-chest sweater, turtleneck, long sleeves, Yellow shirt, cleavage cutout, clothing cutout,` |
+| `Kobori_ANIMA.safetensors` | [Kobori コボリー Amagi Brilliant Park 甘城ブリリアントパーク](https://civitai.com/models/2859955) | `ANIMA` | `kobori, 1girl, solo, long hair, breasts, looking at viewer, blush, bangs, brown hair, hair ornament, long sleeves, dress, brown eyes, puffy sleeves, hair flower, blunt bangs, juliet sleeves, fairy wings,`<br>`kobori, 1girl, solo, long hair, breasts, looking at viewer, blush, bangs, brown hair, hair ornament, long sleeves, dress, brown eyes, puffy sleeves, hair flower, blunt bangs, juliet sleeves` |
+| `LatifaFleuranza_ANIMA.safetensors` | [Latifa Fleuranza ラティファ・フルーランザ 3outfit Amagi Brilliant Park 甘城ブリリアントパーク](https://civitai.com/models/2859263) | `ANIMA` | `latifa fleuranza, 1girl, solo, long hair, smile, blue eyes, blonde hair, gloves, dress, jewelry, bare shoulders, frills, elbow gloves, white gloves, necklace, drill hair, frilled dress, cross, tiara, pink dress, cross necklace,`<br>`latifa fleuranza, 1girl, solo, long hair, smile, blue eyes, blonde hair, bare shoulders, collarbone, frills, off shoulder, pillow, drill hair, pajamas,`<br>`latifa fleuranza, 1girl, solo, long hair, blue eyes, blonde hair, navel, swimsuit, ponytail, hair bow, bikini, drill hair, pink bikini, bikini skirt, suggestive fluid, polka dot bikini,` |
+| `Muse_ANIMA.safetensors` | [Muse ミュース Amagi Brilliant Park 甘城ブリリアントパーク](https://civitai.com/models/2859187) | `ANIMA` | `use, 1girl, solo, smile, short hair, skirt, hair ornament, navel, cleavage, bare shoulders, medium breasts, green eyes, blue hair, choker, midriff, hair flower, wings,`<br>`muse, 1girl, solo, smile, short hair, skirt, hair ornament, navel, cleavage, bare shoulders, medium breasts, green eyes, blue hair, choker, midriff, hair flower, fairy wings` |
+| `Salama_ANIMA.safetensors` | [Salama サーラマ  Amagi Brilliant Park 甘城ブリリアントパーク](https://civitai.com/models/2859133) | `ANIMA` | `salama, 1girl, solo, smile, short hair, red eyes, hair between eyes, cleavage, bare shoulders, medium breasts, collarbone, red hair, choker, orange hair, strapless, red dress, antenna hair, strapless dress,`<br>`salama, 1girl, solo, smile, short hair, red eyes, dress, hair between eyes, cleavage, bare shoulders, medium breasts, collarbone, red hair, wings, choker, orange hair, strapless, red dress, antenna hair, strapless dress,` |
+| `SentoIsuzu_ANIMA.safetensors` | [千斗いすず 千斗五十铃 甘城ブリリアントパーク甘城辉煌乐园救世主](https://civitai.com/models/2711391) | `ANIMA` | `1girl, solo, long hair, breasts, blush, shirt, large breasts, brown hair, bow, cleavage, brown eyes, ponytail, hair bow, antenna hair, sento isuzu,` |
+| `Sylphy_ANIMA.safetensors` | [Sylphy シルフィー Amagi Brilliant Park 甘城ブリリアントパーク](https://civitai.com/models/2859982) | `ANIMA` | `sylphy, 1girl, solo, long hair, smile, bangs, blue eyes, blonde hair, large breasts, gloves, dress, ribbon, cleavage, bare shoulders, collarbone, hair ribbon, shorts, white gloves, white dress, two side up, short shorts, wings,`<br>`sylphy, 1girl, solo, long hair, smile, bangs, blue eyes, blonde hair, large breasts, gloves, dress, ribbon, cleavage, bare shoulders, collarbone, hair ribbon, shorts, white gloves, white dress, two side up, short shorts` |
 
 ---
 
@@ -1180,6 +1205,15 @@ Dokumen ini memuat seluruh daftar model (**607 model**) yang tersedia di noteboo
 | `SportsBraandPanties.safetensors` | [ライン入りスポーツブラ・パンツ／sports bra and panties with lines on the elastic band](https://civitai.com/models/1642054) | `SDXL` | `linespobra, sports bra`<br>`linespopan, panties, striped waistband` |
 | `TransparentRaincoat.safetensors` | [[Illust&XL] transparent raincoat / 透明レインコート / 透明カッパ](https://civitai.com/models/384264) | `SDXL` | `transparent raincoat` |
 | `WrapTowel.safetensors` | [[Illust&XL&Pony] wrap towel / pool towel / ラップタオル / プールタオル](https://civitai.com/models/328680) | `SDXL` | `wrap towel` |
+
+---
+
+## Concept ANIMA
+
+| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
+|---|---|:---:|---|
+| `HentaiComicRandomGenerator_ANIMA.safetensors` | [Hentai Comic Random Generator (FULL COLOR) Anima / Pony / IL XL | フルカラーエロ漫画ランダムジェネレーター](https://civitai.com/models/585589) | `ANIMA` | `Hentai comic style. Multi-view with 3-5 or more panels displaying text, speech bubbles,  focus lines, vibration lines, comic-style facial expressions, and sound effects. Hentai comic depictions of body parts, including genitals  (chest, navel, nipples, vulva, clitoris, vagina, anus, buttocks, nude, torn clothes, vaginal fluid),  Women are depicted with multiple multi-shots (cowboy shot, upper body, face).`<br>`1boy, erection, penis, hetero, sex, rough sex, epic sex, head grab, cumming, speed lines,`<br>`2boys, mmf threesome, erection, penis, multiple penises, testicles, cum,  hetero, sex, group sex,  oral, fellatio,  spread legs, spitroast, irrumatio, sweat, gangbang, double penetration, bangs, folded, thick thighs,` |
+| `MtuVirus_ANIMA.safetensors` | [Mtu Virus](https://civitai.com/models/57573) | `ANIMA` | `mtu virus`<br>`multiple views,` |
 
 ---
 
