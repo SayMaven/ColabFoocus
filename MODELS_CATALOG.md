@@ -47,8 +47,8 @@ Dokumen ini memuat seluruh daftar model (**617 model**) yang tersedia di noteboo
 - [Honkai Star Rail SDXL](#honkai-star-rail-sdxl) *(24 model)*
 - [Zenless Zone Zero ANIMA](#zenless-zone-zero-anima) *(1 model)*
 - [Zenless Zone Zero SDXL](#zenless-zone-zero-sdxl) *(4 model)*
-- [Genshin SDXL](#genshin-sdxl) *(1 model)*
 - [Genshin ANIMA](#genshin-anima) *(1 model)*
+- [Genshin SDXL](#genshin-sdxl) *(1 model)*
 - [Honkai Impact 3rd SDXL](#honkai-impact-3rd-sdxl) *(4 model)*
 - [Gakuen Idolmaster SDXL](#gakuen-idolmaster-sdxl) *(16 model)*
 - [THE iDOLM@STER Cinderella Girls: U149 SDXL](#the-idolmster-cinderella-girls-u149-sdxl) *(13 model)*
@@ -63,9 +63,9 @@ Dokumen ini memuat seluruh daftar model (**617 model**) yang tersedia di noteboo
 - [Takopi no Genzai ANIMA](#takopi-no-genzai-anima) *(2 model)*
 - [Takopi no Genzai SDXL](#takopi-no-genzai-sdxl) *(2 model)*
 - [Hoshizora no Memoria ANIMA](#hoshizora-no-memoria-anima) *(1 model)*
-- [Roshidere ANIMA](#roshidere-anima) *(2 model)*
 - [Hoshizora no Memoria SDXL](#hoshizora-no-memoria-sdxl) *(7 model)*
 - [Amagi Brilliant Park ANIMA](#amagi-brilliant-park-anima) *(7 model)*
+- [Roshidere ANIMA](#roshidere-anima) *(2 model)*
 - [Kamiina Botan Fully Blossom ANIMA](#kamiina-botan-fully-blossom-anima) *(6 model)*
 - [Adachi to Shimamura ANIMA](#adachi-to-shimamura-anima) *(1 model)*
 - [Chou Kaguya Hime ANIMA](#chou-kaguya-hime-anima) *(2 model)*
@@ -514,19 +514,19 @@ Dokumen ini memuat seluruh daftar model (**617 model**) yang tersedia di noteboo
 
 ---
 
-## Genshin SDXL
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
-| `Venti.safetensors` | [Venti (	ウェンティ / 温迪) - Genshin Impact (Illustrious)](https://civitai.com/models/1384811) | `SDXL` | `venti (genshin impact), short hair with long locks, aqua hair, green eyes, aqua eyes, blue hair, black hair, braid, gradient hair, twin braids, side braids, hair between eyes, androgynous, `<br>`beret, vest, collared cape, green hat, green cape, cecilia flower (genshin impact), green shorts, hat flower, white flower, hair flower, hair ornament, black bow, bow, bowtie, frilled sleeves, frills, long sleeves, striped bow, white pantyhose, pantyhose under shorts, white shirt,`<br>`shoes, loafers,`<br>`bard, lyre, instrument, playing instrument, `<br>`venti (archon) (genshin impact), glowing hair, white hood, hooded capelet, white wings, feathered wings, bridal gauntlets, cecilia flower (genshin impact), white flower, white shirt, crop top, midriff, chest tattoo, glowing tattoo, navel, stomach, white shorts, leg tattoo, single thighhigh,`<br>`white hood, hood up, ` |
-
----
-
 ## Genshin ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
 | `VentiAnimaV1_ANIMA.safetensors` | [Venti | Genshin Impact](https://civitai.com/models/968887) | `ANIMA` | `venti \(genshin impact\)`<br>`venti \(archon\) \(genshin impact\)` |
+
+---
+
+## Genshin SDXL
+
+| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
+|---|---|:---:|---|
+| `Venti.safetensors` | [Venti (	ウェンティ / 温迪) - Genshin Impact (Illustrious)](https://civitai.com/models/1384811) | `SDXL` | `venti (genshin impact), short hair with long locks, aqua hair, green eyes, aqua eyes, blue hair, black hair, braid, gradient hair, twin braids, side braids, hair between eyes, androgynous, `<br>`beret, vest, collared cape, green hat, green cape, cecilia flower (genshin impact), green shorts, hat flower, white flower, hair flower, hair ornament, black bow, bow, bowtie, frilled sleeves, frills, long sleeves, striped bow, white pantyhose, pantyhose under shorts, white shirt,`<br>`shoes, loafers,`<br>`bard, lyre, instrument, playing instrument, `<br>`venti (archon) (genshin impact), glowing hair, white hood, hooded capelet, white wings, feathered wings, bridal gauntlets, cecilia flower (genshin impact), white flower, white shirt, crop top, midriff, chest tattoo, glowing tattoo, navel, stomach, white shorts, leg tattoo, single thighhigh,`<br>`white hood, hood up, ` |
 
 ---
 
@@ -712,15 +712,6 @@ Dokumen ini memuat seluruh daftar model (**617 model**) yang tersedia di noteboo
 
 ---
 
-## Roshidere ANIMA
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
-| `AlisaMikhailovnaKujou_ANIMA.safetensors` | [Alisa Mikhailovna Kujou (Ayra-san) | Alya Sometimes Hides Her Feelings in Russian | 時々ボソッとロシア語でデレる隣のアーリャさん](https://civitai.com/models/2706792) | `ANIMA` | `alisa mikhailovna kujou` |
-| `MariaMikhailovnaKujou_ANIMA.safetensors` | [Maria Mikhailovna Kujou (Masha) | Alya Sometimes Hides Her Feelings in Russian | 時々ボソッとロシア語でデレる隣のアーリャさん](https://civitai.com/models/2803601) | `ANIMA` | `maria mikhailovna kujou` |
-
----
-
 ## Hoshizora no Memoria SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
@@ -746,6 +737,15 @@ Dokumen ini memuat seluruh daftar model (**617 model**) yang tersedia di noteboo
 | `Salama_ANIMA.safetensors` | [Salama サーラマ  Amagi Brilliant Park 甘城ブリリアントパーク](https://civitai.com/models/2859133) | `ANIMA` | `salama, 1girl, solo, smile, short hair, red eyes, hair between eyes, cleavage, bare shoulders, medium breasts, collarbone, red hair, choker, orange hair, strapless, red dress, antenna hair, strapless dress,`<br>`salama, 1girl, solo, smile, short hair, red eyes, dress, hair between eyes, cleavage, bare shoulders, medium breasts, collarbone, red hair, wings, choker, orange hair, strapless, red dress, antenna hair, strapless dress,` |
 | `SentoIsuzu_ANIMA.safetensors` | [千斗いすず 千斗五十铃 甘城ブリリアントパーク甘城辉煌乐园救世主](https://civitai.com/models/2711391) | `ANIMA` | `1girl, solo, long hair, breasts, blush, shirt, large breasts, brown hair, bow, cleavage, brown eyes, ponytail, hair bow, antenna hair, sento isuzu,` |
 | `Sylphy_ANIMA.safetensors` | [Sylphy シルフィー Amagi Brilliant Park 甘城ブリリアントパーク](https://civitai.com/models/2859982) | `ANIMA` | `sylphy, 1girl, solo, long hair, smile, bangs, blue eyes, blonde hair, large breasts, gloves, dress, ribbon, cleavage, bare shoulders, collarbone, hair ribbon, shorts, white gloves, white dress, two side up, short shorts, wings,`<br>`sylphy, 1girl, solo, long hair, smile, bangs, blue eyes, blonde hair, large breasts, gloves, dress, ribbon, cleavage, bare shoulders, collarbone, hair ribbon, shorts, white gloves, white dress, two side up, short shorts` |
+
+---
+
+## Roshidere ANIMA
+
+| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
+|---|---|:---:|---|
+| `AlisaMikhailovnaKujou_ANIMA.safetensors` | [Alisa Mikhailovna Kujou (Ayra-san) | Alya Sometimes Hides Her Feelings in Russian | 時々ボソッとロシア語でデレる隣のアーリャさん](https://civitai.com/models/2706792) | `ANIMA` | `alisa mikhailovna kujou` |
+| `MariaMikhailovnaKujou_ANIMA.safetensors` | [Maria Mikhailovna Kujou (Masha) | Alya Sometimes Hides Her Feelings in Russian | 時々ボソッとロシア語でデレる隣のアーリャさん](https://civitai.com/models/2803601) | `ANIMA` | `maria mikhailovna kujou` |
 
 ---
 

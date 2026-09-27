@@ -119,13 +119,13 @@ def select_version_interactive(versions, preselected_version_id=None):
 
 def get_target_dir(model_type, cell_idx):
     # Determine destination folder
-    if cell_idx == 21 or (22 <= cell_idx <= 30) or model_type == "Checkpoint":
+    if cell_idx == 20 or (21 <= cell_idx <= 29) or model_type == "Checkpoint":
         return "models/checkpoints"
-    elif cell_idx == 31 or model_type == "VAE":
+    elif cell_idx == 30 or model_type == "VAE":
         return "models/vae"
-    elif cell_idx == 32 or model_type == "Upscale":
+    elif cell_idx == 31 or model_type == "Upscale":
         return "models/upscale_models"
-    elif cell_idx == 34 or model_type == "Embeddings":
+    elif cell_idx == 33 or model_type == "Embeddings":
         return "models/embeddings"
     else:
         return "models/loras"
