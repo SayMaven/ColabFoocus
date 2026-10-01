@@ -12,15 +12,7 @@ Dokumen ini memuat seluruh daftar model (**617 model**) yang tersedia di noteboo
 ## 📑 Daftar Isi Cepat
 
 - [Checkpoint ANIMA](#checkpoint-anima) *(1 model)*
-- [Checkpoint SDXL](#checkpoint-sdxl) *(3 model)*
-- [https://civitai.com/models/1162518](#httpscivitai.commodels1162518) *(3 model)*
-- [https://civitai.com/models/833294](#httpscivitai.commodels833294) *(2 model)*
-- [https://civitai.com/models/827184](#httpscivitai.commodels827184) *(4 model)*
-- [https://civitai.com/models/1440625](#httpscivitai.commodels1440625) *(2 model)*
-- [https://civitai.com/models/1604942](#httpscivitai.commodels1604942) *(2 model)*
-- [https://civitai.com/models/860278](#httpscivitai.commodels860278) *(2 model)*
-- [https://civitai.com/models/1106264](#httpscivitai.commodels1106264) *(3 model)*
-- [https://civitai.com/models/1277670](#httpscivitai.commodels1277670) *(1 model)*
+- [Checkpoint SDXL](#checkpoint-sdxl) *(22 model)*
 - [VAE SDXL](#vae-sdxl) *(2 model)*
 - [Upscale SDXL](#upscale-sdxl) *(2 model)*
 - [Color Settings SDXL](#color-settings-sdxl) *(2 model)*
@@ -120,84 +112,28 @@ Dokumen ini memuat seluruh daftar model (**617 model**) yang tersedia di noteboo
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
+| `CatCarrier.safetensors` | [Cat Carrier](https://civitai.com/models/860278) | `SDXL` | *Tidak ada trigger khusus* |
+| `GrayColor.safetensors` | [GrayColor - CustomModel](https://civitai.com/models/1440625) | `SDXL` | *Tidak ada trigger khusus* |
+| `IchigoMilk.safetensors` | [IchigoMilk](https://civitai.com/models/1792053) | `SDXL` | *Tidak ada trigger khusus* |
+| `IllusioN-R.safetensors` | [RIN IllusioN-R NSFW Illustrious](https://civitai.com/models/1604942) | `SDXL` | *Tidak ada trigger khusus* |
+| `IllustriousNXT.safetensors` | [IllustriousNXT_XL by klaabu](https://civitai.com/models/1629360) | `SDXL` | *Tidak ada trigger khusus* |
+| `JANKU.safetensors` | [✨ JANKU Trained + Chenkin & NoobAI + RouWei Illustrious XL ✨](https://civitai.com/models/1277670) | `SDXL` | *Tidak ada trigger khusus* |
 | `LewDakaExplicitIllustraILV1.safetensors` | [LewDakaExplicitIllustraIL](https://civitai.com/models/2519299) | `SDXL` | *Tidak ada trigger khusus* |
+| `NoobXLEpsilon1_1.safetensors` | [NoobAI-XL (NAI-XL)](https://civitai.com/models/833294) | `SDXL` | *Tidak ada trigger khusus* |
 | `NovaAnimeXLILV19.safetensors` | [Nova Anime XL](https://civitai.com/models/376130) | `SDXL` | *Tidak ada trigger khusus* |
-| `REED_XXX_illustrious_SDXLV14.safetensors` | [REED_XXX_illustrious_SDXL](https://civitai.com/models/1717562) | `SDXL` | *Tidak ada trigger khusus* |
-
----
-
-## https://civitai.com/models/1162518
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
 | `PlantMilk-FLAX.safetensors` | [Plant Milk 🌿 - Model Suite](https://civitai.com/models/1162518) | `SDXL` | *Tidak ada trigger khusus* |
 | `PrefectIllustriousXLV1_5.safetensors` | [WAI-illustrious-SDXL](https://civitai.com/models/827184) | `SDXL` | *Tidak ada trigger khusus* |
 | `prefectiousXLNSFW.safetensors` | [Prefectious XL NSFW](https://civitai.com/models/992378) | `SDXL` | *Tidak ada trigger khusus* |
-
----
-
-## https://civitai.com/models/833294
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
-| `NoobXLEpsilon1_1.safetensors` | [NoobAI-XL (NAI-XL)](https://civitai.com/models/833294) | `SDXL` | *Tidak ada trigger khusus* |
 | `RaehoshiIllustXLV5_1.safetensors` | [Raehoshi illust XL](https://civitai.com/models/846917) | `SDXL` | *Tidak ada trigger khusus* |
-
----
-
-## https://civitai.com/models/827184
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
+| `REED_XXX_illustrious_SDXLV14.safetensors` | [REED_XXX_illustrious_SDXL](https://civitai.com/models/1717562) | `SDXL` | *Tidak ada trigger khusus* |
+| `SilanceMix.safetensors` | [Silence_Mix](https://civitai.com/models/1106264) | `SDXL` | *Tidak ada trigger khusus* |
+| `TanemoMix.safetensors` | [TanemoMix](https://civitai.com/models/1297977) | `SDXL` | *Tidak ada trigger khusus* |
+| `UnholyDesireMixV5.safetensors` | [Unholy Desire Mix - Sinister Aesthetic (Illustrious)](https://civitai.com/models/1307857) | `SDXL` | *Tidak ada trigger khusus* |
+| `UnholyDesireMixV7.safetensors` | [Unholy Desire Mix - Sinister Aesthetic (Illustrious)](https://civitai.com/models/1307857) | `SDXL` | *Tidak ada trigger khusus* |
 | `WAIiLLNSFWSDXLV13.safetensors` | [WAI-illustrious-SDXL](https://civitai.com/models/827184) | `SDXL` | *Tidak ada trigger khusus* |
 | `WAIiLLNSFWSDXLV15.safetensors` | [WAI-illustrious-SDXL](https://civitai.com/models/827184) | `SDXL` | *Tidak ada trigger khusus* |
 | `WAIiLLNSFWSDXLV16.safetensors` | [WAI-illustrious-SDXL](https://civitai.com/models/827184) | `SDXL` | *Tidak ada trigger khusus* |
 | `WAIiLLNSFWSDXLV17.safetensors` | [WAI-illustrious-SDXL](https://civitai.com/models/827184) | `SDXL` | *Tidak ada trigger khusus* |
-
----
-
-## https://civitai.com/models/1440625
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
-| `GrayColor.safetensors` | [GrayColor - CustomModel](https://civitai.com/models/1440625) | `SDXL` | *Tidak ada trigger khusus* |
-| `IllustriousNXT.safetensors` | [IllustriousNXT_XL by klaabu](https://civitai.com/models/1629360) | `SDXL` | *Tidak ada trigger khusus* |
-
----
-
-## https://civitai.com/models/1604942
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
-| `IllusioN-R.safetensors` | [RIN IllusioN-R NSFW Illustrious](https://civitai.com/models/1604942) | `SDXL` | *Tidak ada trigger khusus* |
-| `TanemoMix.safetensors` | [TanemoMix](https://civitai.com/models/1297977) | `SDXL` | *Tidak ada trigger khusus* |
-
----
-
-## https://civitai.com/models/860278
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
-| `CatCarrier.safetensors` | [Cat Carrier](https://civitai.com/models/860278) | `SDXL` | *Tidak ada trigger khusus* |
-| `IchigoMilk.safetensors` | [IchigoMilk](https://civitai.com/models/1792053) | `SDXL` | *Tidak ada trigger khusus* |
-
----
-
-## https://civitai.com/models/1106264
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
-| `SilanceMix.safetensors` | [Silence_Mix](https://civitai.com/models/1106264) | `SDXL` | *Tidak ada trigger khusus* |
-| `UnholyDesireMixV5.safetensors` | [Unholy Desire Mix - Sinister Aesthetic (Illustrious)](https://civitai.com/models/1307857) | `SDXL` | *Tidak ada trigger khusus* |
-| `UnholyDesireMixV7.safetensors` | [Unholy Desire Mix - Sinister Aesthetic (Illustrious)](https://civitai.com/models/1307857) | `SDXL` | *Tidak ada trigger khusus* |
-
----
-
-## https://civitai.com/models/1277670
-
-| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
-|---|---|:---:|---|
-| `JANKU.safetensors` | [✨ JANKU Trained + Chenkin & NoobAI + RouWei Illustrious XL ✨](https://civitai.com/models/1277670) | `SDXL` | *Tidak ada trigger khusus* |
 
 ---
 

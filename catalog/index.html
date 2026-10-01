@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foocus SayMaven Model Hub — 600+ Anime LoRAs, Checkpoints & Trigger Words</title>
   <meta name="description" content="Katalog interaktif 600+ model SDXL & ANIMA Fooocus lengkap dengan tautan Civitai resmi, trigger words, dan preview gambar hasil generasi.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎨</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='13.5' cy='6.5' r='.5' fill='%238b5cf6'/><circle cx='17.5' cy='10.5' r='.5' fill='%238b5cf6'/><circle cx='8.5' cy='7.5' r='.5' fill='%238b5cf6'/><circle cx='6.5' cy='12.5' r='.5' fill='%238b5cf6'/><path d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z'/></svg>">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Skip Navigation -->
+  <a href="#gridContainer" class="skip-nav">Lewati ke konten utama</a>
 
   <!-- Ambient Glow Effects -->
   <div class="ambient-glow glow-1"></div>
@@ -20,7 +23,8 @@
     <!-- Hero Header -->
     <header class="hero">
       <div class="hero-badge-top">
-        <span>✨ SayMaven ColabFoocus Hub</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>SayMaven ColabFoocus Hub</span>
         <span>•</span>
         <span>Civitai Integrated</span>
       </div>
@@ -94,8 +98,10 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="searchInput" class="search-input" placeholder="Cari nama karakter, seri, trigger words, atau nama file (Tekan '/' untuk fokus)..." autocomplete="off">
-          <button id="clearSearch" class="clear-search" title="Bersihkan pencarian">✕</button>
+          <input type="text" id="searchInput" class="search-input" placeholder="Cari nama karakter, seri, trigger words, atau nama file (Tekan '/' untuk fokus)..." autocomplete="off" aria-label="Cari model">
+          <button id="clearSearch" class="clear-search" title="Bersihkan pencarian" aria-label="Bersihkan pencarian">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
         </div>
         <select id="sortSelect" class="sort-select" title="Urutkan model">
           <option value="notebook">Urutan Notebook Colab</option>
@@ -110,8 +116,14 @@
         <div class="filter-group" id="archFilters">
           <span class="filter-label">Arsitektur:</span>
           <button class="pill-btn active" data-arch="all">Semua</button>
-          <button class="pill-btn pill-anima" data-arch="ANIMA">⚡ ANIMA</button>
-          <button class="pill-btn pill-sdxl" data-arch="SDXL">✨ SDXL</button>
+          <button class="pill-btn pill-anima" data-arch="ANIMA">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            ANIMA
+          </button>
+          <button class="pill-btn pill-sdxl" data-arch="SDXL">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+            SDXL
+          </button>
         </div>
 
         <div class="filter-group" id="typeFilters">
@@ -127,12 +139,18 @@
 
       <!-- Quick Series Clusters -->
       <div class="cluster-scroll" id="clusterScroll"></div>
+
+      <!-- Active Filter Chips -->
+      <div class="active-filters-bar" id="activeFiltersBar" style="display:none;"></div>
     </section>
 
     <!-- Results Header -->
     <div class="results-info">
       <span id="resultsCount">Menampilkan 0 model</span>
-      <span style="font-size: 0.8rem; color: var(--text-muted);">💡 Klik tombol "Salin" pada kartu untuk menyalin trigger words</span>
+      <span style="font-size: 0.8rem; color: var(--text-muted); display:inline-flex; align-items:center; gap:5px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Klik "Salin" pada kartu untuk menyalin trigger words
+      </span>
     </div>
 
     <!-- Cards Grid -->
@@ -140,17 +158,66 @@
 
     <!-- Pagination -->
     <nav class="pagination-wrap" id="paginationWrap">
-      <button class="page-btn" id="prevPageBtn">← Sebelumnya</button>
+      <button class="page-btn" id="prevPageBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Sebelumnya
+      </button>
       <span class="page-info" id="pageInfo">Halaman 1</span>
-      <button class="page-btn" id="nextPageBtn">Selanjutnya →</button>
+      <button class="page-btn" id="nextPageBtn">
+        Selanjutnya
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </nav>
 
   </div>
 
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTopBtn" aria-label="Kembali ke atas">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg class="footer-logo" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+        <span class="footer-title">Foocus SayMaven Model Hub</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/SayMaven/ColabFoocus" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
+        <a href="https://civitai.com" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          Civitai
+        </a>
+        <a href="../MODELS_CATALOG.md">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Catalog MD
+        </a>
+      </div>
+      <div class="footer-copy">
+        Data bersumber dari <a href="https://civitai.com" target="_blank" rel="noopener noreferrer">Civitai</a>.
+        Dibuat untuk <a href="https://github.com/SayMaven/ColabFoocus" target="_blank" rel="noopener noreferrer">ColabFoocus</a> oleh SayMaven.
+      </div>
+    </div>
+  </footer>
+
   <!-- Detail Modal -->
   <div class="modal-backdrop" id="detailModal">
     <div class="modal-content">
-      <button class="close-modal" id="closeModal" title="Tutup">✕</button>
+      <button class="close-modal" id="closeModal" title="Tutup" aria-label="Tutup modal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
 
       <div class="modal-media">
         <div class="modal-img-wrap">
@@ -222,7 +289,8 @@
 
         <div style="display: flex; gap: 10px; margin-top: auto;">
           <a id="modalCivitaiBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="flex: 1; justify-content: center;">
-            <span>🌐 Buka Halaman Web di Civitai</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Buka Halaman Web di Civitai
           </a>
         </div>
       </div>
@@ -233,7 +301,7 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- Scripts -->
-  <script src="data.js"></script>
-  <script src="app.js"></script>
+  <script src="data.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 </html>

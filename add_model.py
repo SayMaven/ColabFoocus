@@ -130,7 +130,65 @@ def get_target_dir(model_type, cell_idx):
     else:
         return "models/loras"
 
+def resolve_clean_header(header, cell_idx, arch="SDXL"):
+    """Menghasilkan header sel resmi yang valid dan manusiawi (bukan link URL civitai)."""
+    h = (header or "").strip()
+    if h.startswith("#"):
+        h = h[1:].strip()
+    
+    # Jika header adalah URL atau kosong
+    if h.startswith("http://") or h.startswith("https://") or not h:
+        if cell_idx == 20:
+            return "# Checkpoint ANIMA"
+        elif 21 <= cell_idx <= 29:
+            return "# Checkpoint SDXL"
+        elif cell_idx == 30:
+            return "# VAE SDXL"
+        elif cell_idx == 31:
+            return "# Upscale SDXL"
+        elif cell_idx == 32:
+            return "# Color Settings SDXL"
+        elif cell_idx == 33:
+            return "# Embeddings SDXL"
+        return f"# General {arch}"
+    
+    return f"# {h}"
+
+def resolve_clean_category(header, cell_idx, model_type="LoRA"):
+    """Menghasilkan nama kategori bersih tanpa URL, '#', atau suffix arsitektur."""
+    h = (header or "").strip()
+    if h.startswith("#"):
+        h = h[1:].strip()
+
+    # Jika header adalah URL atau kosong, mapping berdasarkan posisi sel atau tipe model
+    if h.startswith("http://") or h.startswith("https://") or not h:
+        if cell_idx == 20 or (21 <= cell_idx <= 29) or model_type == "Checkpoint":
+            return "Checkpoint"
+        elif cell_idx == 30 or model_type == "VAE":
+            return "VAE"
+        elif cell_idx == 31 or model_type in ("Upscaler", "Upscale"):
+            return "Upscale"
+        elif cell_idx == 32:
+            return "Color Settings"
+        elif cell_idx == 33 or model_type in ("Embedding", "TextualInversion"):
+            return "Embeddings"
+        return model_type or "General"
+
+    # Bersihkan suffix ANIMA / SDXL
+    clean = re.sub(r'\s*(ANIMA|SDXL)$', '', h, flags=re.IGNORECASE).strip()
+    return clean or model_type or "General"
+
 def export_catalog_files(db):
+    # Sanitize and ensure clean headers & categories for all models
+    for m in db:
+        cell_idx = m.get('cell_index', 999)
+        m_type = m.get('model_type', 'LoRA')
+        arch = m.get('architecture', 'SDXL')
+        raw_header = m.get('cell_header', '')
+        
+        m['cell_header'] = resolve_clean_header(raw_header, cell_idx, arch)
+        m['category'] = resolve_clean_category(m['cell_header'], cell_idx, m_type)
+
     # 1. Update models_database.json
     db.sort(key=lambda x: (x.get('cell_index', 999), x.get('filename', '').lower()))
     with open(DB_FILE, "w", encoding="utf-8") as f:
@@ -140,7 +198,7 @@ def export_catalog_files(db):
     web_models = []
     for m in db:
         web_models.append({
-            "id": m['version_id'],
+            "id": str(m['version_id']),
             "filename": m['filename'],
             "name": m['name'],
             "type": m['model_type'],
@@ -149,19 +207,19 @@ def export_catalog_files(db):
             "header": m['cell_header'],
             "cat": m['category'],
             "target": m['target_path'],
-            "c_id": m['model_id'],
-            "title": m['civitai_title'],
-            "ver": m['version_name'],
-            "url": m['civitai_url'],
-            "dl": m['download_url'],
-            "base": m['base_model'],
-            "tw": m['trained_words'],
-            "img": m['preview_url'],
-            "prompt": m['sample_prompt'],
-            "neg": m['sample_negative'],
-            "sampler": m['sample_sampler'],
-            "cfg": m['sample_cfg'],
-            "steps": m['sample_steps']
+            "c_id": m.get('model_id'),
+            "title": m.get('civitai_title', ''),
+            "ver": m.get('version_name', ''),
+            "url": m.get('civitai_url', ''),
+            "dl": m.get('download_url', ''),
+            "base": m.get('base_model', ''),
+            "tw": m.get('trained_words', []),
+            "img": m.get('preview_url', ''),
+            "prompt": m.get('sample_prompt', ''),
+            "neg": m.get('sample_negative', ''),
+            "sampler": m.get('sample_sampler', ''),
+            "cfg": m.get('sample_cfg'),
+            "steps": m.get('sample_steps')
         })
 
     js_content = f"// Auto-generated Civitai models dataset for ColabFoocus\nwindow.COLAB_MODELS = {json.dumps(web_models, ensure_ascii=False)};\n"
@@ -495,21 +553,23 @@ def process_single_model(url_input):
         src = c.get('source', [])
         if src and src[0].strip().startswith('#'):
             h = src[0].strip()
-            cells_list.append((idx, h))
+            # Bersihkan jika header adalah URL atau format lama
+            h_clean = resolve_clean_header(h, idx, arch)
+            cells_list.append((idx, h_clean))
 
     # Smart recommendation for target cell based on model_type, architecture, and keywords
     rec_cells = []
     if model_type == "Checkpoint":
         if arch == "ANIMA":
-            rec_cells.extend([c for c in cells_list if c[0] == 21])
+            rec_cells.extend([c for c in cells_list if c[0] == 20])
         else:
-            rec_cells.extend([c for c in cells_list if 22 <= c[0] <= 30])
+            rec_cells.extend([c for c in cells_list if 21 <= c[0] <= 29])
     elif model_type == "VAE":
+        rec_cells.extend([c for c in cells_list if c[0] == 30])
+    elif model_type in ["Upscaler", "Upscale"]:
         rec_cells.extend([c for c in cells_list if c[0] == 31])
-    elif model_type == "Upscaler":
-        rec_cells.extend([c for c in cells_list if c[0] == 32])
-    elif model_type == "TextualInversion":
-        rec_cells.extend([c for c in cells_list if c[0] == 34])
+    elif model_type in ["TextualInversion", "Embedding"]:
+        rec_cells.extend([c for c in cells_list if c[0] == 33])
 
     kw_search = (model_title + " " + target_filename).lower()
     # Map common franchise keywords
@@ -698,8 +758,8 @@ def process_single_model(url_input):
         sample_steps = meta.get('steps')
 
     # Category name
-    cat_name = re.sub(r'^#\s*', '', selected_cell_header)
-    cat_name = re.sub(r'\s*(ANIMA|SDXL)$', '', cat_name).strip()
+    selected_cell_header = resolve_clean_header(selected_cell_header, target_cell_idx, arch)
+    cat_name = resolve_clean_category(selected_cell_header, target_cell_idx, model_type)
 
     # 7. Apply to notebooks
     print(f"\nWriting to Cell {target_cell_idx} ({selected_cell_header})...")
@@ -756,8 +816,21 @@ def main():
         print("Penggunaan:")
         print("  python add_model.py                     -> Mode interaktif (looping menambah banyak model)")
         print("  python add_model.py <civitai_url>       -> Proses link Civitai pertama, lalu lanjut looping")
+        print("  python add_model.py --sync              -> Sinkronisasi & sanitasi ulang seluruh katalog data")
         print("\nContoh:")
         print("  python add_model.py https://civitai.com/models/827184")
+        print("  python add_model.py --sync")
+        return
+
+    if len(sys.argv) > 1 and sys.argv[1] in ["--sync", "--rebuild", "-s"]:
+        print("🔄 Melakukan sinkronisasi & sanitasi ulang seluruh katalog data...")
+        with open(DB_FILE, "r", encoding="utf-8") as f:
+            db = json.load(f)
+        export_catalog_files(db)
+        print(f"✅ Selesai! {len(db)} model telah disinkronkan ke:")
+        print(f"   - {DB_FILE}")
+        print(f"   - {WEB_DATA}")
+        print(f"   - {MD_CATALOG}")
         return
 
     initial_url = sys.argv[1] if (len(sys.argv) > 1 and not sys.argv[1].startswith("-")) else None
