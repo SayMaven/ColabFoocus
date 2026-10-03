@@ -65,25 +65,25 @@
         </a>
       </div>
 
-      <!-- Stats Grid -->
+      <!-- Stats Grid (Interactive Quick Filters) -->
       <div class="stats-grid">
-        <div class="stat-card">
+        <div class="stat-card stat-card-interactive" id="cardStatTotal" title="Klik untuk menampilkan semua model" role="button" tabindex="0">
           <div class="stat-num" id="statTotal">0</div>
           <div class="stat-label">Total Model</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card stat-card-interactive" id="cardStatTriggers" title="Klik untuk mengurutkan trigger terbanyak" role="button" tabindex="0">
           <div class="stat-num" id="statTriggers" style="color: #c4b5fd;">0</div>
           <div class="stat-label">Trigger Prompts</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card stat-card-interactive" id="cardStatCheckpoints" title="Klik untuk memfilter Checkpoints" role="button" tabindex="0">
           <div class="stat-num" id="statCheckpoints" style="color: #67e8f9;">0</div>
           <div class="stat-label">Checkpoints</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card stat-card-interactive" id="cardStatAnima" title="Klik untuk memfilter arsitektur ANIMA" role="button" tabindex="0">
           <div class="stat-num" id="statAnima" style="color: #f472b6;">0</div>
           <div class="stat-label">ANIMA Turbo</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card stat-card-interactive" id="cardStatSdxl" title="Klik untuk memfilter arsitektur SDXL" role="button" tabindex="0">
           <div class="stat-num" id="statSdxl" style="color: #60a5fa;">0</div>
           <div class="stat-label">SDXL Standalone</div>
         </div>
@@ -99,17 +99,85 @@
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
           <input type="text" id="searchInput" class="search-input" placeholder="Cari nama karakter, seri, trigger words, atau nama file (Tekan '/' untuk fokus)..." autocomplete="off" aria-label="Cari model">
+          <span class="search-shortcut" id="searchShortcutHint" title="Tekan / untuk mencari"><kbd class="search-kbd">/</kbd></span>
           <button id="clearSearch" class="clear-search" title="Bersihkan pencarian" aria-label="Bersihkan pencarian">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
           </button>
         </div>
-        <select id="sortSelect" class="sort-select" title="Urutkan model">
-          <option value="notebook">Urutan Notebook Colab</option>
-          <option value="name-asc">Nama Model (A → Z)</option>
-          <option value="name-desc">Nama Model (Z → A)</option>
-          <option value="triggers-desc">Trigger Terbanyak</option>
-          <option value="arch">Arsitektur (ANIMA / SDXL)</option>
-        </select>
+
+        <!-- Custom Glassmorphic Sort Dropdown -->
+        <div class="custom-select-wrap" id="sortDropdownWrap">
+          <button type="button" class="custom-select-trigger" id="sortDropdownTrigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Urutkan model">
+            <span class="custom-select-icon" id="sortDropdownCurrentIcon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </span>
+            <span class="custom-select-label" id="sortDropdownLabel">Urutan Notebook Colab</span>
+            <span class="custom-select-arrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          
+          <div class="custom-select-menu" id="sortDropdownMenu" role="listbox" tabindex="-1">
+            <div class="custom-select-option selected" role="option" data-value="notebook" aria-selected="true" tabindex="0">
+              <span class="option-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </span>
+              <span class="option-text">Urutan Notebook Colab</span>
+              <span class="option-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="custom-select-option" role="option" data-value="name-asc" aria-selected="false" tabindex="0">
+              <span class="option-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/><path d="M15 4h5l-5 6h5"/><path d="M15 20v-3.5a2.5 2.5 0 0 1 5 0V20"/><path d="M15 18h5"/></svg>
+              </span>
+              <span class="option-text">Nama Model (A → Z)</span>
+              <span class="option-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="custom-select-option" role="option" data-value="name-desc" aria-selected="false" tabindex="0">
+              <span class="option-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="M15 4h5l-5 6h5"/><path d="M15 20v-3.5a2.5 2.5 0 0 1 5 0V20"/><path d="M15 18h5"/></svg>
+              </span>
+              <span class="option-text">Nama Model (Z → A)</span>
+              <span class="option-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="custom-select-option" role="option" data-value="triggers-desc" aria-selected="false" tabindex="0">
+              <span class="option-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </span>
+              <span class="option-text">Trigger Terbanyak</span>
+              <span class="option-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+            <div class="custom-select-option" role="option" data-value="arch" aria-selected="false" tabindex="0">
+              <span class="option-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              </span>
+              <span class="option-text">Arsitektur (ANIMA / SDXL)</span>
+              <span class="option-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Hidden Native Select (Synchronized for Accessibility & Fallback) -->
+          <select id="sortSelect" class="visually-hidden" title="Urutkan model" aria-hidden="true" tabindex="-1">
+            <option value="notebook">Urutan Notebook Colab</option>
+            <option value="name-asc">Nama Model (A → Z)</option>
+            <option value="name-desc">Nama Model (Z → A)</option>
+            <option value="triggers-desc">Trigger Terbanyak</option>
+            <option value="arch">Arsitektur (ANIMA / SDXL)</option>
+          </select>
+        </div>
       </div>
 
       <div class="filter-row">
@@ -135,6 +203,20 @@
           <button class="pill-btn" data-type="Upscaler">Upscaler</button>
           <button class="pill-btn" data-type="Embedding">Embedding</button>
         </div>
+
+        <div class="filter-group" id="triggerFilters">
+          <span class="filter-label">Trigger:</span>
+          <button class="pill-btn active" data-tw="all">Semua</button>
+          <button class="pill-btn" data-tw="has">Ada Trigger</button>
+          <button class="pill-btn" data-tw="none">Tanpa Trigger</button>
+        </div>
+
+        <div class="filter-group" id="favoriteFilters">
+          <button class="pill-btn pill-fav" id="filterFavBtn" data-fav="only" title="Tampilkan hanya model favorit tersimpan">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span>Favorit (<span id="favCount">0</span>)</span>
+          </button>
+        </div>
       </div>
 
       <!-- Quick Series Clusters -->
@@ -146,11 +228,31 @@
 
     <!-- Results Header -->
     <div class="results-info">
-      <span id="resultsCount">Menampilkan 0 model</span>
-      <span style="font-size: 0.8rem; color: var(--text-muted); display:inline-flex; align-items:center; gap:5px;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        Klik "Salin" pada kartu untuk menyalin trigger words
-      </span>
+      <div class="results-info-left">
+        <span id="resultsCount">Menampilkan 0 model</span>
+        <span class="results-hint">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Klik "Salin" pada kartu untuk menyalin trigger words
+        </span>
+      </div>
+      <div class="results-actions">
+        <div class="per-page-wrap" title="Jumlah model per halaman">
+          <span class="per-page-label">Tampil:</span>
+          <button class="per-page-btn" data-perpage="24">24</button>
+          <button class="per-page-btn active" data-perpage="36">36</button>
+          <button class="per-page-btn" data-perpage="60">60</button>
+          <button class="per-page-btn" data-perpage="120">120</button>
+          <button class="per-page-btn" data-perpage="all">Semua</button>
+        </div>
+        <div class="view-mode-toggle" id="viewModeToggle" role="group" aria-label="Pilih tampilan">
+          <button class="view-btn active" id="viewGridBtn" data-view="grid" title="Tampilan Grid (Kartu Gambar)" aria-pressed="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </button>
+          <button class="view-btn" id="viewListBtn" data-view="list" title="Tampilan List (Tabel Rapat)" aria-pressed="false">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Cards Grid -->
@@ -248,11 +350,16 @@
 
       <div class="modal-info">
         <div class="modal-title-wrap">
-          <div class="modal-meta-chips" style="margin-bottom: 8px;">
-            <span class="badge" id="modalArchBadge">SDXL</span>
-            <span class="badge badge-type" id="modalTypeBadge">LoRA</span>
-            <span style="font-size: 0.8rem; color: var(--text-muted);" id="modalCategory">BanG Dream</span>
-            <span style="font-size: 0.8rem; color: var(--text-muted);" id="modalCell">Cell 35</span>
+          <div class="modal-header-top">
+            <div class="modal-meta-chips">
+              <span class="badge" id="modalArchBadge">SDXL</span>
+              <span class="badge badge-type" id="modalTypeBadge">LoRA</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);" id="modalCategory">BanG Dream</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);" id="modalCell">Cell 35</span>
+            </div>
+            <button class="modal-fav-toggle" id="modalFavBtn" title="Simpan ke favorit" aria-label="Favorit">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
           </div>
           <h2 id="modalTitle">Filename</h2>
           <a id="modalCivitaiTitle" href="#" target="_blank" rel="noopener noreferrer" style="color: var(--accent-purple); font-size: 0.95rem; text-decoration: none; font-weight: 500;">
@@ -263,13 +370,19 @@
         <div class="meta-block">
           <div class="meta-block-title">
             <span id="modalTriggersTitle">Trigger Words</span>
-            <button class="btn-copy-chip" id="modalCopyAllTriggers">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              Salin Semua
-            </button>
+            <div class="modal-triggers-actions">
+              <button class="btn-copy-chip" id="modalCopyFooocus" title="Salin format siap pakai Fooocus: &lt;lora:filename:0.8&gt;, trigger words">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Format Fooocus
+              </button>
+              <button class="btn-copy-chip" id="modalCopyAllTriggers">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Salin Semua
+              </button>
+            </div>
           </div>
           <div id="modalTriggers" class="modal-triggers-container"></div>
         </div>

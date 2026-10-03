@@ -1,4 +1,4 @@
-﻿//  ==================================================================
+//  ==================================================================
 // Foocus SayMaven Model Hub Interactive Logic v2
 //  ==================================================================
 
@@ -9,33 +9,118 @@
 
   //  State 
   let state = {
-    search:  '',
-    arch:    'all',
-    type:    'all',
-    cluster: 'all',
-    sort:    'notebook',
-    page:    1,
-    perPage: 36
+    search:   '',
+    arch:     'all',
+    type:     'all',
+    cluster:  'all',
+    sort:     'notebook',
+    twFilter: 'all',    // 'all' | 'has' | 'none'
+    favOnly:  false,    // boolean
+    viewMode: 'grid',   // 'grid' | 'list'
+    page:     1,
+    perPage:  36
   };
 
   //  DOM Elements 
-  const searchInput      = document.getElementById('searchInput');
-  const clearSearchBtn   = document.getElementById('clearSearch');
-  const sortSelect       = document.getElementById('sortSelect');
-  const archFilters      = document.getElementById('archFilters');
-  const typeFilters      = document.getElementById('typeFilters');
-  const clusterScroll    = document.getElementById('clusterScroll');
-  const gridContainer    = document.getElementById('gridContainer');
-  const resultsCount     = document.getElementById('resultsCount');
-  const paginationWrap   = document.getElementById('paginationWrap');
-  const prevPageBtn      = document.getElementById('prevPageBtn');
-  const nextPageBtn      = document.getElementById('nextPageBtn');
-  const pageInfo         = document.getElementById('pageInfo');
-  const activeFiltersBar = document.getElementById('activeFiltersBar');
-  const detailModal      = document.getElementById('detailModal');
-  const closeModalBtn    = document.getElementById('closeModal');
-  const toastContainer   = document.getElementById('toastContainer');
-  const backToTopBtn     = document.getElementById('backToTopBtn');
+  const searchInput             = document.getElementById('searchInput');
+  const clearSearchBtn          = document.getElementById('clearSearch');
+  const searchShortcutHint      = document.getElementById('searchShortcutHint');
+  const sortSelect              = document.getElementById('sortSelect');
+  const sortDropdownWrap        = document.getElementById('sortDropdownWrap');
+  const sortDropdownTrigger     = document.getElementById('sortDropdownTrigger');
+  const sortDropdownLabel       = document.getElementById('sortDropdownLabel');
+  const sortDropdownCurrentIcon = document.getElementById('sortDropdownCurrentIcon');
+  const sortDropdownMenu        = document.getElementById('sortDropdownMenu');
+  const archFilters             = document.getElementById('archFilters');
+  const typeFilters             = document.getElementById('typeFilters');
+  const triggerFilters          = document.getElementById('triggerFilters');
+  const filterFavBtn            = document.getElementById('filterFavBtn');
+  const favCountEl              = document.getElementById('favCount');
+  const viewGridBtn             = document.getElementById('viewGridBtn');
+  const viewListBtn             = document.getElementById('viewListBtn');
+  const clusterScroll           = document.getElementById('clusterScroll');
+  const gridContainer           = document.getElementById('gridContainer');
+  const resultsCount            = document.getElementById('resultsCount');
+  const paginationWrap          = document.getElementById('paginationWrap');
+  const prevPageBtn             = document.getElementById('prevPageBtn');
+  const nextPageBtn             = document.getElementById('nextPageBtn');
+  const pageInfo                = document.getElementById('pageInfo');
+  const activeFiltersBar        = document.getElementById('activeFiltersBar');
+  const detailModal             = document.getElementById('detailModal');
+  const closeModalBtn           = document.getElementById('closeModal');
+  const modalFavBtn             = document.getElementById('modalFavBtn');
+  const modalCopyFooocus        = document.getElementById('modalCopyFooocus');
+  const toastContainer          = document.getElementById('toastContainer');
+  const backToTopBtn            = document.getElementById('backToTopBtn');
+
+  //  ==================================================================
+  // FAVORITES PERSISTENCE (LocalStorage)
+  //  ==================================================================
+
+  let favorites = new Set();
+  try {
+    const rawFavs = localStorage.getItem('colabfoocus_favs');
+    if (rawFavs) {
+      JSON.parse(rawFavs).forEach(function(id) { favorites.add(String(id)); });
+    }
+    const savedView = localStorage.getItem('colabfoocus_view');
+    if (savedView === 'list' || savedView === 'grid') state.viewMode = savedView;
+    const savedPerPage = localStorage.getItem('colabfoocus_perpage');
+    if (savedPerPage) state.perPage = savedPerPage === 'all' ? 99999 : (parseInt(savedPerPage) || 36);
+  } catch(e) {
+    favorites = new Set();
+  }
+
+  function saveFavorites() {
+    try {
+      localStorage.setItem('colabfoocus_favs', JSON.stringify(Array.from(favorites)));
+    } catch(e) {}
+    updateFavCounter();
+  }
+
+  function updateFavCounter() {
+    if (favCountEl) favCountEl.textContent = favorites.size;
+  }
+
+  function toggleFavorite(id, modelFilename) {
+    id = String(id);
+    if (favorites.has(id)) {
+      favorites.delete(id);
+      showToast('Dihapus dari favorit: <b>' + escapeHtml(modelFilename || 'Model') + '</b>');
+    } else {
+      favorites.add(id);
+      showToast('💖 Disimpan ke favorit: <b>' + escapeHtml(modelFilename || 'Model') + '</b>');
+    }
+    saveFavorites();
+    updateFavButtonsUI(id);
+    if (state.favOnly) {
+      applyFiltersAndRender();
+    }
+  }
+
+  function updateFavButtonsUI(targetId) {
+    document.querySelectorAll('.card-fav-btn[data-id="' + targetId + '"]').forEach(function(btn) {
+      var isFav = favorites.has(targetId);
+      btn.classList.toggle('active', isFav);
+      btn.setAttribute('title', isFav ? 'Hapus dari favorit' : 'Simpan ke favorit');
+      var svg = btn.querySelector('svg');
+      if (svg) {
+        svg.style.fill = isFav ? '#ec4899' : 'none';
+        svg.style.stroke = isFav ? '#ec4899' : '#fff';
+      }
+    });
+
+    if (modalFavBtn && modalFavBtn.getAttribute('data-id') === targetId) {
+      var isFavModal = favorites.has(targetId);
+      modalFavBtn.classList.toggle('active', isFavModal);
+      modalFavBtn.setAttribute('title', isFavModal ? 'Hapus dari favorit' : 'Simpan ke favorit');
+      var modalSvg = modalFavBtn.querySelector('svg');
+      if (modalSvg) {
+        modalSvg.style.fill = isFavModal ? '#ec4899' : 'none';
+        modalSvg.style.stroke = isFavModal ? '#ec4899' : 'currentColor';
+      }
+    }
+  }
 
   //  ==================================================================
   // HELPERS
@@ -113,6 +198,71 @@
       });
     }, { threshold: 0.2 });
     observer.observe(statsGrid);
+
+    // Interactive Quick Filters on Stat Cards
+    var cardTotal = document.getElementById('cardStatTotal');
+    if (cardTotal) {
+      cardTotal.addEventListener('click', function() {
+        resetAllFilters();
+        scrollToGrid();
+      });
+      cardTotal.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cardTotal.click(); }
+      });
+    }
+
+    var cardTriggers = document.getElementById('cardStatTriggers');
+    if (cardTriggers) {
+      cardTriggers.addEventListener('click', function() {
+        state.sort = 'triggers-desc';
+        if (sortSelect) sortSelect.value = 'triggers-desc';
+        updateCustomSortUI('triggers-desc');
+        state.page = 1;
+        applyFiltersAndRender();
+        scrollToGrid();
+        updateURL();
+        showToast('✨ Diurutkan berdasarkan <b>Trigger Terbanyak</b>');
+      });
+      cardTriggers.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cardTriggers.click(); }
+      });
+    }
+
+    var cardCheckpoints = document.getElementById('cardStatCheckpoints');
+    if (cardCheckpoints) {
+      cardCheckpoints.addEventListener('click', function() {
+        var btn = document.querySelector('#typeFilters .pill-btn[data-type="Checkpoint"]');
+        if (btn) btn.click();
+        scrollToGrid();
+      });
+      cardCheckpoints.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cardCheckpoints.click(); }
+      });
+    }
+
+    var cardAnima = document.getElementById('cardStatAnima');
+    if (cardAnima) {
+      cardAnima.addEventListener('click', function() {
+        var btn = document.querySelector('#archFilters .pill-btn[data-arch="ANIMA"]');
+        if (btn) btn.click();
+        scrollToGrid();
+      });
+      cardAnima.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cardAnima.click(); }
+      });
+    }
+
+    var cardSdxl = document.getElementById('cardStatSdxl');
+    if (cardSdxl) {
+      cardSdxl.addEventListener('click', function() {
+        var btn = document.querySelector('#archFilters .pill-btn[data-arch="SDXL"]');
+        if (btn) btn.click();
+        scrollToGrid();
+      });
+      cardSdxl.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cardSdxl.click(); }
+      });
+    }
   }
 
   // SVG icons (Lucide-style, stroke-based, 24x24 viewBox)
@@ -184,8 +334,12 @@
     var chips = [];
 
     if (state.search)         chips.push({ label: '\uD83D\uDD0D "' + state.search + '"', key: 'search' });
+    if (state.favOnly)        chips.push({ label: '💖 Favorit (' + favorites.size + ')', key: 'fav' });
     if (state.arch !== 'all') chips.push({ label: '\u26A1 ' + state.arch, key: 'arch' });
     if (state.type !== 'all') chips.push({ label: '\uD83D\uDDC2 ' + state.type, key: 'type' });
+    if (state.twFilter !== 'all') {
+      chips.push({ label: state.twFilter === 'has' ? '⚡ Ada Trigger' : '⚪ Tanpa Trigger', key: 'twFilter' });
+    }
     if (state.cluster !== 'all') {
       var cl = popularClusters.find(function(c) { return c.id === state.cluster; });
       chips.push({ label: cl ? cl.label : state.cluster, key: 'cluster' });
@@ -221,6 +375,15 @@
       state.search = '';
       searchInput.value = '';
       clearSearchBtn.style.display = 'none';
+      if (searchShortcutHint) searchShortcutHint.style.display = 'flex';
+    } else if (key === 'fav') {
+      state.favOnly = false;
+      if (filterFavBtn) filterFavBtn.classList.remove('active');
+    } else if (key === 'twFilter') {
+      state.twFilter = 'all';
+      document.querySelectorAll('#triggerFilters .pill-btn').forEach(function(b) {
+        b.classList.toggle('active', b.getAttribute('data-tw') === 'all');
+      });
     } else if (key === 'arch') {
       state.arch = 'all';
       document.querySelectorAll('#archFilters .pill-btn').forEach(function(b) { b.classList.remove('active'); });
@@ -242,9 +405,16 @@
 
   function resetAllFilters() {
     state.search = ''; state.arch = 'all'; state.type = 'all';
-    state.cluster = 'all'; state.page = 1;
+    state.cluster = 'all'; state.sort = 'notebook'; state.twFilter = 'all'; state.favOnly = false; state.page = 1;
     searchInput.value = '';
     clearSearchBtn.style.display = 'none';
+    if (searchShortcutHint) searchShortcutHint.style.display = 'flex';
+    if (filterFavBtn) filterFavBtn.classList.remove('active');
+    document.querySelectorAll('#triggerFilters .pill-btn').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-tw') === 'all');
+    });
+    if (sortSelect) sortSelect.value = 'notebook';
+    updateCustomSortUI('notebook');
     document.querySelectorAll('#archFilters .pill-btn').forEach(function(b) { b.classList.remove('active'); });
     var archAll = document.querySelector('#archFilters .pill-btn[data-arch="all"]');
     if (archAll) archAll.classList.add('active');
@@ -263,6 +433,8 @@
   function updateURL() {
     var params = new URLSearchParams();
     if (state.search)              params.set('q',       state.search);
+    if (state.favOnly)             params.set('fav',     '1');
+    if (state.twFilter !== 'all')  params.set('tw',      state.twFilter);
     if (state.arch !== 'all')      params.set('arch',    state.arch);
     if (state.type !== 'all')      params.set('type',    state.type);
     if (state.cluster !== 'all')   params.set('cluster', state.cluster);
@@ -280,13 +452,25 @@
       state.search = params.get('q');
       searchInput.value = state.search;
       clearSearchBtn.style.display = 'block';
+      if (searchShortcutHint) searchShortcutHint.style.display = 'none';
+    }
+    if (params.get('fav') === '1') {
+      state.favOnly = true;
+      if (filterFavBtn) filterFavBtn.classList.add('active');
+    }
+    if (params.get('tw')) {
+      state.twFilter = params.get('tw');
+      document.querySelectorAll('#triggerFilters .pill-btn').forEach(function(b) {
+        b.classList.toggle('active', b.getAttribute('data-tw') === state.twFilter);
+      });
     }
     if (params.get('arch'))    state.arch    = params.get('arch');
     if (params.get('type'))    state.type    = params.get('type');
     if (params.get('cluster')) state.cluster = params.get('cluster');
     if (params.get('sort')) {
       state.sort = params.get('sort');
-      sortSelect.value = state.sort;
+      if (sortSelect) sortSelect.value = state.sort;
+      updateCustomSortUI(state.sort);
     }
     if (params.get('page')) state.page = parseInt(params.get('page')) || 1;
 
@@ -310,6 +494,9 @@
     var q = state.search.trim().toLowerCase();
 
     return modelsData.filter(function(m) {
+      if (state.favOnly && !favorites.has(String(m.id))) return false;
+      if (state.twFilter === 'has' && (!m.tw || m.tw.length === 0)) return false;
+      if (state.twFilter === 'none' && m.tw && m.tw.length > 0) return false;
       if (state.arch !== 'all' && m.arch !== state.arch) return false;
       if (state.type !== 'all' && m.type !== state.type) return false;
 
@@ -325,17 +512,18 @@
         else if (cId === 'clothing')     { if (cat !== 'clothing'   && !header.includes('clothing'))    return false; }
         else if (cId === 'background')   { if (cat !== 'background' && !header.includes('background'))  return false; }
         else if (cId === 'tool')         { if (cat !== 'tool'       && !header.includes('tool'))        return false; }
-        else if (cId === 'bangdream')    { if (cell < 34 || cell > 49)  return false; }
-        else if (cId === 'hoyoverse')    { if (cell < 52 || cell > 58)  return false; }
+        else if (cId === 'bangdream')    { if ((cell < 34 || cell > 49) && !cat.includes('bang dream') && !header.includes('bang dream') && !header.includes('roselia') && !header.includes('afterglow') && !header.includes('morfonica') && !header.includes('mygo') && !header.includes('mujica') && !header.includes('poppin')) return false; }
+        else if (cId === 'hoyoverse')    { if ((cell < 52 || cell > 58) && !header.includes('honkai') && !header.includes('genshin') && !header.includes('zenless') && !header.includes('zzz') && !header.includes('hoyoverse')) return false; }
         else if (cId === 'bluearchive')  { if (cell !== 79 && !cat.includes('blue archive') && !header.includes('blue archive')) return false; }
-        else if (cId === 'musicanime')   { if (cell < 49 || cell > 51)  return false; }
-        else if (cId === 'projectsekai') { if (cell < 61 || cell > 62)  return false; }
-        else if (cId === 'idolmaster')   { if (cell < 59 || cell > 60)  return false; }
+        else if (cId === 'musicanime')   { if ((cell < 49 || cell > 51) && !header.includes('girls band cry') && !header.includes('bocchi') && !header.includes('k-on')) return false; }
+        else if (cId === 'projectsekai') { if ((cell < 61 || cell > 62) && !cat.includes('project sekai') && !header.includes('project sekai')) return false; }
+        else if (cId === 'idolmaster')   { if ((cell < 59 || cell > 60) && !cat.includes('idolm@ster') && !cat.includes('idolmaster') && !header.includes('idolm@ster') && !header.includes('idolmaster')) return false; }
         else if (cId === 'yuri') {
           var yuriCells = [63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 80, 93, 101, 102];
-          if (yuriCells.indexOf(cell) === -1) return false;
+          var isYuri = yuriCells.indexOf(cell) !== -1 || header.includes('watanare') || header.includes('wataten') || header.includes('adachi') || header.includes('takopi') || header.includes('gnp');
+          if (!isYuri) return false;
         }
-        else if (cId === 'random')       { if (cell < 103 || cell > 104) return false; }
+        else if (cId === 'random')       { if ((cell < 103 || cell > 104) && !header.includes('random')) return false; }
       }
 
       if (q) {
@@ -412,6 +600,7 @@
     var archBadgeClass  = m.arch === 'ANIMA' ? 'badge-anima' : 'badge-sdxl';
     var triggersCount   = m.tw ? m.tw.length : 0;
     var displayCat      = getDisplayCat(m);
+    var isFav           = favorites.has(String(m.id));
 
     var triggersPreview = m.tw && m.tw.length > 0
       ? m.tw.slice(0, 3).map(function(t) {
@@ -431,7 +620,8 @@
         mediaTag = '<video class="card-img" src="' + m.img + '" autoplay loop muted playsinline preload="metadata"></video>';
       } else {
         mediaTag = '<img class="card-img" src="' + m.img + '" alt="' + escapeHtml(m.filename) + '" loading="lazy"' +
-          ' onerror="this.parentElement.innerHTML=\'<div class=\\\'card-img-placeholder\\\'>' +
+          ' onload="this.parentElement.classList.remove(\'loading\')"' +
+          ' onerror="this.parentElement.classList.remove(\'loading\');this.parentElement.innerHTML=\'<div class=\\\'card-img-placeholder\\\'>' +
           '<span style=\\\'font-size:2rem;\\\'>\uD83D\uDDBC\uFE0F</span>' +
           '<span style=\\\'font-size:.72rem;margin-top:4px;\\\'>No Preview</span></div>\'">';
       }
@@ -449,10 +639,52 @@
       ? '<span class="trigger-chip" style="opacity:.7;">+' + (triggersCount - 3) + ' lagi</span>'
       : '';
 
+    // Compact List View Layout
+    if (state.viewMode === 'list') {
+      return [
+        '<div class="model-card list-card" data-id="' + m.id + '">',
+        '  <div class="card-img-wrap' + (m.img ? ' loading' : '') + '">',
+        '    ' + mediaTag,
+        '  </div>',
+        '  <div class="card-body">',
+        '    <div class="list-main-info">',
+        '      <div class="card-filename" title="' + escapeHtml(m.filename) + '">' + escapeHtml(m.filename) + '</div>',
+        '      <div class="card-title" title="' + escapeHtml(m.title) + '">' + escapeHtml(m.title || m.filename) + '</div>',
+        '    </div>',
+        '    <div class="list-badges-cluster">',
+        '      <span class="badge ' + archBadgeClass + '">' + m.arch + '</span>',
+        '      <span class="badge badge-type">' + m.type + '</span>',
+        '      <span class="trigger-chip" style="background:rgba(255,255,255,0.06);border-color:var(--border-subtle);color:var(--text-secondary);">' + escapeHtml(displayCat) + '</span>',
+        '    </div>',
+        '    <div class="card-triggers">',
+        '      <div class="triggers-header">',
+        '        <span>Triggers (' + triggersCount + ')</span>',
+        '        ' + copyBtn,
+        '      </div>',
+        '      <div class="trigger-chips-wrap">' + triggersPreview + moreChip + '</div>',
+        '    </div>',
+        '    <div class="card-footer">',
+        '      <button class="list-fav-btn card-fav-btn' + (isFav ? ' active' : '') + '" data-id="' + m.id + '"' +
+        '        title="' + (isFav ? 'Hapus dari favorit' : 'Simpan ke favorit') + '" aria-label="Favorit ' + escapeHtml(m.filename) + '">' +
+        '        <svg width="15" height="15" viewBox="0 0 24 24" fill="' + (isFav ? '#ec4899' : 'none') + '" stroke="' + (isFav ? '#ec4899' : '#fff') + '" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+        '      </button>',
+        '      <button class="btn btn-secondary view-details-btn" data-id="' + m.id + '" aria-label="Lihat detail ' + escapeHtml(m.filename) + '">Detail</button>',
+        '      <a href="' + m.url + '" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" aria-label="Buka di Civitai">Civitai</a>',
+        '    </div>',
+        '  </div>',
+        '</div>'
+      ].join('\n');
+    }
+
+    // Default Grid Card Layout
     return [
       '<div class="model-card" data-id="' + m.id + '">',
-      '  <div class="card-img-wrap">',
+      '  <div class="card-img-wrap' + (m.img ? ' loading' : '') + '">',
       '    ' + mediaTag,
+      '    <button class="card-fav-btn' + (isFav ? ' active' : '') + '" data-id="' + m.id + '"' +
+      '      title="' + (isFav ? 'Hapus dari favorit' : 'Simpan ke favorit') + '" aria-label="Favorit ' + escapeHtml(m.filename) + '">' +
+      '      <svg width="16" height="16" viewBox="0 0 24 24" fill="' + (isFav ? '#ec4899' : 'none') + '" stroke="' + (isFav ? '#ec4899' : '#fff') + '" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+      '    </button>',
       '    <div class="card-badges">',
       '      <span class="badge ' + archBadgeClass + '">' + m.arch + '</span>',
       '      <span class="badge badge-type">' + m.type + '</span>',
@@ -471,16 +703,16 @@
       '    </div>',
       '    <div class="card-footer">',
       '      <button class="btn btn-secondary view-details-btn" data-id="' + m.id + '"' +
-        ' aria-label="Lihat detail ' + escapeHtml(m.filename) + '">' +
-        '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-        '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
-        ' Detail</button>',
+      '        aria-label="Lihat detail ' + escapeHtml(m.filename) + '">' +
+      '        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+      '        Detail</button>',
       '      <a href="' + m.url + '" target="_blank" rel="noopener noreferrer" class="btn btn-secondary"' +
-        ' aria-label="Buka ' + escapeHtml(m.filename) + ' di Civitai">' +
-        '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-        '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>' +
-        '<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>' +
-        ' Civitai</a>',
+      '        aria-label="Buka ' + escapeHtml(m.filename) + ' di Civitai">' +
+      '        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>' +
+      '        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>' +
+      '        Civitai</a>',
       '    </div>',
       '  </div>',
       '</div>'
@@ -489,6 +721,15 @@
 
   //  Card Events 
   function attachCardEvents() {
+    document.querySelectorAll('.card-fav-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var mId = btn.getAttribute('data-id');
+        var model = modelsData.find(function(m) { return String(m.id) === mId; });
+        toggleFavorite(mId, model ? model.filename : '');
+      });
+    });
+
     document.querySelectorAll('.copy-triggers-btn').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -608,6 +849,35 @@
     document.getElementById('modalCategory').textContent    = m.header ? m.header.replace(/^#\s*/, '').replace(/https?:\/\/[^\s]+/g, '').trim() : displayCat;
     document.getElementById('modalCell').textContent        = 'Cell ' + m.cell;
     document.getElementById('modalTarget').textContent      = m.target;
+
+    // Modal Favorite Button
+    if (modalFavBtn) {
+      modalFavBtn.setAttribute('data-id', String(m.id));
+      var isFav = favorites.has(String(m.id));
+      modalFavBtn.classList.toggle('active', isFav);
+      modalFavBtn.setAttribute('title', isFav ? 'Hapus dari favorit' : 'Simpan ke favorit');
+      var modalFavSvg = modalFavBtn.querySelector('svg');
+      if (modalFavSvg) {
+        modalFavSvg.style.fill = isFav ? '#ec4899' : 'none';
+        modalFavSvg.style.stroke = isFav ? '#ec4899' : 'currentColor';
+      }
+      modalFavBtn.onclick = function() {
+        toggleFavorite(m.id, m.filename);
+      };
+    }
+
+    // Modal Format Fooocus Button
+    if (modalCopyFooocus) {
+      var loraName = m.filename.replace(/\.(safetensors|pt|ckpt)$/i, '');
+      var fooocusStr = (m.tw && m.tw.length > 0)
+        ? '<lora:' + loraName + ':0.8>, ' + m.tw.join(', ')
+        : '<lora:' + loraName + ':0.8>';
+      modalCopyFooocus.onclick = function() {
+        navigator.clipboard.writeText(fooocusStr).then(function() {
+          showToast('✨ Format Fooocus disalin: <code>' + escapeHtml(fooocusStr) + '</code>');
+        });
+      };
+    }
 
     var modalMediaWrap = document.querySelector('.modal-img-wrap');
     if (m.img) {
@@ -730,6 +1000,122 @@
   }
 
   //  ==================================================================
+  // CUSTOM GLASSMORPHIC SORT DROPDOWN
+  //  ==================================================================
+
+  function updateCustomSortUI(val) {
+    if (!sortDropdownMenu) return;
+    var options = sortDropdownMenu.querySelectorAll('.custom-select-option');
+    options.forEach(function(opt) {
+      var match = opt.getAttribute('data-value') === val;
+      opt.classList.toggle('selected', match);
+      opt.setAttribute('aria-selected', match ? 'true' : 'false');
+      if (match) {
+        if (sortDropdownLabel) {
+          var textEl = opt.querySelector('.option-text');
+          sortDropdownLabel.textContent = textEl ? textEl.textContent : opt.textContent.trim();
+        }
+        if (sortDropdownCurrentIcon) {
+          var iconEl = opt.querySelector('.option-icon svg');
+          if (iconEl) {
+            sortDropdownCurrentIcon.innerHTML = iconEl.outerHTML;
+          }
+        }
+      }
+    });
+  }
+
+  function openCustomSortDropdown() {
+    if (!sortDropdownWrap || !sortDropdownTrigger) return;
+    sortDropdownWrap.classList.add('open');
+    sortDropdownTrigger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeCustomSortDropdown() {
+    if (!sortDropdownWrap || !sortDropdownTrigger) return;
+    sortDropdownWrap.classList.remove('open');
+    sortDropdownTrigger.setAttribute('aria-expanded', 'false');
+  }
+
+  function initCustomSortDropdown() {
+    if (!sortDropdownWrap || !sortDropdownTrigger || !sortDropdownMenu) return;
+
+    updateCustomSortUI(state.sort);
+
+    // Toggle dropdown open/close on trigger click
+    sortDropdownTrigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isOpen = sortDropdownWrap.classList.contains('open');
+      if (isOpen) {
+        closeCustomSortDropdown();
+      } else {
+        openCustomSortDropdown();
+      }
+    });
+
+    // Option items click & keyboard
+    sortDropdownMenu.querySelectorAll('.custom-select-option').forEach(function(opt) {
+      opt.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var val = opt.getAttribute('data-value');
+        if (val) {
+          state.sort = val;
+          if (sortSelect) sortSelect.value = val;
+          updateCustomSortUI(val);
+          closeCustomSortDropdown();
+          sortDropdownTrigger.focus();
+          state.page = 1;
+          applyFiltersAndRender();
+          updateURL();
+        }
+      });
+
+      opt.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          opt.click();
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          var next = opt.nextElementSibling;
+          if (next && next.classList.contains('custom-select-option')) next.focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          var prev = opt.previousElementSibling;
+          if (prev && prev.classList.contains('custom-select-option')) prev.focus();
+        } else if (e.key === 'Escape') {
+          closeCustomSortDropdown();
+          sortDropdownTrigger.focus();
+        }
+      });
+    });
+
+    // Keyboard support on the trigger button
+    sortDropdownTrigger.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openCustomSortDropdown();
+        var selected = sortDropdownMenu.querySelector('.custom-select-option.selected') || sortDropdownMenu.firstElementChild;
+        if (selected) selected.focus();
+      }
+    });
+
+    // Close on click outside
+    document.addEventListener('click', function(e) {
+      if (sortDropdownWrap && !sortDropdownWrap.contains(e.target)) {
+        closeCustomSortDropdown();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && sortDropdownWrap.classList.contains('open')) {
+        closeCustomSortDropdown();
+        sortDropdownTrigger.focus();
+      }
+    });
+  }
+
+  //  ==================================================================
   // EVENT LISTENERS
   //  ==================================================================
 
@@ -737,6 +1123,7 @@
     state.search = e.target.value;
     state.page = 1;
     clearSearchBtn.style.display = state.search ? 'block' : 'none';
+    if (searchShortcutHint) searchShortcutHint.style.display = state.search ? 'none' : 'flex';
     applyFiltersAndRender();
     updateURL();
   });
@@ -746,17 +1133,21 @@
     state.search = '';
     state.page = 1;
     clearSearchBtn.style.display = 'none';
+    if (searchShortcutHint) searchShortcutHint.style.display = 'flex';
     searchInput.focus();
     applyFiltersAndRender();
     updateURL();
   });
 
-  sortSelect.addEventListener('change', function(e) {
-    state.sort = e.target.value;
-    state.page = 1;
-    applyFiltersAndRender();
-    updateURL();
-  });
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function(e) {
+      state.sort = e.target.value;
+      updateCustomSortUI(state.sort);
+      state.page = 1;
+      applyFiltersAndRender();
+      updateURL();
+    });
+  }
 
   document.querySelectorAll('#archFilters .pill-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
@@ -779,6 +1170,67 @@
       updateURL();
     });
   });
+
+  // Favorite filter pill
+  if (filterFavBtn) {
+    filterFavBtn.addEventListener('click', function() {
+      state.favOnly = !state.favOnly;
+      filterFavBtn.classList.toggle('active', state.favOnly);
+      state.page = 1;
+      applyFiltersAndRender();
+      updateURL();
+    });
+  }
+
+  // Trigger presence filters
+  document.querySelectorAll('#triggerFilters .pill-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#triggerFilters .pill-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      state.twFilter = btn.getAttribute('data-tw') || 'all';
+      state.page = 1;
+      applyFiltersAndRender();
+      updateURL();
+    });
+  });
+
+  // Per page selector
+  document.querySelectorAll('.per-page-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var val = btn.getAttribute('data-perpage') || btn.getAttribute('data-count');
+      var count = val === 'all' ? 99999 : (parseInt(val, 10) || 36);
+      if (state.perPage === count) return;
+      state.perPage = count;
+      try { localStorage.setItem('colabfoocus_perpage', val); } catch(e) {}
+      document.querySelectorAll('.per-page-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      state.page = 1;
+      applyFiltersAndRender();
+    });
+  });
+
+  // View mode switcher (Grid vs Compact List)
+  if (viewGridBtn && viewListBtn) {
+    viewGridBtn.addEventListener('click', function() {
+      if (state.viewMode === 'grid') return;
+      state.viewMode = 'grid';
+      try { localStorage.setItem('colabfoocus_view', 'grid'); } catch(e) {}
+      viewGridBtn.classList.add('active');
+      viewListBtn.classList.remove('active');
+      if (gridContainer) gridContainer.classList.remove('list-view');
+      applyFiltersAndRender();
+    });
+
+    viewListBtn.addEventListener('click', function() {
+      if (state.viewMode === 'list') return;
+      state.viewMode = 'list';
+      try { localStorage.setItem('colabfoocus_view', 'list'); } catch(e) {}
+      viewListBtn.classList.add('active');
+      viewGridBtn.classList.remove('active');
+      if (gridContainer) gridContainer.classList.add('list-view');
+      applyFiltersAndRender();
+    });
+  }
 
   prevPageBtn.addEventListener('click', function() {
     if (state.page > 1) {
@@ -817,8 +1269,32 @@
   //  ==================================================================
 
   initFromURL();
+  initCustomSortDropdown();
   renderClusterFilters();
   initStats();
+
+  // Restore View Mode
+  if (state.viewMode === 'list') {
+    if (gridContainer) gridContainer.classList.add('list-view');
+    if (viewListBtn) viewListBtn.classList.add('active');
+    if (viewGridBtn) viewGridBtn.classList.remove('active');
+  } else {
+    if (gridContainer) gridContainer.classList.remove('list-view');
+    if (viewGridBtn) viewGridBtn.classList.add('active');
+    if (viewListBtn) viewListBtn.classList.remove('active');
+  }
+
+  // Restore Per-Page Active UI
+  document.querySelectorAll('.per-page-btn').forEach(function(btn) {
+    var val = btn.getAttribute('data-perpage') || btn.getAttribute('data-count');
+    var isAll = val === 'all' && state.perPage >= 99999;
+    var isCount = parseInt(val, 10) === state.perPage;
+    btn.classList.toggle('active', isAll || isCount);
+  });
+
+  // Update favorites counter badge
+  updateFavCounter();
+
   applyFiltersAndRender();
 
 })();
