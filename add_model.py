@@ -726,8 +726,21 @@ def process_single_model(url_input):
 
     fn_input = input(f"\n💾 Nama File Simpan [Enter untuk '{suggested_fn}']: ").strip()
     target_filename = sanitize_filename(fn_input) if fn_input else suggested_fn
-    if not target_filename.endswith(('.safetensors', '.pt')):
-        target_filename += ".safetensors"
+
+    # Normalisasi ekstensi dan suffix berdasarkan arsitektur
+    base_fn, ext = os.path.splitext(target_filename)
+    if ext not in ['.safetensors', '.pt']:
+        base_fn = target_filename
+        ext = '.safetensors'
+
+    if arch == "ANIMA":
+        if not base_fn.endswith("_ANIMA"):
+            base_fn += "_ANIMA"
+    else:  # SDXL
+        if base_fn.endswith("_ANIMA"):
+            base_fn = base_fn[:-6]
+
+    target_filename = base_fn + ext
 
     # Check if filename already exists
     existing = [m for m in db if m['filename'].lower() == target_filename.lower()]

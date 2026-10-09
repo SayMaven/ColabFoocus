@@ -41,7 +41,7 @@ Pilih varian notebook sesuai kebutuhan penyimpanan Anda:
 
 ## 🌐 Katalog Web Interaktif & Trigger Words (Civitai Hub)
 
-Jelajahi dan cari seluruh **600+ model (617 model aktif)** dengan antarmuka web modern, lengkap dengan thumbnail preview, filter arsitektur, parameter generasi contoh, tombol salin trigger words 1-klik, dan tautan resmi ke Civitai:
+Jelajahi dan cari seluruh **600+ model (641 model aktif)** dengan antarmuka web modern, lengkap dengan thumbnail preview, filter arsitektur, parameter generasi contoh, tombol salin trigger words 1-klik, dan tautan resmi ke Civitai:
 
 - 🚀 **[Buka Web Hub Interaktif (GitHub Pages)](https://saymaven.github.io/ColabFoocus/)** *(Atau buka langsung file [`catalog/index.html`](catalog/index.html) di browser secara offline)*
 - 📚 **[Buka Dokumentasi Markdown (MODELS_CATALOG.md)](MODELS_CATALOG.md)**
@@ -62,7 +62,7 @@ ColabFoocus/
 │   ├── index.html                           # Tampilan Web App pencarian & preview model
 │   ├── style.css                            # Desain glassmorphism dark aesthetic
 │   ├── app.js                               # Logika search, filter, modal, copy triggers
-│   └── data.js                              # Database offline 617+ model
+│   └── data.js                              # Database offline 641+ model
 ├── index.html                               # Redirect otomatis ke catalog/
 ├── models_database.json                     # Database master metadata Civitai (JSON)
 ├── MODELS_CATALOG.md                        # Dokumentasi tabel lengkap format Markdown
