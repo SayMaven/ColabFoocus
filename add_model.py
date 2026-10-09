@@ -359,6 +359,29 @@ def validate_sync():
         return True
 
 def export_catalog_files(db):
+    # Sinkronkan cell_index dan cell_header tiap model langsung dari notebook terkini
+    if os.path.exists(NB_LOCAL):
+        try:
+            with open(NB_LOCAL, "r", encoding="utf-8") as f:
+                nb = json.load(f)
+            file_to_cell = {}
+            for idx, cell in enumerate(nb.get("cells", [])):
+                src = cell.get("source", [])
+                if not src:
+                    continue
+                header = src[0].strip()
+                cell_text = "".join(src)
+                for m in db:
+                    fname = m.get("filename")
+                    if fname and fname in cell_text:
+                        file_to_cell[fname] = (idx, header)
+            for m in db:
+                fname = m.get("filename")
+                if fname in file_to_cell:
+                    m["cell_index"], m["cell_header"] = file_to_cell[fname]
+        except Exception:
+            pass
+
     # Sanitize and ensure clean headers & categories for all models
     for m in db:
         cell_idx = m.get('cell_index', 999)

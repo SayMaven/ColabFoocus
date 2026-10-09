@@ -1,6 +1,6 @@
 # 📚 Katalog Model, Trigger Words & Sumber Asli Civitai
 
-Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di notebook [Foocus SayMaven](Foocus%20SayMaven.ipynb), lengkap dengan nama file kustom, judul asli dari kreator di Civitai, tautan web resmi, arsitektur, dan trigger words untuk prompt.
+Dokumen ini memuat seluruh daftar model (**666 model**) yang tersedia di notebook [Foocus SayMaven](Foocus%20SayMaven.ipynb), lengkap dengan nama file kustom, judul asli dari kreator di Civitai, tautan web resmi, arsitektur, dan trigger words untuk prompt.
 
 > 💡 **Tips Penggunaan**:
 > - **Nama File**: Cari nama ini di menu dropdown *Model* atau *LoRA* pada antarmuka Fooocus.
@@ -26,8 +26,8 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 - [[Sel 32] Color Settings SDXL](#[sel-32]-color-settings-sdxl) *(2 model)*
 - [[Sel 33] Embeddings SDXL](#[sel-33]-embeddings-sdxl) *(5 model)*
 - [[Sel 34] BangDream Group ANIMA](#[sel-34]-bangdream-group-anima) *(6 model)*
-- [[Sel 35] Artist Style ANIMA](#[sel-35]-artist-style-anima) *(11 model)*
-- [[Sel 36] STYLE ANIMA](#[sel-36]-style-anima) *(4 model)*
+- [[Sel 35] Artist Style ANIMA](#[sel-35]-artist-style-anima) *(18 model)*
+- [[Sel 36] STYLE ANIMA](#[sel-36]-style-anima) *(8 model)*
 - [[Sel 37] MewType ANIMA](#[sel-37]-mewtype-anima) *(2 model)*
 - [[Sel 38] MewType SDXL](#[sel-38]-mewtype-sdxl) *(2 model)*
 - [[Sel 39] All in One SDXL](#[sel-39]-all-in-one-sdxl) *(4 model)*
@@ -67,47 +67,49 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 - [[Sel 73] Hoshizora no Memoria SDXL](#[sel-73]-hoshizora-no-memoria-sdxl) *(7 model)*
 - [[Sel 74] Amagi Brilliant Park ANIMA](#[sel-74]-amagi-brilliant-park-anima) *(7 model)*
 - [[Sel 75] Kanojo Okarishimasu ANIMA](#[sel-75]-kanojo-okarishimasu-anima) *(2 model)*
-- [[Sel 76] Roshidere ANIMA](#[sel-76]-roshidere-anima) *(2 model)*
-- [[Sel 77] Kamiina Botan Fully Blossom ANIMA](#[sel-77]-kamiina-botan-fully-blossom-anima) *(6 model)*
-- [[Sel 78] Adachi to Shimamura ANIMA](#[sel-78]-adachi-to-shimamura-anima) *(1 model)*
-- [[Sel 79] Chou Kaguya Hime ANIMA](#[sel-79]-chou-kaguya-hime-anima) *(2 model)*
-- [[Sel 80] Akebi-chan no Sailor Fuku SDXL](#[sel-80]-akebi-chan-no-sailor-fuku-sdxl) *(1 model)*
-- [[Sel 81] Arknights: endfield SDXL](#[sel-81]-arknights-endfield-sdxl) *(2 model)*
-- [[Sel 82] Blue Archive SDXL](#[sel-82]-blue-archive-sdxl) *(5 model)*
-- [[Sel 83] Citrus SDXL](#[sel-83]-citrus-sdxl) *(2 model)*
-- [[Sel 84] Date A Live SDXL](#[sel-84]-date-a-live-sdxl) *(20 model)*
-- [[Sel 85] Fate/Kalleid Liner Prisma Illya SDXL](#[sel-85]-fatekalleid-liner-prisma-illya-sdxl) *(6 model)*
-- [[Sel 86] Gamers SDXL](#[sel-86]-gamers-sdxl) *(4 model)*
-- [[Sel 87] HELLO WORLD SDXL](#[sel-87]-hello-world-sdxl) *(1 model)*
-- [[Sel 88] Hinako Note SDXL](#[sel-88]-hinako-note-sdxl) *(2 model)*
-- [[Sel 89] Hololive SDXL](#[sel-89]-hololive-sdxl) *(2 model)*
-- [[Sel 90] Idoly Pride SDXL](#[sel-90]-idoly-pride-sdxl) *(2 model)*
-- [[Sel 91] Koisuru Otome SDXL](#[sel-91]-koisuru-otome-sdxl) *(1 model)*
-- [[Sel 92] Meitantei Precure SDXL](#[sel-92]-meitantei-precure-sdxl) *(1 model)*
-- [[Sel 93] Nukitashi the Animation SDXL](#[sel-93]-nukitashi-the-animation-sdxl) *(9 model)*
-- [[Sel 94] One ROOM SDXL](#[sel-94]-one-room-sdxl) *(1 model)*
-- [[Sel 95] Oshi no Ko ANIMA](#[sel-95]-oshi-no-ko-anima) *(1 model)*
-- [[Sel 96] Oshi no Ko SDXL](#[sel-96]-oshi-no-ko-sdxl) *(5 model)*
-- [[Sel 97] Sasayaku You ni Koi wo Utau SDXL](#[sel-97]-sasayaku-you-ni-koi-wo-utau-sdxl) *(2 model)*
-- [[Sel 98] Shoujou Ramune SDXL](#[sel-98]-shoujou-ramune-sdxl) *(2 model)*
-- [[Sel 99] Summer Pocket SDXL](#[sel-99]-summer-pocket-sdxl) *(5 model)*
-- [[Sel 100] Toaru Kagaku no Railgun SDXL](#[sel-100]-toaru-kagaku-no-railgun-sdxl) *(6 model)*
-- [[Sel 101] Uma Musume SDXL](#[sel-101]-uma-musume-sdxl) *(4 model)*
-- [[Sel 102] Vocaloid SDXL](#[sel-102]-vocaloid-sdxl) *(3 model)*
-- [[Sel 103] Wonder Egg Priority SDXL](#[sel-103]-wonder-egg-priority-sdxl) *(2 model)*
-- [[Sel 104] WUWA SDXL](#[sel-104]-wuwa-sdxl) *(6 model)*
-- [[Sel 105] Yagate kimi ni naru SDXL](#[sel-105]-yagate-kimi-ni-naru-sdxl) *(1 model)*
-- [[Sel 106] Yuru Yuri SDXL](#[sel-106]-yuru-yuri-sdxl) *(12 model)*
-- [[Sel 107] Random Character ANIMA](#[sel-107]-random-character-anima) *(7 model)*
-- [[Sel 108] Random Character SDXL](#[sel-108]-random-character-sdxl) *(15 model)*
-- [[Sel 109] Tool SDXL](#[sel-109]-tool-sdxl) *(8 model)*
-- [[Sel 110] Poses SDXL](#[sel-110]-poses-sdxl) *(66 model)*
-- [[Sel 111] Clothing SDXL](#[sel-111]-clothing-sdxl) *(13 model)*
-- [[Sel 112] Concept ANIMA](#[sel-112]-concept-anima) *(7 model)*
-- [[Sel 113] Concept SDXL](#[sel-113]-concept-sdxl) *(73 model)*
-- [[Sel 114] Background SDXL](#[sel-114]-background-sdxl) *(13 model)*
-- [[Sel 115] Style SDXL](#[sel-115]-style-sdxl) *(41 model)*
-- [[Sel 116] STYLE SDXL](#[sel-116]-style-sdxl) *(11 model)*
+- [[Sel 76] Lycoris Recoil ANIMA](#[sel-76]-lycoris-recoil-anima) *(5 model)*
+- [[Sel 77] Roshidere ANIMA](#[sel-77]-roshidere-anima) *(2 model)*
+- [[Sel 78] Kamiina Botan Fully Blossom ANIMA](#[sel-78]-kamiina-botan-fully-blossom-anima) *(6 model)*
+- [[Sel 79] Adachi to Shimamura ANIMA](#[sel-79]-adachi-to-shimamura-anima) *(1 model)*
+- [[Sel 80] Chou Kaguya Hime ANIMA](#[sel-80]-chou-kaguya-hime-anima) *(2 model)*
+- [[Sel 81] Akebi-chan no Sailor Fuku SDXL](#[sel-81]-akebi-chan-no-sailor-fuku-sdxl) *(1 model)*
+- [[Sel 82] Arknights: endfield SDXL](#[sel-82]-arknights-endfield-sdxl) *(2 model)*
+- [[Sel 83] Blue Archive SDXL](#[sel-83]-blue-archive-sdxl) *(5 model)*
+- [[Sel 84] Citrus SDXL](#[sel-84]-citrus-sdxl) *(2 model)*
+- [[Sel 85] Date A Live SDXL](#[sel-85]-date-a-live-sdxl) *(20 model)*
+- [[Sel 86] Fate/Kalleid Liner Prisma Illya SDXL](#[sel-86]-fatekalleid-liner-prisma-illya-sdxl) *(6 model)*
+- [[Sel 87] Gamers SDXL](#[sel-87]-gamers-sdxl) *(4 model)*
+- [[Sel 88] HELLO WORLD SDXL](#[sel-88]-hello-world-sdxl) *(1 model)*
+- [[Sel 89] Hinako Note SDXL](#[sel-89]-hinako-note-sdxl) *(2 model)*
+- [[Sel 90] Hololive SDXL](#[sel-90]-hololive-sdxl) *(2 model)*
+- [[Sel 91] Idoly Pride SDXL](#[sel-91]-idoly-pride-sdxl) *(2 model)*
+- [[Sel 92] Koisuru Otome SDXL](#[sel-92]-koisuru-otome-sdxl) *(1 model)*
+- [[Sel 93] Meitantei Precure ANIMA](#[sel-93]-meitantei-precure-anima) *(3 model)*
+- [[Sel 94] Meitantei Precure SDXL](#[sel-94]-meitantei-precure-sdxl) *(6 model)*
+- [[Sel 95] Nukitashi the Animation SDXL](#[sel-95]-nukitashi-the-animation-sdxl) *(9 model)*
+- [[Sel 96] One ROOM SDXL](#[sel-96]-one-room-sdxl) *(1 model)*
+- [[Sel 97] Oshi no Ko ANIMA](#[sel-97]-oshi-no-ko-anima) *(1 model)*
+- [[Sel 98] Oshi no Ko SDXL](#[sel-98]-oshi-no-ko-sdxl) *(5 model)*
+- [[Sel 99] Sasayaku You ni Koi wo Utau SDXL](#[sel-99]-sasayaku-you-ni-koi-wo-utau-sdxl) *(2 model)*
+- [[Sel 100] Shoujou Ramune SDXL](#[sel-100]-shoujou-ramune-sdxl) *(2 model)*
+- [[Sel 101] Summer Pocket SDXL](#[sel-101]-summer-pocket-sdxl) *(5 model)*
+- [[Sel 102] Toaru Kagaku no Railgun SDXL](#[sel-102]-toaru-kagaku-no-railgun-sdxl) *(6 model)*
+- [[Sel 103] Uma Musume SDXL](#[sel-103]-uma-musume-sdxl) *(4 model)*
+- [[Sel 104] Vocaloid SDXL](#[sel-104]-vocaloid-sdxl) *(3 model)*
+- [[Sel 105] Wonder Egg Priority SDXL](#[sel-105]-wonder-egg-priority-sdxl) *(2 model)*
+- [[Sel 106] WUWA SDXL](#[sel-106]-wuwa-sdxl) *(6 model)*
+- [[Sel 107] Yagate kimi ni naru SDXL](#[sel-107]-yagate-kimi-ni-naru-sdxl) *(1 model)*
+- [[Sel 108] Yuru Yuri SDXL](#[sel-108]-yuru-yuri-sdxl) *(12 model)*
+- [[Sel 109] Random Character ANIMA](#[sel-109]-random-character-anima) *(7 model)*
+- [[Sel 110] Random Character SDXL](#[sel-110]-random-character-sdxl) *(15 model)*
+- [[Sel 111] Tool SDXL](#[sel-111]-tool-sdxl) *(8 model)*
+- [[Sel 112] Poses SDXL](#[sel-112]-poses-sdxl) *(66 model)*
+- [[Sel 113] Clothing SDXL](#[sel-113]-clothing-sdxl) *(13 model)*
+- [[Sel 114] Concept ANIMA](#[sel-114]-concept-anima) *(8 model)*
+- [[Sel 115] Concept SDXL](#[sel-115]-concept-sdxl) *(73 model)*
+- [[Sel 116] Background SDXL](#[sel-116]-background-sdxl) *(13 model)*
+- [[Sel 117] Style SDXL](#[sel-117]-style-sdxl) *(41 model)*
+- [[Sel 118] STYLE SDXL](#[sel-118]-style-sdxl) *(11 model)*
 
 ---
 
@@ -263,13 +265,20 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 | `ArtistStyle_CustomUdon_ANIMA.safetensors` | [Custom Udon Style for Anima P3](https://civitai.com/models/2613471) | `ANIMA` | `@custom udon` |
 | `ArtistStyle_Eufoniuz_ANIMA.safetensors` | [eufoniuz_style](https://civitai.com/models/2888083) | `ANIMA` | *Tidak ada trigger khusus* |
 | `ArtistStyle_friesanquisher_ANIMA.safetensors` | [Artist Style: fries vanquisher](https://civitai.com/models/2879471) | `ANIMA` | `@fries vanquisher` |
+| `ArtistStyle_funimaru_ANIMA.safetensors` | [@zakopuni (funimaru) Style (ANIMA)](https://civitai.com/models/2970822) | `ANIMA` | `@zakopuni` |
 | `ArtistStyle_Haku3490_ANIMA.safetensors` | [Haku3490 #影おじ (隠れエリア) Style (ANIMA)](https://civitai.com/models/2952138) | `ANIMA` | `@haku3490` |
+| `ArtistStyle_hans.B_ANIMA.safetensors` | [hans.B/藩滑るめるArtist style lora [Anima]](https://civitai.com/models/2983317) | `ANIMA` | `h4nsb` |
 | `ArtistStyle_Ixy_ANIMA.safetensors` | [Ixy - Artist Style](https://civitai.com/models/2770600) | `ANIMA` | `@ixy`<br>`@ix7` |
+| `ArtistStyle_KardiaDWEI_ANIMA.safetensors` | [Kardia's nai5 style](https://civitai.com/models/2933457) | `ANIMA` | `@kardia` |
+| `ArtistStyle_KimSomang_ANIMA.safetensors` | [Kim Somang Style Anima](https://civitai.com/models/2984867) | `ANIMA` | *Tidak ada trigger khusus* |
 | `ArtistStyle_Kokonattusoul_ANIMA.safetensors` | [@ga-chan (kokonattusoul) Style](https://civitai.com/models/2966114) | `ANIMA` | `@ga-chan \(kokonattusoul\)` |
+| `ArtistStyle_Nikoai_ANIMA.safetensors` | [Niko's nai5 style](https://civitai.com/models/2932110) | `ANIMA` | `@nikonai` |
 | `ArtistStyle_Riboshika_ANIMA.safetensors` | [<Artist Style> riboshika/リボシカ](https://civitai.com/models/2936849) | `ANIMA` | `@r1boshika` |
+| `ArtistStyle_RIRIKO_ANIMA.safetensors` | [RIRIKO STYLE (ANIMA)](https://civitai.com/models/2961783) | `ANIMA` | `@r1r1k0` |
 | `ArtistStyle_ShirabeShiki_ANIMA.safetensors` | [調四季 Shirabe Shiki | Artist Style](https://civitai.com/models/2946290) | `ANIMA` | `shirabe` |
 | `ArtistStyle_Sincos_ANIMA.safetensors` | [[Anima] サインこす/sincos style](https://civitai.com/models/2675044) | `ANIMA` | `@s1nc0sstyle` |
 | `ArtistStyle_SKNL_ANIMA.safetensors` | [Artist Style(SKNL)/ Anima / Illustrious](https://civitai.com/models/1219794) | `ANIMA` | `SKNLAnima` |
+| `ArtistStyle_sonnick3d_ANIMA.safetensors` | [@sonnick3d - Artist Style - ANIMA](https://civitai.com/models/2953144) | `ANIMA` | `@sonnick3d` |
 | `ArtistStyle_Vicineko_ANIMA.safetensors` | [Vicineko Style Anima](https://civitai.com/models/2724610) | `ANIMA` | `@Vicineko` |
 
 ---
@@ -278,10 +287,14 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
+| `Azurlane_Style_ANIMA.safetensors` | [Azur lane style](https://civitai.com/models/2977084) | `ANIMA` | `@azlanestyle` |
 | `BangDreamAnime3DStyle_ANIMA.safetensors` | [Bang dream!  anime 3D Style for WAI](https://civitai.com/models/2482424) | `ANIMA` | `@bangdream` |
 | `BangDreamPicoStyle_ANIMA.safetensors` | [bang dream pico style](https://civitai.com/models/1787608) | `ANIMA` | *Tidak ada trigger khusus* |
+| `FilterStyleBloom_ANIMA.safetensors` | [Filter style](https://civitai.com/models/2943218) | `ANIMA` | *Tidak ada trigger khusus* |
 | `GakuenIdolmasterGameStyle_ANIMA.safetensors` | [[Anima V1.0 / WAI] Gakuen Idolmaster Game Style / Gakumas (学マス)  Game Style](https://civitai.com/models/1858848) | `ANIMA` | `@gakumas, 3d`<br>`shaded face, sweat, messy hair`<br>`kaya rinha, hanami saki, hanami ume, shinosawa hiro, hataya misuzu, arimura mao, fujita kotone, juo sena, himesaki rinami, katsuragi lilja, shiun sumika, kuramoto china, tsukimura temari,` |
+| `JustAnotherVRChatStyle_ANIMA.safetensors` | [[Anima] Just Another VRChat Style](https://civitai.com/models/2942500) | `ANIMA` | `@vrcstyle`<br>`3d` |
 | `MakotoShinkaiStyle_ANIMA.safetensors` | [[Krea2 & Anima] 3 in 1，Shinkai Makoto/新海诚，《君の名は。》，《天気の子》，《すずめの戸締まり》，Miyamizu Mitsuha，Amano Hina，Iwato Suzume- Artist Style](https://civitai.com/models/2912863) | `ANIMA` | `Miyamizu Mitsuha`<br>`Amano Hina`<br>`Iwato Suzume` |
+| `OniichanWaOshimaiStyle_ANIMA.safetensors` | [Oniichan wa Oshimai! - Anime style](https://civitai.com/models/2991422) | `ANIMA` | `anime coloring` |
 
 ---
 
@@ -771,7 +784,19 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 76] Roshidere ANIMA
+## [Sel 76] Lycoris Recoil ANIMA
+
+| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
+|---|---|:---:|---|
+| `FukiHarukawa_ANIMA.safetensors` | [Fuki Harukawa 春川 フキ 春川蕗 Lycoris Recoil リコリス・リコイル 莉可丽丝](https://civitai.com/models/2958889) | `ANIMA` | `Fuki Harukawa, 1girl, solo, short hair, brown hair, purple eyes, lycoris uniform, school uniform, collared shirt, white shirt, long sleeves, neck ribbon, blue ribbon, ribbon, two-tone dress, red dress, grey dress, pleated dress, red belt, belt, backpack, brown bag,` |
+| `InoueTakina_ANIMA.safetensors` | [Lycoris Recoil Inoue Takina / リコリス・リコイル 井ノ上たきな（Anima）](https://civitai.com/models/2823391) | `ANIMA` | `LycoReco-Inoue-Takina,` |
+| `Kurumi_ANIMA.safetensors` | [Lycoris Recoil Kurumi / リコリス・リコイル クルミ（Anima）](https://civitai.com/models/2828828) | `ANIMA` | `LycoReco-Kurumi` |
+| `NakaharaMizuki_ANIMA.safetensors` | [Lycoris Recoil Nakahara Mizuki / リコリス・リコイル 中原ミズキ（Anima）](https://civitai.com/models/2826045) | `ANIMA` | `LycoReco-Nakahara-Mizuki,` |
+| `NishikigiChisato_ANIMA.safetensors` | [Nishikigi Chisato 錦木千束 5outfit Lycoris Recoil リコリス・リコイル 莉可丽丝](https://civitai.com/models/2958210) | `ANIMA` | `nishikigi chisato, 1girl, solo, looking at viewer, smile, short hair, simple background, shirt, blonde hair, long sleeves, white background, red eyes, dress, ribbon, closed mouth, standing, school uniform, white shirt, full body, hair ribbon, shoes, collared shirt, socks, belt, bag, red ribbon, kneehighs, neck ribbon, brown footwear, bob cut, red dress, black socks, backpack, blue ribbon, loafers, pleated dress, grey dress, two-tone dress, red belt, lycoris uniform`<br>`Nishikigi Chisato, 1girl, solo, short hair, bob cut, one side up, blonde hair, red eyes, hair ribbon, red ribbon, large breasts, collarbone, japanese clothes, kimono, red kimono, tasuki`<br>`Nishikigi Chisato, 1girl, solo, short hair, bob cut, one side up, blonde hair, red eyes, hair ribbon, red ribbon, large breasts, breasts squeezed together, bare shoulders, crop top, sports bra, two-tone sports bra, zipper, zipper pull tab, midriff, navel, stomach, sportswear, buruma, red buruma, thighs, socks, white socks`<br>`Nishikigi Chisato, 1girl, solo, short hair, blonde hair, red eyes, official alternate costume, collar, black collar, bare shoulders, bare arms, dress, red dress, sleeveless dress, sleeveless, pantyhose, black pantyhose, shoes, red footwear`<br>`Nishikigi Chisato, 1girl, solo, short hair, twintails, blonde hair, red eyes, hair ribbon, red ribbon, alternate costume, pajamas, off shoulder, collarbone, shirt, off-shoulder shirt, white shirt, frills, frilled shirt, pants, white pants` |
+
+---
+
+## [Sel 77] Roshidere ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -780,7 +805,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 77] Kamiina Botan Fully Blossom ANIMA
+## [Sel 78] Kamiina Botan Fully Blossom ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -793,7 +818,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 78] Adachi to Shimamura ANIMA
+## [Sel 79] Adachi to Shimamura ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -801,7 +826,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 79] Chou Kaguya Hime ANIMA
+## [Sel 80] Chou Kaguya Hime ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -810,7 +835,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 80] Akebi-chan no Sailor Fuku SDXL
+## [Sel 81] Akebi-chan no Sailor Fuku SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -818,7 +843,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 81] Arknights: endfield SDXL
+## [Sel 82] Arknights: endfield SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -827,7 +852,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 82] Blue Archive SDXL
+## [Sel 83] Blue Archive SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -839,7 +864,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 83] Citrus SDXL
+## [Sel 84] Citrus SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -848,7 +873,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 84] Date A Live SDXL
+## [Sel 85] Date A Live SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -875,7 +900,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 85] Fate/Kalleid Liner Prisma Illya SDXL
+## [Sel 86] Fate/Kalleid Liner Prisma Illya SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -888,7 +913,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 86] Gamers SDXL
+## [Sel 87] Gamers SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -899,7 +924,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 87] HELLO WORLD SDXL
+## [Sel 88] HELLO WORLD SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -907,7 +932,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 88] Hinako Note SDXL
+## [Sel 89] Hinako Note SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -916,7 +941,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 89] Hololive SDXL
+## [Sel 90] Hololive SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -925,7 +950,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 90] Idoly Pride SDXL
+## [Sel 91] Idoly Pride SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -934,7 +959,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 91] Koisuru Otome SDXL
+## [Sel 92] Koisuru Otome SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -942,15 +967,30 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 92] Meitantei Precure SDXL
+## [Sel 93] Meitantei Precure ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
-| `MoriaLuluka.safetensors` | [[Anima LoRA] 森亜るるか / moria luluka [名探偵プリキュア！/ Meitantei Precure!]](https://civitai.com/models/2406391) | `SDXL` | `moria luluka, meitantei precure!,`<br>`grey hair, long hair, antenna hair, hair intakes, hair bow, hair between eyes, purple eyes, black dress, black skirt, capelet, buttons, frills, three-quarter sleeves, puffy sleeves, purple pantyhose, black shoes, necklace, pendant,` |
+| `CureArcana_ANIMA.safetensors` | [Cure Arcana (Meitantei Precure!) / キュアアルカナ (名探偵プリキュア！)](https://civitai.com/models/2862850) | `ANIMA` | `curearcana`<br>`arcanacostume` |
+| `CureEclair_ANIMA.safetensors` | [Cure Eclair (Meitantei Precure!) / キュアエクレール (名探偵プリキュア！)](https://civitai.com/models/2299185) | `ANIMA` | `cureeclair`<br>`eclaircostume` |
+| `EclipShadow_ANIMA.safetensors` | [Eclipse Shadow (Meitantei Precure!) / エクリプス・シャドウ (名探偵プリキュア！)](https://civitai.com/models/2882099) | `ANIMA` | `eclipseshadow`<br>`eclipseshadowcostume` |
 
 ---
 
-## [Sel 93] Nukitashi the Animation SDXL
+## [Sel 94] Meitantei Precure SDXL
+
+| Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
+|---|---|:---:|---|
+| `AkechiAnnaPatissier.safetensors` | [Akechi Anna : Patissier (Meitantei Precure!) / 明智 あんな：パティシエ (名探偵プリキュア！)](https://civitai.com/models/2647936) | `SDXL` | `akechiannapatissier` |
+| `AkechiMikuru.safetensors` | [Anna's mom (Meitantei Precure!) / あんなの母 (名探偵プリキュア！)](https://civitai.com/models/2356118) | `SDXL` | `akechimikuru` |
+| `KobayashiMikuruAdult.safetensors` | [Kobayashi Mikuru : Adult (Meitantei Precure!) / 小林 みくる：大人 (名探偵プリキュア！)](https://civitai.com/models/2736800) | `SDXL` | `kobayashimikuruadult` |
+| `KobayashiMikuruDetective.safetensors` | [Kobayashi Mikiru : Detective (Meitantei Precure!) / 小林 みくる：探偵 (名探偵プリキュア！)](https://civitai.com/models/2673049) | `SDXL` | `kobayashimikurudetective` |
+| `MoriaLuluka.safetensors` | [[Anima LoRA] 森亜るるか / moria luluka [名探偵プリキュア！/ Meitantei Precure!]](https://civitai.com/models/2406391) | `SDXL` | `moria luluka, meitantei precure!,`<br>`grey hair, long hair, antenna hair, hair intakes, hair bow, hair between eyes, purple eyes, black dress, black skirt, capelet, buttons, frills, three-quarter sleeves, puffy sleeves, purple pantyhose, black shoes, necklace, pendant,` |
+| `MoriaLulukaAdult.safetensors` | [Moria Luluka : Adult (Meitantei Precure!) / 森亜 るるか ： 大人 (名探偵プリキュア！)](https://civitai.com/models/2559543) | `SDXL` | `morialulukaadult` |
+
+---
+
+## [Sel 95] Nukitashi the Animation SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -966,7 +1006,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 94] One ROOM SDXL
+## [Sel 96] One ROOM SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -974,7 +1014,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 95] Oshi no Ko ANIMA
+## [Sel 97] Oshi no Ko ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -982,7 +1022,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 96] Oshi no Ko SDXL
+## [Sel 98] Oshi no Ko SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -994,7 +1034,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 97] Sasayaku You ni Koi wo Utau SDXL
+## [Sel 99] Sasayaku You ni Koi wo Utau SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1003,7 +1043,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 98] Shoujou Ramune SDXL
+## [Sel 100] Shoujou Ramune SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1012,7 +1052,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 99] Summer Pocket SDXL
+## [Sel 101] Summer Pocket SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1024,7 +1064,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 100] Toaru Kagaku no Railgun SDXL
+## [Sel 102] Toaru Kagaku no Railgun SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1037,7 +1077,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 101] Uma Musume SDXL
+## [Sel 103] Uma Musume SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1048,7 +1088,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 102] Vocaloid SDXL
+## [Sel 104] Vocaloid SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1058,7 +1098,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 103] Wonder Egg Priority SDXL
+## [Sel 105] Wonder Egg Priority SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1067,7 +1107,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 104] WUWA SDXL
+## [Sel 106] WUWA SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1080,7 +1120,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 105] Yagate kimi ni naru SDXL
+## [Sel 107] Yagate kimi ni naru SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1088,7 +1128,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 106] Yuru Yuri SDXL
+## [Sel 108] Yuru Yuri SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1107,7 +1147,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 107] Random Character ANIMA
+## [Sel 109] Random Character ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1121,7 +1161,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 108] Random Character SDXL
+## [Sel 110] Random Character SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1143,7 +1183,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 109] Tool SDXL
+## [Sel 111] Tool SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1158,7 +1198,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 110] Poses SDXL
+## [Sel 112] Poses SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1231,7 +1271,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 111] Clothing SDXL
+## [Sel 113] Clothing SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1251,11 +1291,12 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 112] Concept ANIMA
+## [Sel 114] Concept ANIMA
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
 | `AestheticComposition_ANIMA.safetensors` | [Aesthetic composition | 美学构图](https://civitai.com/models/2972997) | `ANIMA` | `masterpiece, best quality, very aesthetic,` |
+| `CompositionSelf-Control_ANIMA.safetensors` | [构图自控 | Composition Self-Control - 生图设计 | Raw image design](https://civitai.com/models/2985382) | `ANIMA` | `cmpctrl` |
 | `CondomLeftInside_ANIMA.safetensors` | [(ANIMA) Condom Left Inside / ゴム残し](https://civitai.com/models/2988171) | `ANIMA` | `condom left inside,` |
 | `DisembodiedTongue_ANIMA.safetensors` | [Concept > Disembodied tongue](https://civitai.com/models/2660815) | `ANIMA` | `disembodied tongue on tongue, french kiss`<br>`disembodied tongue on foot`<br>`disembodied tongue on pussy`<br>`disembodied tongue on anus` |
 | `HentaiComicRandomGenerator_ANIMA.safetensors` | [Hentai Comic Random Generator (FULL COLOR) Anima / Pony / IL XL | フルカラーエロ漫画ランダムジェネレーター](https://civitai.com/models/585589) | `ANIMA` | `Hentai comic style. Multi-view with 3-5 or more panels displaying text, speech bubbles,  focus lines, vibration lines, comic-style facial expressions, and sound effects. Hentai comic depictions of body parts, including genitals  (chest, navel, nipples, vulva, clitoris, vagina, anus, buttocks, nude, torn clothes, vaginal fluid),  Women are depicted with multiple multi-shots (cowboy shot, upper body, face).`<br>`1boy, erection, penis, hetero, sex, rough sex, epic sex, head grab, cumming, speed lines,`<br>`2boys, mmf threesome, erection, penis, multiple penises, testicles, cum,  hetero, sex, group sex,  oral, fellatio,  spread legs, spitroast, irrumatio, sweat, gangbang, double penetration, bangs, folded, thick thighs,` |
@@ -1265,7 +1306,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 113] Concept SDXL
+## [Sel 115] Concept SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1345,7 +1386,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 114] Background SDXL
+## [Sel 116] Background SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1365,7 +1406,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 115] Style SDXL
+## [Sel 117] Style SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
@@ -1413,7 +1454,7 @@ Dokumen ini memuat seluruh daftar model (**641 model**) yang tersedia di noteboo
 
 ---
 
-## [Sel 116] STYLE SDXL
+## [Sel 118] STYLE SDXL
 
 | Nama File Fooocus | Judul Asli di Civitai | Arsitektur | Trigger Words / Trained Words |
 |---|---|:---:|---|
