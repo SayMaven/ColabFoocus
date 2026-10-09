@@ -28,15 +28,16 @@ Semua konfigurasi jaringan dan tunnel harus konsisten menggunakan port **`7866`*
 
 ---
 
-## 3. Pembeda Arsitektur Model (ANIMA vs SDXL)
-Terdapat dua arsitektur base model yang digunakan:
-1. **Model ANIMA**:
+## 3. Penamaan Komentar Header Sel & Penomoran [Sel X]
+Setiap sel kode di kedua notebook **WAJIB** mencantumkan nomor sel dengan format `# [Sel X] <Nama Sel>` di baris pertamanya agar cocok 1-to-1 dengan penomoran pada Web Hub dan Katalog:
+1. **Format Standar Header**: `# [Sel X] <Nama Kategori/Seri>` (contoh: `# [Sel 1] Mount Google Drive`, `# [Sel 20] Checkpoint ANIMA`, `# [Sel 34] BangDream Group ANIMA`).
+2. **Model ANIMA**:
    - Komentar header sel **WAJIB** mengandung kata `ANIMA`.
-   - Contoh: `# BangDream Group ANIMA`, `# MewType ANIMA`, `# Project Sekai ANIMA`, `# STYLE ANIMA`.
-2. **Model SDXL**:
+   - Contoh: `# [Sel 34] BangDream Group ANIMA`, `# [Sel 36] MewType ANIMA`, `# [Sel 61] Project Sekai ANIMA`.
+3. **Model SDXL**:
    - Seluruh sel model yang bukan ANIMA adalah model SDXL.
    - Komentar header sel **WAJIB** diakhiri dengan teks `SDXL`.
-   - Contoh: `# Blue Archive SDXL`, `# Roselia SDXL`, `# Ave Mujica SDXL`, `# Poses SDXL`, `# Tool SDXL`.
+   - Contoh: `# [Sel 80] Blue Archive SDXL`, `# [Sel 40] Roselia SDXL`, `# [Sel 47] Ave Mujica SDXL`, `# [Sel 107] Poses SDXL`.
    - *Peringatan*: Hindari duplikasi imbuhan seperti `SDXL SDXL`.
 
 ---

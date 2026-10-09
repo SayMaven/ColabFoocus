@@ -56,8 +56,14 @@ def fetch_json(url):
                 pass
         raise e
 
+def normalize_civitai_domain(url):
+    """Normalisasi domain Civitai: civitai.red → civitai.com (API identik di keduanya)."""
+    if not url:
+        return url
+    return url.replace("civitai.red", "civitai.com")
+
 def normalize_input(raw):
-    """Normalisasi input: support ID angka murni, format 'civitai:ID', atau URL penuh."""
+    """Normalisasi input: support ID angka murni, format 'civitai:ID', URL civitai.red, atau URL penuh."""
     raw = raw.strip()
     # Input berupa angka murni (Model ID)
     if raw.isdigit():
@@ -68,6 +74,11 @@ def normalize_input(raw):
         model_part = parts.split("@")[0].strip()
         if model_part.isdigit():
             return f"https://civitai.com/models/{model_part}"
+    # Normalisasi civitai.red → civitai.com (domain NSFW, API-nya identik)
+    if "civitai.red" in raw:
+        normalized = normalize_civitai_domain(raw)
+        print(f"ℹ️  URL civitai.red terdeteksi, dinormalisasi ke: {normalized}")
+        return normalized
     return raw
 
 def parse_civitai_url(url_str):
@@ -682,7 +693,7 @@ def process_single_model(url_input):
 
     v_name = selected_version.get('name', '')
     base_model = selected_version.get('baseModel', 'Unknown')
-    download_url = selected_version.get('downloadUrl', '')
+    download_url = normalize_civitai_domain(selected_version.get('downloadUrl', ''))
     trained_words = selected_version.get('trainedWords', [])
 
     # Find primary safetensors file
