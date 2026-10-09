@@ -35,6 +35,7 @@ NB_DRIVE = os.path.join(BASE_DIR, "Foocus SayMaven Google Drive Mount.ipynb")
 DB_FILE = os.path.join(BASE_DIR, "models_database.json")
 MD_CATALOG = os.path.join(BASE_DIR, "MODELS_CATALOG.md")
 WEB_DATA = os.path.join(BASE_DIR, "catalog", "data.js")
+README_FILE = os.path.join(BASE_DIR, "README.md")
 
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 
@@ -54,6 +55,20 @@ def fetch_json(url):
             except:
                 pass
         raise e
+
+def normalize_input(raw):
+    """Normalisasi input: support ID angka murni, format 'civitai:ID', atau URL penuh."""
+    raw = raw.strip()
+    # Input berupa angka murni (Model ID)
+    if raw.isdigit():
+        return f"https://civitai.com/models/{raw}"
+    # Format ComfyUI Manager: civitai:123456 atau civitai:123456@version
+    if raw.lower().startswith("civitai:"):
+        parts = raw.split(":", 1)[1]
+        model_part = parts.split("@")[0].strip()
+        if model_part.isdigit():
+            return f"https://civitai.com/models/{model_part}"
+    return raw
 
 def parse_civitai_url(url_str):
     """Ekstrak model_id dan model_version_id (jika ada) dari URL."""
@@ -136,29 +151,35 @@ def resolve_clean_header(header, cell_idx, arch="SDXL"):
     if h.startswith("#"):
         h = h[1:].strip()
     
+    # Bersihkan [Sel X] yang lama jika ada
+    h = re.sub(r'^\[Sel\s+\d+\]\s*', '', h).strip()
+
     # Jika header adalah URL atau kosong
     if h.startswith("http://") or h.startswith("https://") or not h:
         if cell_idx == 20:
-            return "# Checkpoint ANIMA"
+            return "# [Sel 20] Checkpoint ANIMA"
         elif 21 <= cell_idx <= 29:
-            return "# Checkpoint SDXL"
+            part_num = cell_idx - 20
+            return f"# [Sel {cell_idx}] Checkpoint SDXL (Part {part_num})"
         elif cell_idx == 30:
-            return "# VAE SDXL"
+            return "# [Sel 30] VAE SDXL"
         elif cell_idx == 31:
-            return "# Upscale SDXL"
+            return "# [Sel 31] Upscale SDXL"
         elif cell_idx == 32:
-            return "# Color Settings SDXL"
+            return "# [Sel 32] Color Settings SDXL"
         elif cell_idx == 33:
-            return "# Embeddings SDXL"
-        return f"# General {arch}"
+            return "# [Sel 33] Embeddings SDXL"
+        return f"# [Sel {cell_idx}] General {arch}"
     
-    return f"# {h}"
+    return f"# [Sel {cell_idx}] {h}"
 
 def resolve_clean_category(header, cell_idx, model_type="LoRA"):
-    """Menghasilkan nama kategori bersih tanpa URL, '#', atau suffix arsitektur."""
+    """Menghasilkan nama kategori bersih tanpa URL, '#', '[Sel X]', atau suffix arsitektur."""
     h = (header or "").strip()
     if h.startswith("#"):
         h = h[1:].strip()
+    h = re.sub(r'^\[Sel\s+\d+\]\s*', '', h).strip()
+    h = re.sub(r'\(Part\s+\d+\)', '', h).strip()
 
     # Jika header adalah URL atau kosong, mapping berdasarkan posisi sel atau tipe model
     if h.startswith("http://") or h.startswith("https://") or not h:
@@ -177,6 +198,154 @@ def resolve_clean_category(header, cell_idx, model_type="LoRA"):
     # Bersihkan suffix ANIMA / SDXL
     clean = re.sub(r'\s*(ANIMA|SDXL)$', '', h, flags=re.IGNORECASE).strip()
     return clean or model_type or "General"
+
+def update_readme_model_count(count):
+    """Perbarui jumlah model aktif yang tertera di README.md secara otomatis."""
+    if not os.path.exists(README_FILE):
+        return
+    with open(README_FILE, "r", encoding="utf-8") as f:
+        content = f.read()
+    # Pola: "600+ model (617 model aktif)" atau "NNN model aktif"
+    new_content = re.sub(
+        r'\*\*\d+\+?\s*model\s*\(\d+\s*model aktif\)\*\*',
+        f'**600+ model ({count} model aktif)**',
+        content
+    )
+    # Pola fallback di data.js description atau kalimat lain
+    new_content = re.sub(
+        r'(Database offline )\d+(\+ model)',
+        lambda m: m.group(1) + str(count) + m.group(2).replace(str(count), ''),
+        new_content
+    )
+    if new_content != content:
+        with open(README_FILE, "w", encoding="utf-8") as f:
+            f.write(new_content)
+        print(f"   📝 README.md diperbarui: {count} model aktif")
+
+def validate_sync():
+    """
+    Validasi sinkronisasi antara kedua notebook dan database.
+    Periksa: jumlah sel, header tiap sel, dan cell_index di database.
+    """
+    print("\n🔍 Memvalidasi sinkronisasi notebook dan database...\n")
+    errors = []
+    warnings = []
+
+    # 1. Load kedua notebook
+    try:
+        with open(NB_LOCAL, "r", encoding="utf-8") as f:
+            nb_local = json.load(f)
+        with open(NB_DRIVE, "r", encoding="utf-8") as f:
+            nb_drive = json.load(f)
+    except Exception as e:
+        print(f"❌ Gagal membaca notebook: {e}")
+        return False
+
+    cells_local = nb_local.get('cells', [])
+    cells_drive = nb_drive.get('cells', [])
+
+    # 2. Cek jumlah sel
+    if len(cells_local) != len(cells_drive):
+        errors.append(
+            f"Jumlah sel tidak sama: local={len(cells_local)}, drive={len(cells_drive)}"
+        )
+    else:
+        print(f"✅ Jumlah sel: {len(cells_local)} sel (identik)")
+
+    # 3. Cek header tiap sel (skip sel 0 karena berisi badge Colab yang berbeda tiap notebook)
+    mismatched_headers = []
+    n_check = min(len(cells_local), len(cells_drive))
+    for i in range(1, n_check):  # mulai dari index 1, bukan 0
+        src_local = cells_local[i].get('source', [])
+        src_drive = cells_drive[i].get('source', [])
+        h_local = src_local[0].strip() if src_local else ''
+        h_drive = src_drive[0].strip() if src_drive else ''
+        # Normalize path prefix untuk perbandingan (ignore /content/ vs /content/drive/)
+        h_local_norm = re.sub(r'/content/drive/MyDrive/Fooocus', '/content/Fooocus', h_local)
+        h_drive_norm = re.sub(r'/content/drive/MyDrive/Fooocus', '/content/Fooocus', h_drive)
+        if h_local_norm != h_drive_norm:
+            mismatched_headers.append((i, h_local[:80], h_drive[:80]))
+
+    if mismatched_headers:
+        errors.append(f"{len(mismatched_headers)} sel memiliki header yang tidak cocok:")
+        for idx, hl, hd in mismatched_headers[:10]:
+            errors.append(f"  [Sel {idx}] Local: {repr(hl)}")
+            errors.append(f"           Drive: {repr(hd)}")
+        if len(mismatched_headers) > 10:
+            errors.append(f"  ... dan {len(mismatched_headers) - 10} lainnya.")
+    else:
+        print(f"✅ Header seluruh sel: identik")
+
+    # 4. Cek nomor [Sel X] di header
+    wrong_numbers = []
+    for i in range(1, len(cells_local)):
+        src = cells_local[i].get('source', [])
+        if not src:
+            continue
+        h = src[0].strip()
+        m = re.search(r'\[Sel\s+(\d+)\]', h)
+        if m:
+            declared = int(m.group(1))
+            if declared != i:
+                wrong_numbers.append((i, declared, h[:60]))
+
+    if wrong_numbers:
+        warnings.append(f"{len(wrong_numbers)} sel memiliki nomor [Sel X] yang tidak sesuai posisi:")
+        for actual, declared, h in wrong_numbers[:10]:
+            warnings.append(f"  Posisi aktual={actual}, tertulis=[Sel {declared}]: {h}")
+    else:
+        print(f"✅ Penomoran [Sel X]: semua sesuai posisi")
+
+    # 5. Cek cell_index di database vs posisi aktual di notebook
+    try:
+        with open(DB_FILE, "r", encoding="utf-8") as f:
+            db = json.load(f)
+        wrong_cellindex = []
+        for m_entry in db:
+            cidx = m_entry.get('cell_index')
+            fname = m_entry.get('filename', '')
+            if cidx is None or cidx >= len(cells_local):
+                wrong_cellindex.append((fname, cidx, 'out of range'))
+                continue
+            # Cari filename di sel tersebut
+            src = cells_local[cidx].get('source', [])
+            cell_text = ''.join(src)
+            if fname not in cell_text:
+                # Cari di notebook untuk tahu posisi sebenarnya
+                found_at = None
+                for i2, c2 in enumerate(cells_local):
+                    if fname in ''.join(c2.get('source', [])):
+                        found_at = i2
+                        break
+                wrong_cellindex.append((fname, cidx, f'seharusnya sel {found_at}' if found_at else 'tidak ditemukan di notebook'))
+
+        if wrong_cellindex:
+            warnings.append(f"{len(wrong_cellindex)} model memiliki cell_index yang salah di database:")
+            for fn, ci, info in wrong_cellindex[:10]:
+                warnings.append(f"  {fn}: cell_index={ci} ({info})")
+            if len(wrong_cellindex) > 10:
+                warnings.append(f"  ... dan {len(wrong_cellindex) - 10} lainnya.")
+        else:
+            print(f"✅ cell_index di database: semua sesuai posisi notebook")
+    except Exception as e:
+        warnings.append(f"Tidak bisa memvalidasi database: {e}")
+
+    # 6. Laporan akhir
+    print("")
+    if warnings:
+        print(f"⚠️  PERINGATAN ({len(warnings)} item):")
+        for w in warnings:
+            print(f"  {w}")
+        print("")
+    if errors:
+        print(f"❌ ERROR KRITIS ({len(errors)} item):")
+        for e in errors:
+            print(f"  {e}")
+        print("\n💡 Jalankan python add_model.py --sync untuk memperbaiki katalog.")
+        return False
+    else:
+        print("🎉 Sinkronisasi notebook VALID! Tidak ada masalah yang ditemukan.")
+        return True
 
 def export_catalog_files(db):
     # Sanitize and ensure clean headers & categories for all models
@@ -292,6 +461,9 @@ def export_catalog_files(db):
     with open(MD_CATALOG, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
+    # 4. Auto-update jumlah model di README.md
+    update_readme_model_count(len(db))
+
 def add_model_to_notebooks(target_cell_idx, civitai_url, local_dl_line, drive_dl_line, filename):
     for nb_path, dl_line in [(NB_LOCAL, local_dl_line), (NB_DRIVE, drive_dl_line)]:
         with open(nb_path, "r", encoding="utf-8") as f:
@@ -331,8 +503,9 @@ def add_model_to_notebooks(target_cell_idx, civitai_url, local_dl_line, drive_dl
             json.dump(nb, f, indent=1, ensure_ascii=False)
 
 def clean_category_name(raw_name):
-    """Membersihkan simbol '#' dan suffix ANIMA/SDXL dari input pengguna."""
+    """Membersihkan simbol '#', '[Sel X]', dan suffix ANIMA/SDXL dari input pengguna."""
     s = re.sub(r'^[#\s]+', '', raw_name).strip()
+    s = re.sub(r'^\[Sel\s+\d+\]\s*', '', s).strip()
     s = re.sub(r'\s*(ANIMA|SDXL)$', '', s, flags=re.IGNORECASE).strip()
     return s
 
@@ -354,9 +527,7 @@ def insert_new_cell(raw_name, arch):
        - SDXL mandiri: Ditempatkan alfabetis di rentang Seri SDXL mandiri.
     """
     clean = clean_category_name(raw_name)
-    new_header = build_cell_header(clean, arch)
     opposite_arch = "SDXL" if arch == "ANIMA" else "ANIMA"
-    opposite_header = build_cell_header(clean, opposite_arch)
 
     with open(NB_LOCAL, "r", encoding="utf-8") as f:
         nb_local = json.load(f)
@@ -368,7 +539,7 @@ def insert_new_cell(raw_name, arch):
     # 1. Cek pasangan arsitektur yang sudah ada
     for i, c in enumerate(nb_local['cells']):
         src = c.get('source', [])
-        if src and src[0].strip() == opposite_header:
+        if src and clean_category_name(src[0]).lower() == clean.lower() and opposite_arch in src[0]:
             if arch == "ANIMA":
                 insert_idx = i
             else:
@@ -391,25 +562,25 @@ def insert_new_cell(raw_name, arch):
     # 3. Jika seri baru, cari posisi alfabetis di kluster yang tepat
     if insert_idx is None:
         if arch == "ANIMA":
-            start_search = 74
-            end_search = 80
+            start_search = 73
+            end_search = 78
             for i, c in enumerate(nb_local['cells']):
                 src = c.get('source', [])
                 if src:
-                    if "# Hoshizora no Memoria SDXL" in src[0]:
+                    if "Hoshizora no Memoria SDXL" in src[0]:
                         start_search = i + 1
-                    if "# Akebi-chan" in src[0]:
+                    if "Akebi-chan" in src[0]:
                         end_search = i
                         break
         else:
-            start_search = 80
-            end_search = 106
+            start_search = 78
+            end_search = 104
             for i, c in enumerate(nb_local['cells']):
                 src = c.get('source', [])
                 if src:
-                    if "# Akebi-chan" in src[0]:
+                    if "Akebi-chan" in src[0]:
                         start_search = i
-                    if "# Random Character" in src[0]:
+                    if "Random Character" in src[0]:
                         end_search = i
                         break
 
@@ -427,12 +598,22 @@ def insert_new_cell(raw_name, arch):
         if insert_idx is None:
             insert_idx = end_search
 
-    # Buat sel baru di kedua notebook
+    # Buat sel baru di kedua notebook dengan format [Sel X]
+    new_header = f"# [Sel {insert_idx}] {clean} {arch}"
     new_cell_local = {"cell_type": "code", "execution_count": None, "metadata": {}, "outputs": [], "source": [f"{new_header}\n"]}
     new_cell_drive = {"cell_type": "code", "execution_count": None, "metadata": {}, "outputs": [], "source": [f"{new_header}\n"]}
 
     nb_local['cells'].insert(insert_idx, new_cell_local)
     nb_drive['cells'].insert(insert_idx, new_cell_drive)
+
+    # Renumber ulang seluruh nomor sel di kedua notebook agar tetap urut sempurna
+    for nb_obj in (nb_local, nb_drive):
+        for idx in range(1, len(nb_obj['cells'])):
+            src_lines = nb_obj['cells'][idx].get('source', [])
+            if src_lines:
+                first_l = src_lines[0].strip()
+                cleaned_h = re.sub(r'^#\s*(\[Sel\s+\d+\]\s*)?', '', first_l).strip()
+                nb_obj['cells'][idx]['source'][0] = f"# [Sel {idx}] {cleaned_h}\n"
 
     with open(NB_LOCAL, "w", encoding="utf-8") as f:
         json.dump(nb_local, f, indent=1, ensure_ascii=False)
@@ -815,11 +996,15 @@ def main():
     if len(sys.argv) > 1 and sys.argv[1] in ["-h", "--help"]:
         print("Penggunaan:")
         print("  python add_model.py                     -> Mode interaktif (looping menambah banyak model)")
-        print("  python add_model.py <civitai_url>       -> Proses link Civitai pertama, lalu lanjut looping")
-        print("  python add_model.py --sync              -> Sinkronisasi & sanitasi ulang seluruh katalog data")
+        print("  python add_model.py <civitai_url>       -> Proses link Civitai, lalu lanjut looping")
+        print("  python add_model.py <model_id>          -> Cukup masukkan angka ID Civitai")
+        print("  python add_model.py --sync              -> Sinkronisasi & sanitasi ulang seluruh katalog")
+        print("  python add_model.py --validate          -> Verifikasi sinkronisasi kedua notebook & database")
         print("\nContoh:")
         print("  python add_model.py https://civitai.com/models/827184")
+        print("  python add_model.py 827184")
         print("  python add_model.py --sync")
+        print("  python add_model.py --validate")
         return
 
     if len(sys.argv) > 1 and sys.argv[1] in ["--sync", "--rebuild", "-s"]:
@@ -827,13 +1012,21 @@ def main():
         with open(DB_FILE, "r", encoding="utf-8") as f:
             db = json.load(f)
         export_catalog_files(db)
+        update_readme_model_count(len(db))
         print(f"✅ Selesai! {len(db)} model telah disinkronkan ke:")
         print(f"   - {DB_FILE}")
         print(f"   - {WEB_DATA}")
         print(f"   - {MD_CATALOG}")
+        print(f"   - {README_FILE}")
+        return
+
+    if len(sys.argv) > 1 and sys.argv[1] in ["--validate", "-v"]:
+        validate_sync()
         return
 
     initial_url = sys.argv[1] if (len(sys.argv) > 1 and not sys.argv[1].startswith("-")) else None
+    if initial_url:
+        initial_url = normalize_input(initial_url)
     first_run = True
 
     while True:
@@ -843,8 +1036,9 @@ def main():
                 initial_url = None
                 first_run = False
             else:
-                prompt_text = "\n🔗 Masukkan URL Civitai (atau tekan Enter / ketik 'q' untuk selesai): "
+                prompt_text = "\n🔗 Masukkan URL atau ID Civitai (atau tekan Enter / ketik 'q' untuk selesai): "
                 url_input = input(prompt_text).strip()
+                url_input = normalize_input(url_input)
 
             # Keluar jika kosong atau ketik q/exit
             if not url_input or url_input.lower() in ["q", "quit", "exit", "selesai", "stop"]:

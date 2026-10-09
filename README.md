@@ -62,7 +62,7 @@ ColabFoocus/
 │   ├── index.html                           # Tampilan Web App pencarian & preview model
 │   ├── style.css                            # Desain glassmorphism dark aesthetic
 │   ├── app.js                               # Logika search, filter, modal, copy triggers
-│   └── data.js                              # Database offline 600+ model
+│   └── data.js                              # Database offline 617+ model
 ├── index.html                               # Redirect otomatis ke catalog/
 ├── models_database.json                     # Database master metadata Civitai (JSON)
 ├── MODELS_CATALOG.md                        # Dokumentasi tabel lengkap format Markdown
@@ -94,11 +94,17 @@ Ingin menambahkan LoRA atau Checkpoint baru dari Civitai tanpa harus mengetik ma
 # Tambahkan model via URL Civitai
 python add_model.py https://civitai.com/models/827184/wai-illustrious-sdxl
 
-# Atau cukup dengan Model ID Civitai
+# Atau cukup dengan Model ID Civitai (tanpa URL penuh)
 python add_model.py 827184
 
 # Atau jalankan tanpa argumen untuk mode interaktif penuh
 python add_model.py
+
+# Sinkronisasi ulang seluruh katalog (juga update README otomatis)
+python add_model.py --sync
+
+# Verifikasi sinkronisasi kedua notebook dan database
+python add_model.py --validate
 ```
 
 ### Keunggulan `add_model.py`:
@@ -107,7 +113,8 @@ python add_model.py
 - 🏷️ **Kustomisasi Nama File Bersih**: Tentukan nama file yang rapi (ekstensi `.safetensors` dan suffix `_ANIMA` ditangani otomatis).
 - 🔍 **Pencarian Sel Tanpa Hafal Nomor**: Cukup ketik kata kunci seperti `bangdream`, `poses`, `blue archive`, `style`, dsb.
 - ➕ **Dukungan Seri Baru Otomatis**: Jika seri anime belum ada di notebook, pilih opsi `new` dan script akan otomatis membuat sel baru pada posisi alfabetis (A–Z) yang tepat.
-- 🔄 **Sinkronisasi 1-to-1 Penuh**: Otomatis memperbarui kedua notebook (`Foocus SayMaven.ipynb` & Google Drive), mengurutkan baris secara alfabetis (A–Z), serta menyinkronkan `models_database.json`, `MODELS_CATALOG.md`, dan Web Hub `catalog/data.js` secara simultan.
+- 🔄 **Sinkronisasi 1-to-1 Penuh**: Otomatis memperbarui kedua notebook (`Foocus SayMaven.ipynb` & Google Drive), mengurutkan baris secara alfabetis (A–Z), serta menyinkronkan `models_database.json`, `MODELS_CATALOG.md`, Web Hub `catalog/data.js`, dan jumlah model di `README.md` secara simultan.
+- ✅ **Validasi Sinkronisasi (`--validate`)**: Perintah khusus untuk memverifikasi bahwa kedua notebook masih identik (jumlah sel, header, penomoran, dan `cell_index` di database) — safety net untuk mendeteksi perbedaan pasca-edit manual.
 
 ---
 
